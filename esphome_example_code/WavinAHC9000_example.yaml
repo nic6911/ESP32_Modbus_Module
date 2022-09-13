@@ -97,8 +97,8 @@ api:
 ota:
  
 wifi:
-  ssid: "My Wi-Fi Network"
-  password: "password"
+  ssid: ${ssid_set}
+  password: ${password_set}
  
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
