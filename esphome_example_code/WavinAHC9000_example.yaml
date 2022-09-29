@@ -118,6 +118,7 @@ uart:
 modbus:
     - id: ${device}_modbus
       uart_id: uart_${device}
+      flow_control_pin: 26
  
 modbus_controller:
   id: ${device}_modbus_controller
