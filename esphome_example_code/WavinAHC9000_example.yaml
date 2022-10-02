@@ -59,13 +59,7 @@ substitutions:
    # UPDATE TIME (GATEWAY)
   update_interval: 60s
  
-  # TEMP STEP + CLIMATE MIN/MAX LIMIT TEMP SETPOINT
-  temp_step:   '0.5'
-  climate_min_temp: '12'  
-  climate_max_temp: '40'
- 
   # PIN DEFINITIONS (Should in most cases not be changed) 
-  tx_enable_pin: '26'
   rx_pin: '13'
   tx_pin: '14'
  
@@ -79,9 +73,7 @@ substitutions:
  
 esphome:
   name: ${device}
-  project:
-    name: "home.wavin_gulvvarme"
-    version: "1.0.0"
+  
 esp32:
   board: pico32
   framework:
