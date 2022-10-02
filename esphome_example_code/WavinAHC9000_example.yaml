@@ -126,14 +126,6 @@ modbus_controller:
   modbus_id: wavin_modbus
   update_interval: 5s
  
-external_components:
-  - source: github://heinekmadsen/esphome_components
-    refresh: 0s
- 
-wavinAhc9000:
-  update_interval: ${update_interval}
-  rw_pin: ${tx_enable_pin}
- 
 # Uncomment the active channels on your Wavin Ahc 9000
 packages:
   remote_package:
@@ -142,11 +134,11 @@ packages:
     files: 
       - components/wavinahc9000v2/configs/basic.yaml # REQUIRED FOR WAVIN AHC 9000
       - components/wavinahc9000v2/configs/channel_01.yaml
-      - components/wavinahc9000v2/configs/channel_01_comfort.yaml # Only for channels with thermostat with IR sensor
+      #- components/wavinahc9000v2/configs/channel_01_comfort.yaml # Only for channels with thermostat with IR sensor
       - components/wavinahc9000v2/configs/channel_02.yaml
-      - components/wavinahc9000v2/configs/channel_02_comfort.yaml # Only for channels with thermostat with IR sensor
+      #- components/wavinahc9000v2/configs/channel_02_comfort.yaml # Only for channels with thermostat with IR sensor
       - components/wavinahc9000v2/configs/channel_03.yaml
-      - components/wavinahc9000v2/configs/channel_03_comfort.yaml # Only for channels with thermostat with IR sensor
+      #- components/wavinahc9000v2/configs/channel_03_comfort.yaml # Only for channels with thermostat with IR sensor
       #- components/wavinahc9000v2/configs/channel_04.yaml 
       #- components/wavinahc9000v2/configs/channel_04_comfort.yaml # Only for channels with thermostat with IR sensor
       #- components/wavinahc9000v2/configs/channel_05.yaml 
