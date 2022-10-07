@@ -116,7 +116,7 @@ modbus_controller:
   id: ${device}_modbus_controller
   address: 1
   modbus_id: wavin_modbus
-  update_interval: 5s
+  update_interval: ${update_interval}
  
 # Uncomment the active channels on your Wavin Ahc 9000
 packages:
