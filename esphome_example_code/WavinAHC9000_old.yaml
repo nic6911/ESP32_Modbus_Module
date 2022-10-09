@@ -1,0 +1,310 @@
+########################################################################################
+#                                                                                      #
+#      WAVIN AHC-9000 FLOOR HEATING CONTROLLER SOFTWARE FOR HOME ASSISTANT             #
+#                                                                                      #   
+#        Code developed by : Heine Koldbro Madsen and Samuel Sieb 2021                 #
+#                                                                                      #
+# https://github.com/heinekmadsen/esphome_components/tree/main/components/wavinAhc9000 #    
+#                                                                                      #
+# Hardware by : Mogens Groth Nicolaisen https://github.com/nic6911/Wavin-AHC-9000-mqtt #
+#                                                                                      #
+########################################################################################
+
+
+########################################################################################
+#                      CONFIGURATION PART OF YOUR CHOICE :)                            #
+########################################################################################
+
+substitutions:
+  device_name: 'wavin'
+  friendly_name: 'Wavin'
+  log_level: WARN
+ 
+  # UPDATE TIME (GATEWAY)
+  update_interval: 60s
+  
+  # CHANNEL ID´S
+  channel_1:  Værelse1
+  channel_2:  Værelse2
+  channel_3:  Bad1
+  channel_4:  Bryggers
+  channel_5:  Kontor
+  channel_6:  Bad2
+  channel_7:  Køkken Alrum
+  channel_8:  Værelse3
+  channel_9:  Soveværelse
+  channel_10: Stue
+  channel_11: Gang
+  channel_12: <Unused>
+  channel_13: <Unused>
+  channel_14: <Unused>
+  channel_15: <Unused>
+  channel_16: <Unused>
+  
+  # TEMP STEP + CLIMATE MIN/MAX LIMIT TEMP SETPOINT
+  temp_step:   '0.5'
+  climate_min_temp: '12'  
+  climate_max_temp: '40'
+  
+  # PIN DEFINITIONS (Should in most cases not be changed) 
+  tx_enable_pin: '26'
+  rx_pin: '13'
+  tx_pin: '14'
+
+  # WiFi settings
+  ssid_set: !secret wifi_ssid
+  password_set: !secret wifi_password
+  
+########################################################################################
+#                        CODE BELOW SHOULD NOT BE CHANGED                              #
+########################################################################################  
+
+esphome:
+  name: ${device_name}
+  
+esp32:
+  board: pico32
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  baud_rate: 0
+    
+# Enable Home Assistant API
+api:
+  
+ota:
+
+wifi:
+  ssid: ${ssid_set}
+  password: ${password_set}
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Wavin Fallback Hotspot"
+    password: "12345678"
+
+captive_portal:  
+
+uart:
+  rx_pin: ${rx_pin}
+  tx_pin: ${tx_pin}
+  baud_rate: 38400
+  id: uart_modbus
+  stop_bits: 1
+  
+external_components:
+  - source: github://heinekmadsen/esphome_components
+    refresh: 0s
+
+# Temporary fix for modbus component error in ESPHome 2021.10.0
+# https://github.com/esphome/issues/issues/2630
+# Might not be nessesary in future builds, but for now it is
+  - source:
+      type: git
+      url: https://github.com/martgras/esphome
+      ref: modbus-fix
+    components: [ modbus ]
+  
+modbus:
+  uart_id: uart_modbus
+ 
+wavinAhc9000:
+  update_interval: ${update_interval}
+  rw_pin: ${tx_enable_pin}
+  
+climate:
+  - platform: wavinAhc9000
+    channel: 1
+    name: ${friendly_name} Climate ${channel_1}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_1}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_1}
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 2
+    name: ${friendly_name} Climate ${channel_2}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_2}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_2}
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 3
+    name: ${friendly_name} Climate ${channel_3}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_3}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_3}
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 4
+    name: ${friendly_name} Climate ${channel_4}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_4}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_4}
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 5
+    name: ${friendly_name} Climate ${channel_5}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_5}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_5}
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 6
+    name: ${friendly_name} Climate ${channel_6}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_6}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_6}
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 7
+    name: ${friendly_name} Climate ${channel_7}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_7}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_7}
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 8
+    name: ${friendly_name} Climate ${channel_8}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_8}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_8}
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 9
+    name: ${friendly_name} Climate ${channel_9}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_9}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_9}
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 10
+    name: ${friendly_name} Climate ${channel_10}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_10}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_10}
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 11
+    name: ${friendly_name} Climate ${channel_11}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_11}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_11}       
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 12
+    name: ${friendly_name} Climate ${channel_12}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_12}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_12}       
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 13
+    name: ${friendly_name} Climate ${channel_13}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_13}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_13}       
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 14
+    name: ${friendly_name} Climate ${channel_14}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_14}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_14}       
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 15
+    name: ${friendly_name} Climate ${channel_15}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_15}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_15}       
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+  - platform: wavinAhc9000
+    channel: 16
+    name: ${friendly_name} Climate ${channel_16}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_16}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_16}       
+    visual:
+      temperature_step: ${temp_step} °C
+      min_temperature: ${climate_min_temp} °C
+      max_temperature: ${climate_max_temp} °C
+      
+     
