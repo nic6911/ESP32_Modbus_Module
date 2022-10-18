@@ -51,8 +51,8 @@ substitutions:
   tx_pin: '14'
 
   # WiFi settings
-  ssid_set: "My Wi-Fi Network"
-  password_set: "password"
+  ssid_set: !secret wifi_ssid
+  password_set: !secret wifi_password
   
 ########################################################################################
 #                        CODE BELOW SHOULD NOT BE CHANGED                              #
@@ -60,14 +60,11 @@ substitutions:
 
 esphome:
   name: ${device_name}
-  project:
-    name: "home.wavin_sentio_gulvvarme"
-    version: "1.0.0"
+
 esp32:
   board: pico32
   framework:
     type: arduino
-
 
 # Enable logging
 logger:
@@ -85,18 +82,14 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Wavin Fallback Hotspot"
-    password: "12345678"
 
 captive_portal:  
 
 external_components:
   - source: github://nic6911/esphome_components@Wavin_Sentio
     refresh: 0s  
-  - source:
-      type: git
-      url: https://github.com/esphome/esphome
-      ref: 2022.5.1
-    components: [ modbus, modbus_controller ]
+  - source: github://epiclabs-uc/esphome@fix-885-old
+    components: wifi 
     refresh: 0s
     
 uart:
@@ -121,19 +114,166 @@ modbus_controller:
 
 sentio:
 
+select:
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Sentio ferie mode"
+    id: sentio_vacation_mode
+    address: 27
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "OFF" : 0
+      "ON" : 1
+
+## Channel 1  
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_1} termostat lås"
+    id: thermostat_lock_channel_1
+    address: 120
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "Locked" : 8
+      "Hotel" : 16
+      "Unlocked" : 32
+
+## Channel 2
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_2} termostat lås"
+    id: thermostat_lock_channel_2
+    address: 220
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "Locked" : 8
+      "Hotel" : 16
+      "Unlocked" : 32      
+
+## Channel 3
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_3} termostat lås"
+    id: thermostat_lock_channel_3
+    address: 320
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "Locked" : 8
+      "Hotel" : 16
+      "Unlocked" : 32     
+
+## Channel 4
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_4} termostat lås"
+    id: thermostat_lock_channel_4
+    address: 420
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "Locked" : 8
+      "Hotel" : 16
+      "Unlocked" : 32     
+
+## Channel 5
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_5} termostat lås"
+    id: thermostat_lock_channel_5
+    address: 520
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "Locked" : 8
+      "Hotel" : 16
+      "Unlocked" : 32     
+
+## Channel 6
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_6} termostat lås"
+    id: thermostat_lock_channel_6
+    address: 620
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "Locked" : 8
+      "Hotel" : 16
+      "Unlocked" : 32     
+
+## Channel 7
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_7} termostat lås"
+    id: thermostat_lock_channel_7
+    address: 720
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "Locked" : 8
+      "Hotel" : 16
+      "Unlocked" : 32     
+
+## Channel 8
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_8} termostat lås"
+    id: thermostat_lock_channel_8
+    address: 820
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "Locked" : 8
+      "Hotel" : 16
+      "Unlocked" : 32     
+
+## Channel 9
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_9} termostat lås"
+    id: thermostat_lock_channel_9
+    address: 920
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "Locked" : 8
+      "Hotel" : 16
+      "Unlocked" : 32     
+
+## Channel 11
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_11} termostat lås"
+    id: thermostat_lock_channel_11
+    address: 1120
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "Locked" : 8
+      "Hotel" : 16
+      "Unlocked" : 32     
+
 sensor:
 
 #########################
 #### INPUT REGISTERS ####
 #########################
 
-  - platform: modbus_controller
-    modbus_controller_id: sentio_modbus_controller
-    name: "Modbus baud rate"
-    id: sentio_baud_rate
-    register_type: holding
-    address: 0x00004
-    
 ## Channel 1
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -165,7 +305,19 @@ sensor:
     address: 106
     filters:
       - multiply: 0.01 
-      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_1} kondenspunkt"
+    id: kondenspunkt_channel_1
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: humidity
+    register_type: read
+    address: 107
+    filters:
+      - multiply: 0.01  
+
 ## Channel 2
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -197,7 +349,19 @@ sensor:
     address: 206
     filters:
       - multiply: 0.01 
-      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_2} kondenspunkt"
+    id: kondenspunkt_channel_2
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: humidity
+    register_type: read
+    address: 207
+    filters:
+      - multiply: 0.01  
+
 ## Channel 3
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -229,7 +393,19 @@ sensor:
     address: 306
     filters:
       - multiply: 0.01 
-      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_3} kondenspunkt"
+    id: kondenspunkt_channel_3
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: humidity
+    register_type: read
+    address: 307
+    filters:
+      - multiply: 0.01  
+
 ## Channel 4
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -261,7 +437,19 @@ sensor:
     address: 406
     filters:
       - multiply: 0.01 
-      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_4} kondenspunkt"
+    id: kondenspunkt_channel_4
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: humidity
+    register_type: read
+    address: 407
+    filters:
+      - multiply: 0.01  
+
 ## Channel 5
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -293,7 +481,19 @@ sensor:
     address: 506
     filters:
       - multiply: 0.01       
-      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_5} kondenspunkt"
+    id: kondenspunkt_channel_5
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: humidity
+    register_type: read
+    address: 507
+    filters:
+      - multiply: 0.01  
+
 ## Channel 6
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -325,7 +525,19 @@ sensor:
     address: 606
     filters:
       - multiply: 0.01       
-      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_6} kondenspunkt"
+    id: kondenspunkt_channel_6
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: humidity
+    register_type: read
+    address: 607
+    filters:
+      - multiply: 0.01  
+
 ## Channel 7
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -357,7 +569,19 @@ sensor:
     address: 706
     filters:
       - multiply: 0.01       
-      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_7} kondenspunkt"
+    id: kondenspunkt_channel_7
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: humidity
+    register_type: read
+    address: 707
+    filters:
+      - multiply: 0.01  
+
 ## Channel 8
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -389,7 +613,19 @@ sensor:
     address: 806
     filters:
       - multiply: 0.01       
-      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_8} kondenspunkt"
+    id: kondenspunkt_channel_8
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: humidity
+    register_type: read
+    address: 807
+    filters:
+      - multiply: 0.01  
+
 ## Channel 9
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -421,7 +657,19 @@ sensor:
     address: 906
     filters:
       - multiply: 0.01       
-      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_9} kondenspunkt"
+    id: kondenspunkt_channel_9
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: humidity
+    register_type: read
+    address: 907
+    filters:
+      - multiply: 0.01  
+
 ## Channel 11
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -453,12 +701,37 @@ sensor:
     address: 1106
     filters:
       - multiply: 0.01   
-      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_11} kondenspunkt"
+    id: kondenspunkt_channel_11
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: humidity
+    register_type: read
+    address: 1107
+    filters:
+      - multiply: 0.01         
+
 #########################
 ### SETPOINT REGISTERS ##
 #########################
 
 number:
+
+# Might work to enable modbus on Sentio - not tested !
+#  - platform: modbus_controller
+#    modbus_controller_id: sentio_modbus_controller
+#    name: "Modbus mode"
+#    id: sentio_modbus_mode
+#    min_value: 0.0
+#    max_value: 4.0
+#    step: 1.0
+#    address: 0x00005
+#    force_new_range: true
+#    use_write_multiple: true 
+
 ## Channel 1
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -468,6 +741,18 @@ number:
     max_value: 30.0
     step: 0.5
     address: 119
+    force_new_range: true
+    use_write_multiple: true 
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_1} ferie temperatur setpunkt"
+    id: ferie_temperatur_setpunkt_channel_1
+    min_value: 10.0
+    max_value: 30.0
+    step: 0.5
+    address: 122
     force_new_range: true
     use_write_multiple: true 
     multiply: 100
@@ -483,6 +768,18 @@ number:
     address: 219
     force_new_range: true
     use_write_multiple: true 
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_2} ferie temperatur setpunkt"
+    id: ferie_temperatur_setpunkt_channel_2
+    min_value: 10.0
+    max_value: 30.0
+    step: 0.5
+    address: 222
+    force_new_range: true
+    use_write_multiple: true 
     multiply: 100
 
 ## Channel 3    
@@ -494,6 +791,18 @@ number:
     max_value: 30.0
     step: 0.5
     address: 319
+    force_new_range: true
+    use_write_multiple: true 
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_3} ferie temperatur setpunkt"
+    id: ferie_temperatur_setpunkt_channel_3
+    min_value: 10.0
+    max_value: 30.0
+    step: 0.5
+    address: 322
     force_new_range: true
     use_write_multiple: true 
     multiply: 100
@@ -509,6 +818,18 @@ number:
     address: 419
     force_new_range: true
     use_write_multiple: true 
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_4} ferie temperatur setpunkt"
+    id: ferie_temperatur_setpunkt_channel_4
+    min_value: 10.0
+    max_value: 30.0
+    step: 0.5
+    address: 422
+    force_new_range: true
+    use_write_multiple: true 
     multiply: 100
 
 ## Channel 5   
@@ -520,6 +841,18 @@ number:
     max_value: 30.0
     step: 0.5
     address: 519
+    force_new_range: true
+    use_write_multiple: true 
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_5} ferie temperatur setpunkt"
+    id: ferie_temperatur_setpunkt_channel_5
+    min_value: 10.0
+    max_value: 30.0
+    step: 0.5
+    address: 522
     force_new_range: true
     use_write_multiple: true 
     multiply: 100
@@ -535,6 +868,18 @@ number:
     address: 619
     force_new_range: true
     use_write_multiple: true 
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_6} ferie temperatur setpunkt"
+    id: ferie_temperatur_setpunkt_channel_6
+    min_value: 10.0
+    max_value: 30.0
+    step: 0.5
+    address: 622
+    force_new_range: true
+    use_write_multiple: true 
     multiply: 100
 
 ## Channel 7   
@@ -546,6 +891,18 @@ number:
     max_value: 30.0
     step: 0.5
     address: 719
+    force_new_range: true
+    use_write_multiple: true 
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_7} ferie temperatur setpunkt"
+    id: ferie_temperatur_setpunkt_channel_7
+    min_value: 10.0
+    max_value: 30.0
+    step: 0.5
+    address: 722
     force_new_range: true
     use_write_multiple: true 
     multiply: 100
@@ -561,6 +918,18 @@ number:
     address: 819
     force_new_range: true
     use_write_multiple: true 
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_8} ferie temperatur setpunkt"
+    id: ferie_temperatur_setpunkt_channel_8
+    min_value: 10.0
+    max_value: 30.0
+    step: 0.5
+    address: 822
+    force_new_range: true
+    use_write_multiple: true 
     multiply: 100
 
 ## Channel 9    
@@ -572,6 +941,18 @@ number:
     max_value: 30.0
     step: 0.5
     address: 919
+    force_new_range: true
+    use_write_multiple: true 
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_9} ferie temperatur setpunkt"
+    id: ferie_temperatur_setpunkt_channel_9
+    min_value: 10.0
+    max_value: 30.0
+    step: 0.5
+    address: 922
     force_new_range: true
     use_write_multiple: true 
     multiply: 100
@@ -588,6 +969,274 @@ number:
     force_new_range: true
     use_write_multiple: true 
     multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "${channel_11} ferie temperatur setpunkt"
+    id: ferie_temperatur_setpunkt_channel_11
+    min_value: 10.0
+    max_value: 30.0
+    step: 0.5
+    address: 1122
+    force_new_range: true
+    use_write_multiple: true 
+    multiply: 100
+
+binary_sensor:
+#########################
+#### INPUT REGISTERS ####
+#########################
+
+## Channel 1
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Problem pending in ${channel_1}"
+    id: sentio_warning_channel_1
+    register_type: read
+    address: 101
+    bitmask: 1      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Critical problem pending in ${channel_1}"
+    id: sentio_error_channel_1
+    register_type: read
+    address: 102
+    bitmask: 1 
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Low battery ${channel_1}"
+    id: sentio_battery_low_channel_1
+    register_type: read
+    address: 103
+    bitmask: 1 
+
+## Channel 2
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Problem pending in ${channel_2}"
+    id: sentio_warning_channel_2
+    register_type: read
+    address: 201
+    bitmask: 1      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Critical problem pending in ${channel_2}"
+    id: sentio_error_channel_2
+    register_type: read
+    address: 202
+    bitmask: 1 
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Low battery ${channel_2}"
+    id: sentio_battery_low_channel_2
+    register_type: read
+    address: 203
+    bitmask: 1 
+
+## Channel 3
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Problem pending in ${channel_3}"
+    id: sentio_warning_channel_3
+    register_type: read
+    address: 301
+    bitmask: 1      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Critical problem pending in ${channel_3}"
+    id: sentio_error_channel_3
+    register_type: read
+    address: 302
+    bitmask: 1 
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Low battery ${channel_3}"
+    id: sentio_battery_low_channel_3
+    register_type: read
+    address: 303
+    bitmask: 1 
+
+## Channel 4
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Problem pending in ${channel_4}"
+    id: sentio_warning_channel_4
+    register_type: read
+    address: 401
+    bitmask: 1      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Critical problem pending in ${channel_4}"
+    id: sentio_error_channel_4
+    register_type: read
+    address: 402
+    bitmask: 1 
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Low battery ${channel_4}"
+    id: sentio_battery_low_channel_4
+    register_type: read
+    address: 403
+    bitmask: 1 
+
+## Channel 5
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Problem pending in ${channel_5}"
+    id: sentio_warning_channel_5
+    register_type: read
+    address: 501
+    bitmask: 1      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Critical problem pending in ${channel_5}"
+    id: sentio_error_channel_5
+    register_type: read
+    address: 502
+    bitmask: 1 
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Low battery ${channel_5}"
+    id: sentio_battery_low_channel_5
+    register_type: read
+    address: 503
+    bitmask: 1     
+
+## Channel 6
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Problem pending in ${channel_6}"
+    id: sentio_warning_channel_6
+    register_type: read
+    address: 601
+    bitmask: 1      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Critical problem pending in ${channel_6}"
+    id: sentio_error_channel_6
+    register_type: read
+    address: 602
+    bitmask: 1 
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Low battery ${channel_6}"
+    id: sentio_battery_low_channel_6
+    register_type: read
+    address: 603
+    bitmask: 1 
+
+## Channel 7
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Problem pending in ${channel_7}"
+    id: sentio_warning_channel_7
+    register_type: read
+    address: 701
+    bitmask: 1      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Critical problem pending in ${channel_7}"
+    id: sentio_error_channel_7
+    register_type: read
+    address: 702
+    bitmask: 1 
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Low battery ${channel_7}"
+    id: sentio_battery_low_channel_7
+    register_type: read
+    address: 703
+    bitmask: 1 
+
+## Channel 8
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Problem pending in ${channel_8}"
+    id: sentio_warning_channel_8
+    register_type: read
+    address: 801
+    bitmask: 1      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Critical problem pending in ${channel_8}"
+    id: sentio_error_channel_8
+    register_type: read
+    address: 802
+    bitmask: 1 
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Low battery ${channel_8}"
+    id: sentio_battery_low_channel_8
+    register_type: read
+    address: 803
+    bitmask: 1 
+
+## Channel 9
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Problem pending in ${channel_9}"
+    id: sentio_warning_channel_9
+    register_type: read
+    address: 901
+    bitmask: 1      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Critical problem pending in ${channel_9}"
+    id: sentio_error_channel_9
+    register_type: read
+    address: 902
+    bitmask: 1 
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Low battery ${channel_9}"
+    id: sentio_battery_low_channel_9
+    register_type: read
+    address: 903
+    bitmask: 1 
+
+## Channel 11
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Problem pending in ${channel_11}"
+    id: sentio_warning_channel_11
+    register_type: read
+    address: 1101
+    bitmask: 1      
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Critical problem pending in ${channel_11}"
+    id: sentio_error_channel_11
+    register_type: read
+    address: 1102
+    bitmask: 1 
+
+  - platform: modbus_controller
+    modbus_controller_id: sentio_modbus_controller
+    name: "Low battery ${channel_11}"
+    id: sentio_battery_low_channel_11
+    register_type: read
+    address: 1103
+    bitmask: 1 
+
 
 #########################
 #### CLIMATE ENTITIES ###
