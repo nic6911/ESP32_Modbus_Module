@@ -998,14 +998,6 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Critical problem pending in ${channel_1}"
-    id: sentio_error_channel_1
-    register_type: read
-    address: 102
-    bitmask: 1 
-
-  - platform: modbus_controller
-    modbus_controller_id: sentio_modbus_controller
     name: "Low battery ${channel_1}"
     id: sentio_battery_low_channel_1
     register_type: read
@@ -1020,14 +1012,6 @@ binary_sensor:
     register_type: read
     address: 201
     bitmask: 1      
-
-  - platform: modbus_controller
-    modbus_controller_id: sentio_modbus_controller
-    name: "Critical problem pending in ${channel_2}"
-    id: sentio_error_channel_2
-    register_type: read
-    address: 202
-    bitmask: 1 
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -1048,14 +1032,6 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Critical problem pending in ${channel_3}"
-    id: sentio_error_channel_3
-    register_type: read
-    address: 302
-    bitmask: 1 
-
-  - platform: modbus_controller
-    modbus_controller_id: sentio_modbus_controller
     name: "Low battery ${channel_3}"
     id: sentio_battery_low_channel_3
     register_type: read
@@ -1070,14 +1046,6 @@ binary_sensor:
     register_type: read
     address: 401
     bitmask: 1      
-
-  - platform: modbus_controller
-    modbus_controller_id: sentio_modbus_controller
-    name: "Critical problem pending in ${channel_4}"
-    id: sentio_error_channel_4
-    register_type: read
-    address: 402
-    bitmask: 1 
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -1098,14 +1066,6 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Critical problem pending in ${channel_5}"
-    id: sentio_error_channel_5
-    register_type: read
-    address: 502
-    bitmask: 1 
-
-  - platform: modbus_controller
-    modbus_controller_id: sentio_modbus_controller
     name: "Low battery ${channel_5}"
     id: sentio_battery_low_channel_5
     register_type: read
@@ -1120,14 +1080,6 @@ binary_sensor:
     register_type: read
     address: 601
     bitmask: 1      
-
-  - platform: modbus_controller
-    modbus_controller_id: sentio_modbus_controller
-    name: "Critical problem pending in ${channel_6}"
-    id: sentio_error_channel_6
-    register_type: read
-    address: 602
-    bitmask: 1 
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -1148,14 +1100,6 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Critical problem pending in ${channel_7}"
-    id: sentio_error_channel_7
-    register_type: read
-    address: 702
-    bitmask: 1 
-
-  - platform: modbus_controller
-    modbus_controller_id: sentio_modbus_controller
     name: "Low battery ${channel_7}"
     id: sentio_battery_low_channel_7
     register_type: read
@@ -1170,14 +1114,6 @@ binary_sensor:
     register_type: read
     address: 801
     bitmask: 1      
-
-  - platform: modbus_controller
-    modbus_controller_id: sentio_modbus_controller
-    name: "Critical problem pending in ${channel_8}"
-    id: sentio_error_channel_8
-    register_type: read
-    address: 802
-    bitmask: 1 
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
@@ -1198,14 +1134,6 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Critical problem pending in ${channel_9}"
-    id: sentio_error_channel_9
-    register_type: read
-    address: 902
-    bitmask: 1 
-
-  - platform: modbus_controller
-    modbus_controller_id: sentio_modbus_controller
     name: "Low battery ${channel_9}"
     id: sentio_battery_low_channel_9
     register_type: read
@@ -1220,14 +1148,6 @@ binary_sensor:
     register_type: read
     address: 1101
     bitmask: 1      
-
-  - platform: modbus_controller
-    modbus_controller_id: sentio_modbus_controller
-    name: "Critical problem pending in ${channel_11}"
-    id: sentio_error_channel_11
-    register_type: read
-    address: 1102
-    bitmask: 1 
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
