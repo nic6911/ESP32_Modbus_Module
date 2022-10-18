@@ -308,8 +308,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_1} kondenspunkt"
-    id: kondenspunkt_channel_1
+    name: "${channel_1} dugpunkt"
+    id: dugpunkt_channel_1
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: humidity
@@ -352,8 +352,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_2} kondenspunkt"
-    id: kondenspunkt_channel_2
+    name: "${channel_2} dugpunkt"
+    id: dugpunkt_channel_2
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: humidity
@@ -396,8 +396,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_3} kondenspunkt"
-    id: kondenspunkt_channel_3
+    name: "${channel_3} dugpunkt"
+    id: dugpunkt_channel_3
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: humidity
@@ -440,8 +440,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_4} kondenspunkt"
-    id: kondenspunkt_channel_4
+    name: "${channel_4} dugpunkt"
+    id: dugpunkt_channel_4
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: humidity
@@ -484,8 +484,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_5} kondenspunkt"
-    id: kondenspunkt_channel_5
+    name: "${channel_5} dugpunkt"
+    id: dugpunkt_channel_5
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: humidity
@@ -528,8 +528,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_6} kondenspunkt"
-    id: kondenspunkt_channel_6
+    name: "${channel_6} dugpunkt"
+    id: dugpunkt_channel_6
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: humidity
@@ -572,8 +572,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_7} kondenspunkt"
-    id: kondenspunkt_channel_7
+    name: "${channel_7} dugpunkt"
+    id: dugpunkt_channel_7
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: humidity
@@ -616,8 +616,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_8} kondenspunkt"
-    id: kondenspunkt_channel_8
+    name: "${channel_8} dugpunkt"
+    id: dugpunkt_channel_8
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: humidity
@@ -660,8 +660,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_9} kondenspunkt"
-    id: kondenspunkt_channel_9
+    name: "${channel_9} dugpunkt"
+    id: dugpunkt_channel_9
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: humidity
@@ -704,8 +704,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_11} kondenspunkt"
-    id: kondenspunkt_channel_11
+    name: "${channel_11} dugpunkt"
+    id: dugpunkt_channel_11
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: humidity
@@ -990,7 +990,7 @@ binary_sensor:
 ## Channel 1
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Problem pending in ${channel_1}"
+    name: "Fejl ${channel_1}"
     id: sentio_warning_channel_1
     register_type: read
     address: 101
@@ -998,7 +998,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Low battery ${channel_1}"
+    name: "Lav batteri ${channel_1}"
     id: sentio_battery_low_channel_1
     register_type: read
     address: 103
@@ -1007,7 +1007,7 @@ binary_sensor:
 ## Channel 2
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Problem pending in ${channel_2}"
+    name: "Fejl ${channel_2}"
     id: sentio_warning_channel_2
     register_type: read
     address: 201
@@ -1015,7 +1015,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Low battery ${channel_2}"
+    name: "Lav batteri ${channel_2}"
     id: sentio_battery_low_channel_2
     register_type: read
     address: 203
@@ -1024,7 +1024,7 @@ binary_sensor:
 ## Channel 3
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Problem pending in ${channel_3}"
+    name: "Fejl ${channel_3}"
     id: sentio_warning_channel_3
     register_type: read
     address: 301
@@ -1032,7 +1032,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Low battery ${channel_3}"
+    name: "Lav batteri ${channel_3}"
     id: sentio_battery_low_channel_3
     register_type: read
     address: 303
@@ -1041,7 +1041,7 @@ binary_sensor:
 ## Channel 4
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Problem pending in ${channel_4}"
+    name: "Fejl ${channel_4}"
     id: sentio_warning_channel_4
     register_type: read
     address: 401
@@ -1049,7 +1049,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Low battery ${channel_4}"
+    name: "Lav batteri ${channel_4}"
     id: sentio_battery_low_channel_4
     register_type: read
     address: 403
@@ -1058,7 +1058,7 @@ binary_sensor:
 ## Channel 5
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Problem pending in ${channel_5}"
+    name: "Fejl ${channel_5}"
     id: sentio_warning_channel_5
     register_type: read
     address: 501
@@ -1066,7 +1066,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Low battery ${channel_5}"
+    name: "Lav batteri ${channel_5}"
     id: sentio_battery_low_channel_5
     register_type: read
     address: 503
@@ -1075,7 +1075,7 @@ binary_sensor:
 ## Channel 6
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Problem pending in ${channel_6}"
+    name: "Fejl ${channel_6}"
     id: sentio_warning_channel_6
     register_type: read
     address: 601
@@ -1083,7 +1083,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Low battery ${channel_6}"
+    name: "Lav batteri ${channel_6}"
     id: sentio_battery_low_channel_6
     register_type: read
     address: 603
@@ -1092,7 +1092,7 @@ binary_sensor:
 ## Channel 7
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Problem pending in ${channel_7}"
+    name: "Fejl ${channel_7}"
     id: sentio_warning_channel_7
     register_type: read
     address: 701
@@ -1100,7 +1100,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Low battery ${channel_7}"
+    name: "Lav batteri ${channel_7}"
     id: sentio_battery_low_channel_7
     register_type: read
     address: 703
@@ -1109,7 +1109,7 @@ binary_sensor:
 ## Channel 8
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Problem pending in ${channel_8}"
+    name: "Fejl ${channel_8}"
     id: sentio_warning_channel_8
     register_type: read
     address: 801
@@ -1117,7 +1117,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Low battery ${channel_8}"
+    name: "Lav batteri ${channel_8}"
     id: sentio_battery_low_channel_8
     register_type: read
     address: 803
@@ -1126,7 +1126,7 @@ binary_sensor:
 ## Channel 9
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Problem pending in ${channel_9}"
+    name: "Fejl ${channel_9}"
     id: sentio_warning_channel_9
     register_type: read
     address: 901
@@ -1134,7 +1134,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Low battery ${channel_9}"
+    name: "Lav batteri ${channel_9}"
     id: sentio_battery_low_channel_9
     register_type: read
     address: 903
@@ -1143,7 +1143,7 @@ binary_sensor:
 ## Channel 11
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Problem pending in ${channel_11}"
+    name: "Fejl ${channel_11}"
     id: sentio_warning_channel_11
     register_type: read
     address: 1101
@@ -1151,7 +1151,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Low battery ${channel_11}"
+    name: "Lav batteri ${channel_11}"
     id: sentio_battery_low_channel_11
     register_type: read
     address: 1103
