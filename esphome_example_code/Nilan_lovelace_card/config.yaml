@@ -1,0 +1,792 @@
+#################################################################
+#                                                               #
+#                          Nilan Package                        #
+#                                                               #
+#################################################################
+
+
+
+
+#################################################################
+#                                                               #
+#                          Climate                              #
+#                                                               #
+################################################################# 
+
+climate:
+  - platform: mqtt
+    name: "Nilan Genvex"
+    qos: 2
+    payload_on: "1"
+    payload_off: "0"
+    power_command_topic: "ventilation/runset"
+    modes:
+      - auto
+      - heat
+      - cool
+      - 'off'
+    mode_state_topic: "ventilation/control/ModeSet" 
+    mode_state_template: >-
+      {% set modes = { '0':'off', '1':'heat',  '2':'cool', '3':'auto'} %}
+      {{ modes[value] if value in modes.keys() else 'off' }}
+    mode_command_topic: "convert/modeset"
+    current_temperature_topic: "ventilation/temp/T7_Inlet"
+    min_temp: 16
+    max_temp: 28 
+    temperature_state_topic: "ventilation/control/TempSet"
+    temperature_state_template: >-
+      {{ value | float | multiply(0.01) | round(1) }}
+    temperature_command_topic: "convert/tempset"
+    retain: true
+    send_if_off: true
+    
+#################################################################
+#                                                               #
+#                              Fan                              #
+#                                                               #
+#################################################################   
+
+fan:
+  - platform: mqtt
+    name: "Nilan"
+    state_topic: "ventilation/control/RunSet"
+    command_topic: "ventilation/runset"
+    speed_state_topic: "ventilation/control/VentSet"
+    speed_command_topic: "ventilation/ventset"
+    qos: 2
+    retain: true
+    payload_on: "1"
+    payload_off: "0"
+    payload_low_speed: "2"
+    payload_medium_speed: "3"
+    payload_high_speed: "4"
+    speeds:
+      - "off"
+      - low
+      - medium
+      - high
+
+#################################################################
+#                                                               #
+#                          Switch                               #
+#                                                               #
+#################################################################   
+
+switch:
+  - platform: mqtt
+    name: Nilan Bruger Valg
+    state_topic: "ventilation/userset"
+    command_topic: "ventilation/userset"
+    payload_on: "1"
+    payload_off: "0"
+    
+#################################################################
+#                                                               #
+#                          Sensors                              #
+#                                                               #
+#################################################################   
+
+######################################
+###    Nilan temperatur Sensorer   ###
+###################################### 
+
+sensor:
+  - platform: mqtt
+    name: "Nilan Udendørs Temp"
+    state_topic: "ventilation/temp/T8_Outdoor"
+    unit_of_measurement: "°C"
+    device_class: temperature
+
+  - platform: mqtt
+    name: "Nilan Indblæs Temp"
+    state_topic: "ventilation/temp/T7_Inlet"
+    unit_of_measurement: "°C"
+    device_class: temperature
+  
+  - platform: mqtt
+    name: "Nilan Udsug Temp"
+    state_topic: "ventilation/temp/T3_Exhaust"
+    unit_of_measurement: "°C"
+    device_class: temperature  
+
+  - platform: mqtt
+    name: "Nilan CTS602 Temp"
+    state_topic: "ventilation/temp/T0_Controller"
+    unit_of_measurement: "°C"
+    device_class: temperature
+        
+  - platform: mqtt
+    name: "Nilan Afkast Temp"
+    state_topic: "ventilation/temp/T4_Outlet"
+    unit_of_measurement: "°C"
+    device_class: temperature 
+
+#################################
+###  Aggregat - type sensor   ###
+################################# 
+
+  - platform: mqtt
+    name: "Nilan Type"
+    state_topic: "ventilation/control/Type"
+
+  - platform: template
+    sensors:
+      nilan_model:
+        friendly_name: Nilan Aggregat Type
+        value_template: >-
+          {% if states.sensor.nilan_type.state == "0"  %} 
+            None      
+          {% elif states.sensor.nilan_type.state == "1" %}
+            Test
+          {% elif states.sensor.nilan_type.state == "2" %}
+            VPL 10 uden køl        
+          {% elif states.sensor.nilan_type.state == "3" %}
+            VPL 15 uden køl    
+          {% elif states.sensor.nilan_type.state == "4" %}
+            VPL 15 med køl   
+          {% elif states.sensor.nilan_type.state == "5" %}
+            VPL 25 med 3 hastigheder uden køl   
+          {% elif states.sensor.nilan_type.state == "6" %}
+            VPL 25 med 3 hastigheder med køl   
+          {% elif states.sensor.nilan_type.state == "7" %}
+            VPL 28 2 hastigheder uden køl   
+          {% elif states.sensor.nilan_type.state == "8" %}
+            VPL 28 med 2 hastigheder med køl   
+          {% elif states.sensor.nilan_type.state == "9" %}
+            VP 18 med kryds monteret oven på anlæg uden køl   
+          {% elif states.sensor.nilan_type.state == "10" %}
+            VP 18 med kryds monteret oven på anlæg med køl     
+          {% elif states.sensor.nilan_type.state == "11" %}
+            Vp 18 Compact og Compact p uden køl
+          {% elif states.sensor.nilan_type.state == "12" %}
+            VP 18 Compact og Compact P med køl        
+          {% elif states.sensor.nilan_type.state == "13" %}
+            Comfort anlæg (Comfort 300 LR)   
+          {% elif states.sensor.nilan_type.state == "14" %}
+            CT 150 anlæg med 1-2-3 omskifter
+          {% elif states.sensor.nilan_type.state == "15" %}
+            VLX som kører VAV   
+          {% elif states.sensor.nilan_type.state == "16" %}
+            VLX med 2 trin   
+          {% elif states.sensor.nilan_type.state == "17" %}
+            VLX med 3 trin   
+          {% elif states.sensor.nilan_type.state == "18" %}
+            VP 18 uden køl   
+          {% elif states.sensor.nilan_type.state == "19" %}
+            VP 18 med køl   
+          {% elif states.sensor.nilan_type.state == "20" %}
+            VP 18 med elkedel uden køl   
+          {% elif states.sensor.nilan_type.state == "21" %}
+            VP 18 med elkedel og køl   
+          {% elif states.sensor.nilan_type.state == "22" %}
+            VGU 250 brugsvands varmepumpe  
+          {% elif states.sensor.nilan_type.state == "23" %}
+            VGU 250 brugsvands varmepumpe med elkedel   
+          {% elif states.sensor.nilan_type.state == "24" %}
+            VPL 25 uden køl  
+          {% elif states.sensor.nilan_type.state == "25" %}
+            VPL 25 med køl   
+          {% elif states.sensor.nilan_type.state == "26" %}
+            VPM 120-560   
+          {% elif states.sensor.nilan_type.state == "27" %}
+            Comfort 1200 - 4000   
+          {% elif states.sensor.nilan_type.state == "28" %}
+            VP 20 Compact gorona   
+          {% elif states.sensor.nilan_type.state == "29" %}
+            VLX med CTS 602 print   
+          {% elif states.sensor.nilan_type.state == "30" %}
+            Compact P Nordic   
+          {% elif states.sensor.nilan_type.state == "31" %}
+            Comfort Nordic   
+          {% elif states.sensor.nilan_type.state == "32" %}
+            VP 18 Version 1
+          {% elif states.sensor.nilan_type.state == "33" %}
+            Combi 300   
+          {% elif states.sensor.nilan_type.state == "34" %}
+            Compact med 4-vejsventil uden køl   
+          {% else %}
+            Ukendt          
+          {% endif %}
+
+#################################
+###        Fugt Sensor        ###
+#################################        
+
+  - platform: mqtt
+    name: "Nilan Luftfugtighed"
+    state_topic: "ventilation/moist/RH"
+    unit_of_measurement: "%"
+    device_class: humidity
+
+#################################
+###      Luftmængde Sensor    ###
+#################################      
+
+  - platform: mqtt
+    name: "Nilan Indblæs Procent"
+    state_topic: "ventilation/speed/InletSpeed"
+    value_template: >-
+      {{ value | float | multiply(0.01) | round(0) }}
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    name: "Nilan Udblæs Procent"
+    state_topic: "ventilation/speed/ExhaustSpeed"
+    value_template: >-
+      {{ value | float | multiply(0.01) | round(0) }}
+    unit_of_measurement: "%"
+
+#################################
+###   Krydsveklser Effekt     ###
+#################################      
+
+  - platform: mqtt
+    name: "Nilan Krydsveklser Effektivitet"
+    state_topic: "ventilation/inputairtemp/EffPct"
+    value_template: >-
+      {{ value | float | multiply(0.01) | round(0) }}
+    unit_of_measurement: "%"
+
+############################################
+###    Sommer / Vinter drift sensor      ###
+############################################    
+
+  - platform: mqtt
+    name: "Drift"
+    state_topic: "ventilation/inputairtemp/IsSummer"
+    value_template: >-
+            {% if value == "0" %}
+            {{"Vinterdrift"}}
+            {% else %}
+            {{"Sommerdrift"}}
+            {% endif %}
+
+#################################
+###       Filter-Alarm        ###
+#################################       
+
+  - platform: mqtt
+    name: "Nilan Filterstatus"
+    state_topic: "ventilation/alarm/Status"
+    icon: mdi:air-filter
+    value_template: >-
+            {% if value == "0" %}
+            {{"Filter OK"}}
+            {% else %}
+            {{"Filter skal skiftes!!!"}}
+            {% endif %}      
+    
+#################################################################
+#                                                               #
+#                          Binary sensors                       #
+#                                                               #
+#################################################################      
+
+#################################
+###       Bypass sensor       ###
+################################# 
+
+binary_sensor:
+
+  - platform: mqtt
+    name: "Nilan Bypass"
+    state_topic: "ventilation/display/AirBypass/IsOpen"
+    payload_on: "1"
+    payload_off: "0"
+    device_class: opening
+
+#################################
+###       Modbus Sensor       ###
+#################################  
+  
+  - platform: mqtt
+    name: "Nilan Modbus Sensor"
+    state_topic: "ventilation/error/modbus/"
+    payload_on: "1"
+    payload_off: "0"
+    device_class: problem       
+
+#################################
+###       Ping Sensor         ###
+#################################  
+  
+  - platform: ping
+    name: Nilan Controller
+    host: 10.0.1.98
+    count: 2
+    scan_interval: 30      
+
+#################################
+###    Brugervalg sensor      ###
+#################################    
+
+  - platform: mqtt
+    name: "Brugervalg Status"
+    state_topic: "ventilation/user/UserFuncAct"
+    payload_on: "1"
+    payload_off: "0"
+    device_class: connectivity     
+
+#################################################################
+#                                                               #
+#                          Automations                          #
+#                                                               #
+#################################################################   
+
+################################################
+###  Convert HVAC mode og HVAC Temperature   ###
+################################################ 
+
+automation:
+
+- alias: 'Convert HVAC Mode'
+  trigger:
+    platform: mqtt
+    topic: convert/modeset
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: "ventilation/modeset"
+      payload: >-
+        {% set mode_name = trigger.payload %}
+        {% set modes = { 'off':'0', 'heat':'1', 'cool':'2', 'auto':'3' } %}
+        {{ modes[mode_name] if mode_name in modes.keys() else '0' }}
+
+- alias: 'Convert HVAC Temperature'
+  trigger:
+    platform: mqtt
+    topic: convert/tempset
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: "ventilation/tempset"
+      payload: "{{ trigger.payload | float | multiply(100) | round }}" 
+
+###########################################
+###  Bypass open / close notification   ###
+########################################### 
+
+- alias: Nilan Bypass Closed
+  trigger:
+    platform: state
+    entity_id: binary_sensor.nilan_bypass
+    to: 'off'
+  action:
+    - service: notify.mobile_app_jacob
+      data:
+        message: 'Kl: {{ now().strftime("%H:%M") }}'
+        title: "Nilan Bypass Lukket"
+
+- alias: Nilan Bypass Open
+  trigger:
+    platform: state
+    entity_id: binary_sensor.nilan_bypass
+    to: 'on'
+  action:
+    - service: notify.mobile_app_jacob
+      data:
+        message: 'Kl: {{ now().strftime("%H:%M") }}' 
+        title: "Nilan Bypass Åben"  
+
+####################################################
+###  Gateway - tabt forbindelse notification.    ###
+#################################################### 
+
+- alias: Nilan Gateway - forbindelse afbrudt
+  trigger:
+    platform: state
+    entity_id: binary_sensor.nilan_controller
+    to: 'off'
+  action:
+    - service: notify.mobile_app_jacob
+      data:
+        message: 'Kl: {{ now().strftime("%H:%M") }}' 
+        title: "Nilan Gateway - mistet forbindelse"  
+
+- alias: Nilan Gateway - forbindelse genoprettet
+  trigger:
+    platform: state
+    entity_id: binary_sensor.nilan_controller
+    to: 'off'
+  action:
+    - service: notify.mobile_app_jacob
+      data:
+        message: 'Kl: {{ now().strftime("%H:%M") }}' 
+        title: "Nilan Gateway - forbindelse genoprettet"          
+
+####################################################
+###  Brugervalg aktiv / ikke aktiv notification  ###
+#################################################### 
+
+# - alias: Nilan Brugervalg aktiv notifikation
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.brugervalg_status
+#     to: 'on'
+#   action:
+#     - service: tts.google_translate_say
+#       entity_id:
+#         - media_player.google_nest_hub_kokken
+#       data_template:
+#         message: "Nilan brugervalg aktiveret"
+
+# - alias: Nilan Brugervalg aktiv notifikation
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.brugervalg_status
+#     to: 'off'
+#   action:
+#     - service: tts.google_translate_say
+#       entity_id:
+#         - media_player.google_nest_hub_kokken
+#       data_template:
+#         message: "Nilan Brugervalg deaktiveret"      
+
+###########################################
+###  Bath - hig humidity notification   ###
+########################################### 
+
+- alias: Humid_Bath_Rising
+  trigger:
+    platform: state
+    entity_id: sensor.humid_bath_trend
+    to: Rising
+  action:
+    service: notify.mobile_app_jacob
+    data_template:
+      title: "Luftfugtighed bad stiger"
+      message: "Aktuel luftfugtighed er {{ states('sensor.nilan_luftfugtighed') }} %"
+
+- alias: Humid_Bath_Falling
+  trigger:
+    platform: state
+    entity_id: sensor.humid_bath_trend
+    to: Falling
+  action:
+    service: notify.mobile_app_jacob
+    data_template:
+      title: "Luftfugtighed bad falder"
+      message: "Aktuel luftfugtighed er {{ states('sensor.nilan_luftfugtighed') }} %"
+
+####################################
+###  Filter alarm notification   ###
+#################################### 
+
+- alias: Nilan Alarm
+  trigger:
+    platform: state
+    entity_id: sensor.nilan_filterstatus
+    to: 'Filter skal skiftes!!!'
+  action:
+    - service: notify.mobile_app_jacob
+      data:
+        message: 'Kl: {{ now().strftime("%H:%M") }}' 
+        title: "Filter i Nilan-Anlæg skal skiftes!!!"
+
+#######################################################################################################
+###  Automatiser Nilan Temperatur og Wavin Termostater afhængig af Sommer og Vinter-sensor i Nilan  ###
+####################################################################################################### 
+
+- alias: Sæt Sommer temp på Nilan til 21 grader
+  trigger:
+    platform: mqtt
+    topic: thermostatMode
+    payload: Sommer
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id:
+          - climate.nilan_genvex
+        temperature: 21
+
+- alias: Sæt Vinter temp på Nilan til 28 grader
+  trigger:
+    platform: mqtt
+    topic: thermostatMode
+    payload: Vinter
+  action:
+    - service: climate.set_temperature
+      data:
+        entity_id:
+          - climate.nilan_genvex
+        temperature: 28
+
+#######################################################################################################
+###         Styr Nilan Uge Program (Off, Program 1, 2 og 3) via input select i Home Assistant.      ###
+####################################################################################################### 
+
+- alias: Weekprogram Mode via GUI
+  trigger:
+    platform: state
+    entity_id: input_select.weekprogram_mode
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: "ventilation/selectset"
+      retain: false
+      payload: >-
+        {% if states.input_select.weekprogram_mode.state == "Off" %}0
+        {% elif states.input_select.weekprogram_mode.state == "Program 1" %}1
+        {% elif states.input_select.weekprogram_mode.state == "Program 2" %}2
+        {% elif states.input_select.weekprogram_mode.state == "Program 3" %}3
+        {% endif %}
+
+- alias: Weekprogram Mode via MQTT
+  trigger:
+    platform: mqtt
+    topic: "ventilation/program/Selectset"
+  action:
+    service: input_select.select_option
+    data_template:
+      entity_id: input_select.weekprogram_mode
+      option: >-
+        {% if trigger.payload == "0" %}Off
+        {% elif trigger.payload == "1" %}Program 1
+        {% elif trigger.payload == "2" %}Program 2
+        {% elif trigger.payload == "3" %}Program 3
+        {% endif %}        
+
+#######################################################################################################
+###                 Styr Nilan brugervalg - off, udvidet, tilluft, fraluft mv                       ###
+#######################################################################################################         
+        
+- alias: Brugervalg Mode via GUI
+  trigger:
+    platform: state
+    entity_id: input_select.brugervalg_mode
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: "ventilation/userfuncset"
+      retain: false
+      payload: >-
+        {% if states.input_select.brugervalg_mode.state == "Off" %}0
+        {% elif states.input_select.brugervalg_mode.state == "Udvidet" %}1
+        {% elif states.input_select.brugervalg_mode.state == "Tilluft" %}2
+        {% elif states.input_select.brugervalg_mode.state == "Fraluft" %}3
+        {% elif states.input_select.brugervalg_mode.state == "Ventilere" %}5
+        {% elif states.input_select.brugervalg_mode.state == "Emhætte" %}6
+        {% endif %}
+
+- alias: Brugervalg Mode via MQTT
+  trigger:
+    platform: mqtt
+    topic: "ventilation/user/UserFuncSet"
+  action:
+    service: input_select.select_option
+    data_template:
+      entity_id: input_select.brugervalg_mode
+      option: >-
+        {% if trigger.payload == "0" %}Off
+        {% elif trigger.payload == "1" %}Udvidet
+        {% elif trigger.payload == "2" %}Tilluft
+        {% elif trigger.payload == "3" %}Fraluft
+        {% elif trigger.payload == "5" %}Ventilere
+        {% elif trigger.payload == "6" %}Emhætte
+        {% endif %}
+
+#######################################################################################################
+###                             Styr Nilan brugervalg tid                                           ###
+#######################################################################################################
+
+- alias: Brugervalg tid via GUI
+  trigger:
+    platform: state
+    entity_id: input_select.usertime_mode
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: "ventilation/usertimeset"
+      retain: false
+      payload: >-
+        {% if states.input_select.usertime_mode.state ==   "Off"        %}000
+        {% elif states.input_select.usertime_mode.state == "0,5 time"   %}030
+        {% elif states.input_select.usertime_mode.state == "1,0 time"   %}100
+        {% elif states.input_select.usertime_mode.state == "1,5 time"   %}130
+        {% elif states.input_select.usertime_mode.state == "2,0 timer"  %}200
+        {% elif states.input_select.usertime_mode.state == "2,5 timer"  %}230
+        {% elif states.input_select.usertime_mode.state == "3,0 timer"  %}300
+        {% elif states.input_select.usertime_mode.state == "3,5 timer"  %}330
+        {% elif states.input_select.usertime_mode.state == "4,0 timer"  %}400
+        {% elif states.input_select.usertime_mode.state == "4,5 timer"  %}430
+        {% elif states.input_select.usertime_mode.state == "5,0 timer"  %}500
+        {% elif states.input_select.usertime_mode.state == "5,5 timer"  %}530
+        {% elif states.input_select.usertime_mode.state == "6,0 timer"  %}600
+        {% elif states.input_select.usertime_mode.state == "6,5 timer"  %}630
+        {% elif states.input_select.usertime_mode.state == "7,0 timer"  %}700
+        {% elif states.input_select.usertime_mode.state == "7,5 timer"  %}730
+        {% elif states.input_select.usertime_mode.state == "8,0 timer"  %}800
+        {% endif %}
+
+- alias: Brugervalg tid via MQTT
+  trigger:
+    platform: mqtt
+    topic: "ventilation/user/UserTimeSet"
+  action:
+    service: input_select.select_option
+    data_template:
+      entity_id: input_select.usertime_mode
+      option: >-
+        {% if trigger.payload ==   "0"   %}Off
+        {% elif trigger.payload == "30"  %}0,5 time
+        {% elif trigger.payload == "100" %}1,0 time
+        {% elif trigger.payload == "130" %}1,5 time
+        {% elif trigger.payload == "200" %}2,0 timer
+        {% elif trigger.payload == "230" %}2,5 timer
+        {% elif trigger.payload == "300" %}3,0 timer
+        {% elif trigger.payload == "330" %}3,5 timer
+        {% elif trigger.payload == "400" %}4,0 timer
+        {% elif trigger.payload == "430" %}4,5 timer
+        {% elif trigger.payload == "500" %}5,0 timer
+        {% elif trigger.payload == "530" %}5,5 timer
+        {% elif trigger.payload == "600" %}6,0 timer
+        {% elif trigger.payload == "630" %}6,5 timer
+        {% elif trigger.payload == "700" %}7,0 timer
+        {% elif trigger.payload == "730" %}7,5 timer
+        {% elif trigger.payload == "800" %}8,0 timer
+        {% endif %}
+        
+#######################################################################################################
+###                             User temp setting.                                                  ###
+#######################################################################################################
+
+- alias: Set nilan user temp slider via mqtt
+  trigger:
+    platform: mqtt
+    topic: 'ventilation/user/UserTempSet'
+  action:
+    service: input_number.set_value
+    data:
+      entity_id: input_number.user_temp
+      value: "{{ trigger.payload }}"
+
+- alias: Set nilan user temp slider via gui
+  trigger:
+    platform: state
+    entity_id: input_number.user_temp
+  action:
+    service: mqtt.publish
+    data:
+      topic: 'ventilation/usertempset'
+      retain: false
+      payload: "{{ states('input_number.user_temp') | int }}"
+      
+#######################################################################################################
+###                             User vent setting                                                   ###
+#######################################################################################################
+
+- alias: Set nilan user vent slider via mqtt
+  trigger:
+    platform: mqtt
+    topic: 'ventilation/user/UserVentSet'
+  action:
+    service: input_number.set_value
+    data:
+      entity_id: input_number.user_vent
+      value: "{{ trigger.payload }}"
+
+- alias: Set nilan user vent slider via gui
+  trigger:
+    platform: state
+    entity_id: input_number.user_vent
+  action:
+    service: mqtt.publish
+    data:
+      topic: 'ventilation/userventset'
+      retain: false
+      payload: "{{ states('input_number.user_vent') | int }}"    
+
+#################################################################
+#                                                               #
+#                          Input Select                         #
+#                                                               #
+#################################################################  
+
+input_select:
+  weekprogram_mode:
+    name: Nilan Week Program
+    options:
+      - "Off"
+      - "Program 1"
+      - "Program 2"
+      - "Program 3"
+    initial: "Off"  
+    icon: mdi:calendar
+
+#################################
+###     Brugervalg mode       ###
+#################################   
+
+  brugervalg_mode:
+    name: Nilan Brugervalg Type
+    options:
+      - "Off"
+      - "Udvidet"
+      - "Tilluft"
+      - "Fraluft"
+      - "Ventilere"
+      - "Emhætte" 
+    icon: mdi:fan
+
+#################################
+###     Usertime mode         ###
+#################################     
+
+  usertime_mode:
+    name: Nilan Brugervalg Tid
+    options:
+      - "Off"
+      - "0,5 time"
+      - "1,0 time"
+      - "1,5 time"
+      - "2,0 timer"
+      - "2,5 timer"
+      - "3,0 timer"
+      - "3,5 timer"
+      - "4,0 timer"
+      - "4,5 timer"
+      - "5,0 timer"
+      - "5,5 timer"
+      - "6,0 timer"
+      - "6,5 timer"
+      - "7,0 timer"
+      - "7,5 timer"
+      - "8,8 timer"
+    icon: mdi:timer
+    
+
+#################################################################
+#                                                               #
+#                         Input number                          #
+#                                                               #
+#################################################################
+
+#################################
+###     User temperature      ###
+#################################  
+
+input_number:
+  user_temp:
+    name: User Temp 
+    min: 16
+    max: 28
+    step: 1
+    unit_of_measurement: °C
+    icon: mdi:thermometer
+
+#################################
+###     User vent setting     ###
+#################################     
+
+  user_vent:
+    name: User Vent 
+    min: 1
+    max: 4
+    step: 1
+    icon: mdi:fan     
+
+
+
+
+
+
