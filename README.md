@@ -36,8 +36,11 @@ A wiring example on a Comfort 300 and Wavin AHC9000 is shown here:
 
 ## Software
 The module is intended for use with Home Assistant and ESPHome though not limited to this.
-See the video guide here on how to set it up: 
+See the video guide here on how to set it up wirelessly: 
 https://youtu.be/gB1TLhx6Nzc
+
+And over USB the procedure is given here:
+https://youtu.be/Q5KRcv-uObo
 
 The board dependent setup part is as follows:
 ```
