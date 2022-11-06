@@ -42,7 +42,7 @@ But in general you will need +8-24VDC, GND, A (modbus+) and B (modbus-) connecte
 ## Software
 The module is intended for use with Home Assistant and ESPHome though not limited to this.
 See the video guide here on how to set it up wirelessly: 
-https://youtu.be/gB1TLhx6Nzc
+https://youtu.be/s8QjRjI9TLo
 
 And over USB the procedure is given here:
 https://youtu.be/Q5KRcv-uObo
