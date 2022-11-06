@@ -31,8 +31,13 @@ The following schematic shows the details of the module:
 
 On Wavin you simply use a patch cable (straight) and connect it from the module to the Modbus port and then you are done :)
 
-A wiring example on a Comfort 300 and Wavin AHC9000 is shown here:
+The general layout for Nilan is shown in the table here (for a RJ45B !):
 ![Connections](/electronics/connection.png)
+
+A wiring example on a Comfort 300 CTS602 light is shown here:
+![Connections](/electronics/CTS602_light.png)
+
+But in general you will need +8-24VDC, GND, A (modbus+) and B (modbus-) connected to run the module.
 
 ## Software
 The module is intended for use with Home Assistant and ESPHome though not limited to this.
