@@ -254,12 +254,12 @@ select:
       "Hotel" : 16
       "Unlocked" : 32     
 
-## Channel 11
+## Channel 10
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_11} termostat lås"
-    id: thermostat_lock_channel_11
-    address: 1120
+    name: "${channel_10} termostat lås"
+    id: thermostat_lock_channel_10
+    address: 1020
     force_new_range: true
     use_write_multiple: true
     value_type: U_WORD
@@ -670,47 +670,47 @@ sensor:
     filters:
       - multiply: 0.01  
 
-## Channel 11
+## Channel 10
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_11} mode"
-    id: mode_channel_11
+    name: "${channel_10} mode"
+    id: mode_channel_10
     register_type: read
-    address: 1102
+    address: 1002
     
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_11} temperatur"
-    id: temperatur_channel_11
+    name: "${channel_10} temperatur"
+    id: temperatur_channel_10
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: temperature
     register_type: read
-    address: 1104
+    address: 1004
     filters:
       - multiply: 0.01
       
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_11} luftfugtighed"
-    id: luftfugtighed_channel_11
+    name: "${channel_10} luftfugtighed"
+    id: luftfugtighed_channel_10
     unit_of_measurement: '%'
     accuracy_decimals: 1
     device_class: humidity
     register_type: read
-    address: 1106
+    address: 1006
     filters:
       - multiply: 0.01   
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_11} dugpunkt"
-    id: dugpunkt_channel_11
+    name: "${channel_10} dugpunkt"
+    id: dugpunkt_channel_10
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: humidity
     register_type: read
-    address: 1107
+    address: 1007
     filters:
       - multiply: 0.01         
 
@@ -957,27 +957,27 @@ number:
     use_write_multiple: true 
     multiply: 100
     
-## Channel 11   
+## Channel 10   
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_11} temperatur setpunkt"
-    id: temperatur_setpunkt_channel_11
+    name: "${channel_10} temperatur setpunkt"
+    id: temperatur_setpunkt_channel_10
     min_value: 10.0
     max_value: 30.0
     step: 0.5
-    address: 1119
+    address: 1019
     force_new_range: true
     use_write_multiple: true 
     multiply: 100  
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "${channel_11} ferie temperatur setpunkt"
-    id: ferie_temperatur_setpunkt_channel_11
+    name: "${channel_10} ferie temperatur setpunkt"
+    id: ferie_temperatur_setpunkt_channel_10
     min_value: 10.0
     max_value: 30.0
     step: 0.5
-    address: 1122
+    address: 1022
     force_new_range: true
     use_write_multiple: true 
     multiply: 100
@@ -1140,21 +1140,21 @@ binary_sensor:
     address: 903
     bitmask: 1 
 
-## Channel 11
+## Channel 10
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Fejl ${channel_11}"
-    id: sentio_warning_channel_11
+    name: "Fejl ${channel_10}"
+    id: sentio_warning_channel_10
     register_type: read
-    address: 1101
+    address: 1001
     bitmask: 1      
 
   - platform: modbus_controller
     modbus_controller_id: sentio_modbus_controller
-    name: "Lav batteri ${channel_11}"
-    id: sentio_battery_low_channel_11
+    name: "Lav batteri ${channel_10}"
+    id: sentio_battery_low_channel_10
     register_type: read
-    address: 1103
+    address: 1003
     bitmask: 1 
 
 
@@ -1218,7 +1218,7 @@ climate:
     mode_select_id: mode_channel_9
     
   - platform: sentio
-    name: ${channel_11}
-    current_temp_sensor_id: temperatur_channel_11
-    target_temp_sensor_id: temperatur_setpunkt_channel_11
-    mode_select_id: mode_channel_11      
+    name: ${channel_10}
+    current_temp_sensor_id: temperatur_channel_10
+    target_temp_sensor_id: temperatur_setpunkt_channel_10
+    mode_select_id: mode_channel_10      
