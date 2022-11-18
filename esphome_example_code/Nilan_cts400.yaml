@@ -1,5 +1,5 @@
 esphome:
-  name: nilan
+  name: cts400
 esp32:
   board: pico32
   framework:
@@ -44,7 +44,7 @@ modbus_controller:
   modbus_id: modbus_id
   #update_interval: 30s
  
- external_components:
+external_components:
   - source: github://Jopand/esphome_components@develop
     refresh: 0s
     
