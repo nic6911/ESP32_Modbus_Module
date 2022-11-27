@@ -39,13 +39,20 @@ A wiring example on a Comfort 300 CTS602 light is shown here:
 
 But in general you will need +8-24VDC, GND, A (modbus+) and B (modbus-) connected to run the module.
 
-## Software
+## Software + Video Guides !
 The module is intended for use with Home Assistant and ESPHome though not limited to this.
 See the video guide here on how to set it up wirelessly: 
 https://youtu.be/s8QjRjI9TLo
 
 And over USB the procedure is given here:
 https://youtu.be/Q5KRcv-uObo
+
+###Wavin code issues
+For now the code not ending with _old is faulty when using combined channels. See the issue "Channel 9 and 10 is showing temperature at 0 degrees celcius ":
+https://github.com/heinekmadsen/esphome_components/issues/9
+
+The easy fix is just to use the _old code, or to do what is mentioned in the Git issue above.
+
 
 The board dependent setup part is as follows:
 ```
