@@ -9,7 +9,7 @@ substitutions:
   log_level: DEBUG
  
   # UPDATE TIME (GATEWAY)
-  update_interval: 10s
+  update_interval: 30s
   
   # PIN DEFINITIONS (Should in most cases not be changed) 
   rx_pin: '13'
@@ -83,6 +83,7 @@ sensor:
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: temperature
+    value_type: S_WORD
     register_type: read
     address: 0
     filters:
@@ -95,6 +96,7 @@ sensor:
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: temperature
+    value_type: S_WORD
     register_type: read
     address: 1
     filters:
@@ -107,6 +109,7 @@ sensor:
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: temperature
+    value_type: S_WORD
     register_type: read
     address: 2
     filters:
@@ -119,6 +122,7 @@ sensor:
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: temperature
+    value_type: S_WORD
     register_type: read
     address: 3
     filters:
@@ -131,6 +135,7 @@ sensor:
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: temperature
+    value_type: S_WORD
     register_type: read
     address: 4
     filters:
@@ -143,6 +148,7 @@ sensor:
     unit_of_measurement: °C
     accuracy_decimals: 1
     device_class: temperature
+    value_type: S_WORD
     register_type: read
     address: 5
     filters:
