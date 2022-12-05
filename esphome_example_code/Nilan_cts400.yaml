@@ -81,7 +81,7 @@ sensor:
     register_type: read
     address: 30
     filters:
-      - multiply: 0.01
+      - multiply: 0.1
       
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -92,7 +92,7 @@ sensor:
     register_type: read
     address: 28
     filters:
-      - multiply: 0.01
+      - multiply: 0.1
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -104,7 +104,7 @@ sensor:
     register_type: read
     address: 27
     filters:
-      - multiply: 0.01
+      - multiply: 0.1
       
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -116,7 +116,7 @@ sensor:
     register_type: read
     address: 29
     filters:
-      - multiply: 0.01
+      - multiply: 0.1
       
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -128,7 +128,7 @@ sensor:
     register_type: read
     address: 31
     filters:
-      - multiply: 0.01
+      - multiply: 0.1
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -216,7 +216,7 @@ sensor:
     register_type: holding
     address: 24
     filters:
-      - multiply: 0.01
+      - multiply: 0.1
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -228,7 +228,7 @@ sensor:
     register_type: holding
     address: 25
     filters:
-      - multiply: 0.01
+      - multiply: 0.1
 
 binary_sensor:
 #########################
@@ -249,7 +249,7 @@ binary_sensor:
     id: nilan_is_summer
     register_type: read
     address: 72
-    bitmask: 1
+    bitmask: 0
 
 ###########################
 #### HOLDING REGISTERS ####
@@ -290,7 +290,7 @@ number:
     address: 37
     force_new_range: true
     use_write_multiple: true
-    multiply: 100
+    multiply: 10
 
 switch:
   - platform: modbus_controller
