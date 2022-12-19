@@ -42,7 +42,7 @@ modbus_controller:
   id: nilan_modbus_controller
   address: 30
   modbus_id: modbus_id
-  #update_interval: 30s
+  update_interval: 10s
  
 external_components:
   - source: github://Jopand/esphome_components@develop
@@ -73,7 +73,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Afkast temperatur"
+    name: "Outlet temperature"
     id: nilan_outlet_temp_t4
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -85,7 +85,7 @@ sensor:
       
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Indblæsning temperatur"
+    name: "Inlet temperature"
     id: nilan_inlet_temp_t2
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -108,7 +108,7 @@ sensor:
       
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Udsugning temperatur"
+    name: "Exhaust temperature"
     id: nilan_exhaust_temp_t3
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -196,27 +196,22 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
-    name: "Days to next filter change alarm"
+    name: "Days to next filter change"
     id: nilan_days_to_next_filter_alarm
     unit_of_measurement: 'days'
     accuracy_decimals: 0
     register_type: read
     address: 110    
-      
-###########################
-#### HOLDING REGISTERS ####
-###########################
+
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
     name: "Exhaust fan speed"
     id: nilan_exhaust_fan_speed
     unit_of_measurement: '%'
     icon: "mdi:percent"
-    accuracy_decimals: 0
-    register_type: holding
+    accuracy_decimals: 1
+    register_type: read
     address: 24
-    filters:
-      - multiply: 0.1
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -224,11 +219,14 @@ sensor:
     id: nilan_inlet_fan_speed
     unit_of_measurement: '%'
     icon: "mdi:percent"
-    accuracy_decimals: 0
-    register_type: holding
+    accuracy_decimals: 1
+    register_type: read
     address: 25
-    filters:
-      - multiply: 0.1
+          
+###########################
+#### HOLDING REGISTERS ####
+###########################
+
 
 binary_sensor:
 #########################
