@@ -39,6 +39,8 @@ The general layout for Nilan is shown in the table here (for a RJ45B !):
 A wiring example on a Comfort 300 CTS602 light is shown here:
 ![Connections](/electronics/CTS602_light.png)
 
+#### If in doubt, look up your Nilan diagram on www.nilan.dk or write me !
+
 But in general you will need +8-24VDC, GND, A (modbus+) and B (modbus-) connected to run the module.
 
 ## Software + Video Guides !
