@@ -1,5 +1,5 @@
 esphome:
-  name: cts400
+  name: nilan
 esp32:
   board: pico32
   framework:
@@ -212,6 +212,8 @@ sensor:
     accuracy_decimals: 1
     register_type: read
     address: 24
+    filters:
+      - multiply: 0.1    
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -222,6 +224,8 @@ sensor:
     accuracy_decimals: 1
     register_type: read
     address: 25
+    filters:
+      - multiply: 0.1    
           
 ###########################
 #### HOLDING REGISTERS ####
@@ -275,8 +279,8 @@ number:
     max_value: 4
     step: 1.0
     address: 69
-    force_new_range: true
-    use_write_multiple: true  
+    #force_new_range: true
+    #use_write_multiple: true  
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -286,8 +290,8 @@ number:
     max_value: 30
     step: 1.0
     address: 37
-    force_new_range: true
-    use_write_multiple: true
+    #force_new_range: true
+    #use_write_multiple: true
     multiply: 10
 
 switch:
