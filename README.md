@@ -12,7 +12,22 @@ You can buy the module here: https://ustepper.com/shop/home/18-esphome-modbus-mo
 Do this at your own risk ! You are interfacing with hardware that you can potentially damage if you do not connect things as required !
 Using the hardware and code presented here is done at you own risk. The hardware and software has been tested on the devices listed above without issues.
 
-## Hardware
+## Updated Hardware as of February 2023
+The module includes:
+- ESP32-C3-MINI-1 WiFi module w. 4MB flash and 400KB SRAM
+- RS485 modbus interface IC
+- USB-C interface for power and programming
+- Switch mode buck for powering the device from any source providing 8-24VDC (USB power not required)
+- 2 x optocoupler outputs
+- I/O's on two pin rows
+- RJ45 interface compliant with the Wavin Sentio/AHC9000 interface
+
+The form factor and visuals is the same as for the previous ESP32-PICO. The change results in a BOM reduction and thus a price reduction due to the integrated USB controller in the C3.
+
+The following schematic shows the details of the module:
+![Schematic](/electronics/schematicsC3.png)
+
+## Hardware pre-february 2023
 The module includes:
 - ESP32-PICO-MINI-02-N8R2 WiFi module w. 8MB flash and 2MB ram
 - RS485 modbus interface IC
@@ -51,13 +66,43 @@ https://youtu.be/s8QjRjI9TLo
 And over USB the procedure is given here:
 https://youtu.be/Q5KRcv-uObo
 
-###Wavin code issues
+### Wavin code issues
 For now the code not ending with _old is faulty when using combined channels. See the issue "Channel 9 and 10 is showing temperature at 0 degrees celcius ":
 https://github.com/heinekmadsen/esphome_components/issues/9
 
 The easy fix is just to use the _old code, or to do what is mentioned in the Git issue above.
 
 
+### Board setup from February 2023
+The board dependent setup part is as follows for the ESP32-C3:
+```
+esphome:
+  name: nilan
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  output_power: "8.5"
+
+uart:
+  rx_pin: 20
+  tx_pin: 21
+  parity: EVEN
+  baud_rate: 19200
+  id: uart_modbus
+  stop_bits: 1
+  
+modbus:
+  id: modbus_id
+  flow_control_pin: 10
+  uart_id: uart_modbus
+```  
+
+### Board setup pre-february 2023
 The board dependent setup part is as follows:
 ```
 esphome:
