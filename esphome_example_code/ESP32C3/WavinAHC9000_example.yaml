@@ -24,19 +24,19 @@ substitutions:
   update_interval: 60s
   
   # CHANNEL ID´S
-  channel_1:  Værelse1
-  channel_2:  Værelse2
-  channel_3:  Bad1
-  channel_4:  Bryggers
-  channel_5:  Kontor
-  channel_6:  Bad2
-  channel_7:  Køkken Alrum
-  channel_8:  Værelse3
-  channel_9:  Soveværelse
-  channel_10: Stue
-  channel_11: Gang
-  channel_12: <Unused>
-  channel_13: <Unused>
+  channel_1:  <Unused>
+  channel_2:  <Unused>
+  channel_3:  <Unused>
+  channel_4:  <Unused>
+  channel_5:  <Unused>
+  channel_6:  <Unused>
+  channel_7:  <Unused> Alrum
+  channel_8:  <Unused>
+  channel_9:  Gang
+  channel_10: Luca
+  channel_11: Aya
+  channel_12: Loui
+  channel_13: Badeværelse
   channel_14: <Unused>
   channel_15: <Unused>
   channel_16: <Unused>
@@ -76,6 +76,11 @@ api:
   
 ota:
 
+# This should point to the public location of this yaml file.
+dashboard_import:
+  package_import_url: github://nic6911/ESP32_Modus_Module/blob/main/esphome_example_code/ESP32C3/WavinAHC9000_example.yaml
+  import_full_config: false # or true
+  
 wifi:
   ssid: ${ssid_set}
   password: ${password_set}
@@ -86,6 +91,11 @@ wifi:
     password: "12345678"
 
 captive_portal:  
+
+# Sets up Bluetooth LE (Only on ESP32) to allow the user
+# to provision wifi credentials to the device.
+esp32_improv:
+  authorizer: none
 
 uart:
   rx_pin: ${rx_pin}
