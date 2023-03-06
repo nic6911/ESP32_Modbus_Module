@@ -79,6 +79,7 @@ sensor:
     accuracy_decimals: 1
     device_class: temperature
     register_type: read
+    value_type: S_WORD
     address: 30
     filters:
       - multiply: 0.1
@@ -90,6 +91,7 @@ sensor:
     unit_of_measurement: °C
     accuracy_decimals: 1
     register_type: read
+    value_type: S_WORD
     address: 28
     filters:
       - multiply: 0.1
@@ -102,6 +104,7 @@ sensor:
     accuracy_decimals: 1
     device_class: temperature
     register_type: read
+    value_type: S_WORD
     address: 27
     filters:
       - multiply: 0.1
@@ -114,6 +117,7 @@ sensor:
     accuracy_decimals: 1
     device_class: temperature
     register_type: read
+    value_type: S_WORD
     address: 29
     filters:
       - multiply: 0.1
