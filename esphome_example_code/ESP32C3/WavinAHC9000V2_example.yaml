@@ -255,5 +255,20 @@ packages:
       #- components/wavinahc9000v2/configs/channel_15_comfort.yaml # Only for channels with thermostat with IR sensor
       #- components/wavinahc9000v2/configs/channel_16.yaml 
       #- components/wavinahc9000v2/configs/channel_16_comfort.yaml # Only for channels with thermostat with IR sensor
-      - components/wavinahc9000v2/configs/channel_17.yaml 
+      #- components/wavinahc9000v2/configs/channel_17.yaml 
+      #- components/wavinahc9000v2/configs/channel_18.yaml 
+      #- components/wavinahc9000v2/configs/channel_19.yaml 
+      #- components/wavinahc9000v2/configs/channel_20.yaml 
+      #- components/wavinahc9000v2/configs/channel_21.yaml 
+      #- components/wavinahc9000v2/configs/channel_22.yaml 
+      #- components/wavinahc9000v2/configs/channel_23.yaml 
+      #- components/wavinahc9000v2/configs/channel_24.yaml 
+      #- components/wavinahc9000v2/configs/channel_25.yaml 
+      #- components/wavinahc9000v2/configs/channel_26.yaml 
+      #- components/wavinahc9000v2/configs/channel_27.yaml 
+      #- components/wavinahc9000v2/configs/channel_28.yaml 
+      #- components/wavinahc9000v2/configs/channel_29.yaml 
+      #- components/wavinahc9000v2/configs/channel_30.yaml 
+      #- components/wavinahc9000v2/configs/channel_31.yaml 
+      #- components/wavinahc9000v2/configs/channel_32.yaml 
     refresh: 0s  
