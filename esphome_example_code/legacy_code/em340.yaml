@@ -2,7 +2,7 @@
 esphome:
   name: em340
 esp32:
-  board: esp32-c3-devkitm-1
+  board: pico32
   framework:
     type: arduino
 
@@ -31,15 +31,15 @@ captive_portal:
 
 uart:
   id: modbus_serial
-  rx_pin: 20
-  tx_pin: 21
+  rx_pin: 13
+  tx_pin: 14
   baud_rate: 9600
   stop_bits: 1
 
 modbus:
   uart_id: modbus_serial
   id: em340_modbus
-  flow_control_pin: 10  
+  flow_control_pin: 26  
 
 modbus_controller:
   modbus_id: em340_modbus

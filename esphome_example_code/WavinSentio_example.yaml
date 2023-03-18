@@ -47,8 +47,8 @@ substitutions:
   climate_max_temp: '30'
   
   # PIN DEFINITIONS (Should in most cases not be changed) 
-  rx_pin: '13'
-  tx_pin: '14'
+  rx_pin: '20'
+  tx_pin: '21'
 
   # WiFi settings
   ssid_set: !secret wifi_ssid
@@ -62,7 +62,7 @@ esphome:
   name: ${device_name}
 
 esp32:
-  board: pico32
+  board: esp32-c3-devkitm-1
   framework:
     type: arduino
 
@@ -96,7 +96,7 @@ uart:
 modbus:
   id: modbus_id
   uart_id: uart_modbus
-  flow_control_pin: 26
+  flow_control_pin: 10
   
 modbus_controller:
   id: sentio_modbus_controller

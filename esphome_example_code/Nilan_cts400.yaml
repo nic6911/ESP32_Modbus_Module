@@ -1,7 +1,7 @@
 esphome:
   name: nilan
 esp32:
-  board: pico32
+  board: esp32-c3-devkitm-1
   framework:
     type: arduino
 
@@ -26,8 +26,8 @@ wifi:
 captive_portal:
 
 uart:
-  rx_pin: 13
-  tx_pin: 14
+  rx_pin: 20
+  tx_pin: 21
   parity: EVEN
   baud_rate: 19200
   id: uart_modbus
@@ -35,7 +35,7 @@ uart:
   
 modbus:
   id: modbus_id
-  flow_control_pin: 26
+  flow_control_pin: 10
   uart_id: uart_modbus
   
 modbus_controller:
@@ -450,12 +450,12 @@ switch:
     address: 51
  
   - platform: gpio
-    pin: 32
+    pin: 3
     name: "Brugervalg 1"   
     id: nilan_user_function2_switch
       
   - platform: gpio
-    pin: 33
+    pin: 4
     name: "Brugervalg 2"   
     id: nilan_user_funtion2_switch      
     

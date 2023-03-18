@@ -1,7 +1,7 @@
 esphome:
   name: nilan
 esp32:
-  board: esp32-c3-devkitm-1
+  board: pico32
   framework:
     type: arduino
 
@@ -14,11 +14,6 @@ api:
 
 ota:
 
-# This should point to the public location of this yaml file.
-dashboard_import:
-  package_import_url: github://nic6911/ESP32_Modus_Module/blob/main/esphome_example_code/ESP32C3/Nilan_example.yaml@main
-  import_full_config: true
-  
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
@@ -30,14 +25,9 @@ wifi:
 
 captive_portal:
 
-# Sets up Bluetooth LE (Only on ESP32) to allow the user
-# to provision wifi credentials to the device.
-esp32_improv:
-  authorizer: none
-  
 uart:
-  rx_pin: 20
-  tx_pin: 21
+  rx_pin: 13
+  tx_pin: 14
   parity: EVEN
   baud_rate: 19200
   id: uart_modbus
@@ -45,7 +35,7 @@ uart:
   
 modbus:
   id: modbus_id
-  flow_control_pin: 10
+  flow_control_pin: 26
   uart_id: uart_modbus
   
 modbus_controller:
@@ -711,12 +701,12 @@ switch:
     address: 1001
     
   - platform: gpio
-    pin: 3
+    pin: 32
     name: "Brugervalg 1"   
     id: nilan_user_function2_switch
       
   - platform: gpio
-    pin: 4
+    pin: 33
     name: "Brugervalg 2"   
     id: nilan_user_funtion2_switch      
     

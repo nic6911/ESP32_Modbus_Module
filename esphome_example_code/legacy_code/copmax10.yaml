@@ -12,8 +12,8 @@ substitutions:
   update_interval: 30s
   
   # PIN DEFINITIONS (Should in most cases not be changed) 
-  rx_pin: '20'
-  tx_pin: '21'
+  rx_pin: '13'
+  tx_pin: '14'
 
   # WiFi settings
   ssid_set: !secret wifi_ssid
@@ -27,7 +27,7 @@ esphome:
   name: ${device_name}
 
 esp32:
-  board: esp32-c3-devkitm-1
+  board: pico32
   framework:
     type: arduino
 
@@ -61,7 +61,7 @@ uart:
 modbus:
   id: modbus_id
   uart_id: uart_modbus
-  flow_control_pin: 10
+  flow_control_pin: 26
   
 modbus_controller:
   id: copmax_modbus_controller
