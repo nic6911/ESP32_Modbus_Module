@@ -37,22 +37,6 @@ substitutions:
   channel_14_friendly_name: "Channel 14"
   channel_15_friendly_name: "Channel 15"
   channel_16_friendly_name: "Channel 16"
-  channel_17_friendly_name: "Channel 17"
-  channel_18_friendly_name: "Channel 18"
-  channel_19_friendly_name: "Channel 19"
-  channel_20_friendly_name: "Channel 20"
-  channel_21_friendly_name: "Channel 21"
-  channel_22_friendly_name: "Channel 22"
-  channel_23_friendly_name: "Channel 23"
-  channel_24_friendly_name: "Channel 24"
-  channel_25_friendly_name: "Channel 25"
-  channel_26_friendly_name: "Channel 26"
-  channel_27_friendly_name: "Channel 27"
-  channel_28_friendly_name: "Channel 28"
-  channel_29_friendly_name: "Channel 29"
-  channel_30_friendly_name: "Channel 30"
-  channel_31_friendly_name: "Channel 31"
-  channel_32_friendly_name: "Channel 32"
   
   # CHANNEL ID´S (ONLY LOWER CASE LETTERS, NO SPACES) used for entity ids
   channel_01_id: channel_01
@@ -71,22 +55,6 @@ substitutions:
   channel_14_id: channel_14
   channel_15_id: channel_15
   channel_16_id: channel_16
-  channel_17_id: channel_17
-  channel_18_id: channel_18
-  channel_19_id: channel_19
-  channel_20_id: channel_20
-  channel_21_id: channel_21
-  channel_22_id: channel_22
-  channel_23_id: channel_23
-  channel_24_id: channel_24
-  channel_25_id: channel_25
-  channel_26_id: channel_26
-  channel_27_id: channel_27
-  channel_28_id: channel_28
-  channel_29_id: channel_29
-  channel_30_id: channel_30
-  channel_31_id: channel_31
-  channel_32_id: channel_32
 
  # CHANNEL Alignments (ONLY change if you have offsets in channel vs temperature. Some have reported this if using multiple strings pr. room thermostat)
   channel_01_sensor: "0x00"
@@ -105,22 +73,6 @@ substitutions:
   channel_14_sensor: "0x0D"
   channel_15_sensor: "0x0E"
   channel_16_sensor: "0x0F"
-  channel_17_sensor: "0x14"
-  channel_18_sensor: "0x15"
-  channel_19_sensor: "0x16"
-  channel_20_sensor: "0x17"
-  channel_21_sensor: "0x18"
-  channel_22_sensor: "0x19"
-  channel_23_sensor: "0x1A"
-  channel_24_sensor: "0x1B"
-  channel_25_sensor: "0x1C"
-  channel_26_sensor: "0x1D"
-  channel_27_sensor: "0x1E"
-  channel_28_sensor: "0x1F"
-  channel_29_sensor: "0x20"
-  channel_30_sensor: "0x21"
-  channel_31_sensor: "0x22"
-  channel_32_sensor: "0x23"
   
   channel_01: "0x00"
   channel_02: "0x01"
@@ -138,22 +90,6 @@ substitutions:
   channel_14: "0x0D"
   channel_15: "0x0E"
   channel_16: "0x0F"
-  channel_17: "0x14"
-  channel_18: "0x15"
-  channel_19: "0x16"
-  channel_20: "0x17"
-  channel_21: "0x18"
-  channel_22: "0x19"
-  channel_23: "0x1A"
-  channel_24: "0x1B"
-  channel_25: "0x1C"
-  channel_26: "0x1D"
-  channel_27: "0x1E"
-  channel_28: "0x1F"
-  channel_29: "0x20"
-  channel_30: "0x21"
-  channel_31: "0x22"
-  channel_32: "0x23"
 
    # UPDATE TIME (GATEWAY)
   update_interval: 60s
@@ -255,20 +191,4 @@ packages:
       #- components/wavinahc9000v2/configs/channel_15_comfort.yaml # Only for channels with thermostat with IR sensor
       #- components/wavinahc9000v2/configs/channel_16.yaml 
       #- components/wavinahc9000v2/configs/channel_16_comfort.yaml # Only for channels with thermostat with IR sensor
-      #- components/wavinahc9000v2/configs/channel_17.yaml 
-      #- components/wavinahc9000v2/configs/channel_18.yaml 
-      #- components/wavinahc9000v2/configs/channel_19.yaml 
-      #- components/wavinahc9000v2/configs/channel_20.yaml 
-      #- components/wavinahc9000v2/configs/channel_21.yaml 
-      #- components/wavinahc9000v2/configs/channel_22.yaml 
-      #- components/wavinahc9000v2/configs/channel_23.yaml 
-      #- components/wavinahc9000v2/configs/channel_24.yaml 
-      #- components/wavinahc9000v2/configs/channel_25.yaml 
-      #- components/wavinahc9000v2/configs/channel_26.yaml 
-      #- components/wavinahc9000v2/configs/channel_27.yaml 
-      #- components/wavinahc9000v2/configs/channel_28.yaml 
-      #- components/wavinahc9000v2/configs/channel_29.yaml 
-      #- components/wavinahc9000v2/configs/channel_30.yaml 
-      #- components/wavinahc9000v2/configs/channel_31.yaml 
-      #- components/wavinahc9000v2/configs/channel_32.yaml 
     refresh: 0s  
