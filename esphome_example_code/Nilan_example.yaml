@@ -13,11 +13,6 @@ logger:
 api:
 
 ota:
-
-# This should point to the public location of this yaml file.
-dashboard_import:
-  package_import_url: github://nic6911/ESP32_Modus_Module/blob/main/esphome_example_code/ESP32C3/Nilan_example.yaml@main
-  import_full_config: true
   
 wifi:
   ssid: !secret wifi_ssid
@@ -26,7 +21,7 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Nilan Fallback Hotspot"
-    password: "12345678"
+    password: ""
 
 captive_portal:
 
