@@ -13,7 +13,7 @@ logger:
 api:
 
 ota:
-  
+
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
@@ -24,11 +24,6 @@ wifi:
     password: ""
 
 captive_portal:
-
-# Sets up Bluetooth LE (Only on ESP32) to allow the user
-# to provision wifi credentials to the device.
-esp32_improv:
-  authorizer: none
   
 uart:
   rx_pin: 20
