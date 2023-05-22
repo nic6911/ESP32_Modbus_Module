@@ -1,0 +1,24 @@
+alias: Sync gulvvarme
+description: ""
+trigger:
+  - platform: state
+    entity_id: input_number.sync_temperatur
+condition: []
+action:
+  - service: climate.set_temperature
+    target:
+      entity_id:
+        - climate.arnes_vaerelse
+        - climate.bad_born
+        - climate.bad_voksne
+        - climate.bryggers
+        - climate.ellens_vaerelse
+        - climate.entre
+        - climate.mors_kontor
+        - climate.fars_kontor
+        - climate.sovevaerelse
+        - climate.stue_ka
+    data:
+      temperature: "{{ states('input_number.sync_temperatur') }}"
+      entity_id: input_number.sync_temperatur
+mode: single

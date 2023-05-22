@@ -1,0 +1,71 @@
+type: vertical-stack
+cards:
+  - type: entities
+    entities:
+      - entity: climate.arnes_vaerelse
+        icon: mdi:teddy-bear
+        name: Arnes værelse
+      - entity: climate.ellens_vaerelse
+        icon: mdi:unicorn
+        name: Ellens værelse
+      - entity: climate.fars_kontor
+        icon: mdi:laptop
+        name: Fars kontor
+      - entity: climate.mors_kontor
+        icon: mdi:desktop-classic
+        name: Mors kontor
+      - entity: climate.stue_ka
+        icon: mdi:sofa
+        name: Stue
+      - entity: climate.sovevaerelse
+        icon: mdi:bed-king
+        name: Soveværelse
+      - entity: climate.bryggers
+        icon: mdi:tumble-dryer
+        name: Bryggers
+      - entity: climate.entre
+        icon: mdi:door-closed
+        name: Entré
+      - entity: climate.bad_voksne
+        icon: mdi:paper-roll-outline
+        name: Toilet
+      - entity: climate.bad_born
+        icon: mdi:paper-roll-outline
+        name: Gæstetoilet
+      - entity: input_number.sync_temperatur
+    state_color: true
+    title: Gulvvarme
+  - type: entities
+    entities:
+      - entity: sensor.arnes_vaerelse_luftfugtighed
+        icon: mdi:teddy-bear
+        name: Arnes værelse
+      - entity: sensor.ellens_vaerelse_luftfugtighed
+        icon: mdi:unicorn
+        name: Ellens værelse
+      - entity: sensor.fars_kontor_luftfugtighed
+        icon: mdi:laptop
+        name: Fars kontor
+      - entity: sensor.mors_kontor_luftfugtighed
+        icon: mdi:desktop-classic
+        name: Mors kontor
+      - entity: sensor.stue_ka_luftfugtighed
+        icon: mdi:sofa
+        name: Stue
+      - entity: sensor.sovevaerelse_luftfugtighed
+        icon: mdi:bed-king
+        name: Soveværelse
+      - entity: sensor.bryggers_luftfugtighed
+        icon: mdi:tumble-dryer
+        name: Bryggers
+      - entity: sensor.entre_luftfugtighed
+        icon: mdi:door-closed
+        name: Entré
+      - entity: sensor.bad_voksne_luftfugtighed
+        icon: mdi:paper-roll-outline
+        name: Toilet luftfugtighed
+      - entity: sensor.bad_born_luftfugtighed
+        icon: mdi:paper-roll-outline
+        name: Gæstetoilet luftfugtighed
+    state_color: true
+    title: Luftfugtighed
