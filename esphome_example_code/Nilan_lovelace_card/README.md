@@ -3,4 +3,4 @@ Add the .yaml code in a custom card in your lovelace setup. The card has depende
 The image you will have to upload to your Home Assistant folder called "www". 
 
 The result with black theme you can see here:
-![Example](/example.PNG)
+![Example](/esphome_example_code/Nilan_lovelace_card/example.PNG)
