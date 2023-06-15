@@ -57,8 +57,6 @@ select:
     name: "Set operation mode"
     id: nilan_set_operation_mode
     address: 70
-    force_new_range: true
-    use_write_multiple: true
     value_type: U_WORD
     optionsmap:
       "Off" : 0
@@ -282,9 +280,7 @@ number:
     min_value: 1
     max_value: 4
     step: 1.0
-    address: 69
-    force_new_range: true
-    use_write_multiple: true  
+    address: 69 
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -294,8 +290,6 @@ number:
     max_value: 30
     step: 1.0
     address: 37
-    #force_new_range: true
-    #use_write_multiple: true
     multiply: 10
 
   - platform: modbus_controller
@@ -305,9 +299,7 @@ number:
     min_value: 0.0
     max_value: 4.0
     step: 1.0
-    address: 79
-    force_new_range: true
-    use_write_multiple: true 
+    address: 79 
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -317,8 +309,6 @@ number:
     max_value: 4.0
     step: 1.0
     address: 85
-    force_new_range: true
-    use_write_multiple: true 
  
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -338,7 +328,7 @@ number:
     min_value: 1.0
     max_value: 180.0
     step: 1.0
-    address: 84    
+    address: 84     
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -349,7 +339,7 @@ number:
     unit_of_measurement: '%'
     icon: "mdi:percent"
     address: 59
-	multiply: 10   
+    multiply: 10   
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -360,7 +350,7 @@ number:
     unit_of_measurement: '%'
     icon: "mdi:percent"
     address: 60
-	multiply: 10
+    multiply: 10
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -371,7 +361,7 @@ number:
     unit_of_measurement: '%'
     icon: "mdi:percent"
     address: 61
-	multiply: 10 
+    multiply: 10 
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -382,7 +372,7 @@ number:
     unit_of_measurement: '%'
     icon: "mdi:percent"
     address: 62
-	multiply: 10
+    multiply: 10
 
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -393,7 +383,7 @@ number:
     unit_of_measurement: '%'
     icon: "mdi:percent"
     address: 63
-	multiply: 10
+    multiply: 10
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -404,7 +394,7 @@ number:
     unit_of_measurement: '%'
     icon: "mdi:percent"
     address: 64
-	multiply: 10
+    multiply: 10
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -415,7 +405,7 @@ number:
     unit_of_measurement: '%'
     icon: "mdi:percent"
     address: 65
-	multiply: 10
+    multiply: 10
     
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -426,27 +416,15 @@ number:
     unit_of_measurement: '%'
     icon: "mdi:percent"
     address: 66
-	multiply: 10
+    multiply: 10
     
 switch:
-  - platform: modbus_controller
-    modbus_controller_id: nilan_modbus_controller
-    name: "On/Off state"
-    id: nilan_on_off_state
-    register_type: holding
-    bitmask: 1
-    #force_new_range: true
-    #use_write_multiple: true
-    address: 74    
-
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
     name: "Reset filter timer"
     id: nilan_filter_reset
     register_type: holding
     bitmask: 1
-    #force_new_range: true
-    #use_write_multiple: true
     address: 51
  
   - platform: gpio
