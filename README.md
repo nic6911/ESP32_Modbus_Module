@@ -3,6 +3,9 @@ ESP32 modbus module intended for use with Home Assistant to support various modb
 - Nilan Ventilation with CTS602/602Light and CTS400 w. modbus
 - Wavin AHC9000 floor heating
 - Wavin Sentio floor heating
+- EM340 electricity meter w. modbus
+
+There are a couple of additional code examples that has been tested and verified by users om the example code folder.
 
 The module is not limited to those applications, but since I haven't tried other applications I give no promises !
 
@@ -65,13 +68,6 @@ https://youtu.be/s8QjRjI9TLo
 
 And over USB the procedure is given here:
 https://youtu.be/Q5KRcv-uObo
-
-### Wavin code issues
-For now the code not ending with _old is faulty when using combined channels. See the issue "Channel 9 and 10 is showing temperature at 0 degrees celcius ":
-https://github.com/heinekmadsen/esphome_components/issues/9
-
-The easy fix is just to use the _old code, or to do what is mentioned in the Git issue above.
-
 
 ### Board setup from February 2023
 The board dependent setup part is as follows for the ESP32-C3:

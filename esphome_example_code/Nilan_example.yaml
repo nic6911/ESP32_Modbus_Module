@@ -42,14 +42,11 @@ modbus_controller:
   id: nilan_modbus_controller
   address: 30
   modbus_id: modbus_id
-  #update_interval: 30s
+  update_interval: 30s
  
 external_components:
-  - source: github://Jopand/esphome_components@develop
+  - source: github://Jopand/esphome_components@main
     refresh: 0s
-  #- source: github://esphome/esphome@dev
-  #  refresh: 0s
-  #  components: [ modbus, modbus_controller ]
  
 nilan:
     
@@ -717,4 +714,18 @@ climate:
     target_temp_sensor_id: nilan_target_temperature_set
     fan_speed_sensor_id: nilan_ventilation_speed_set
     mode_select_id: nilan_set_operation_mode
+
+output:
+  - platform: modbus_controller
+    id: nilan_reset_alarm
+    address: 400
+    use_write_multiple: true
+    value_type: U_WORD
+    write_lambda: return 255;
     
+button:
+  - platform: output
+    name: Reset alarm
+    id: nilan_reset_alarm_button
+    output: nilan_reset_alarm
+    duration: 5s    

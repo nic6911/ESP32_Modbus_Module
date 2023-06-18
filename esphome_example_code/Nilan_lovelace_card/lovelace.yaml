@@ -93,6 +93,7 @@ cards:
             name: Dagen siden filterskift
           - entity: sensor.days_to_next_filter_change_alarm
             name: Dage til filterskift
+          - entity: button.reset_alarm
   - type: entities
     entities:
       - type: custom:fold-entity-row
