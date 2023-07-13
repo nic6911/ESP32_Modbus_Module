@@ -11,6 +11,8 @@ The module is not limited to those applications, but since I haven't tried other
 
 You can buy the module here: https://ustepper.com/shop/home/18-esphome-modbus-module.html
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://bmc.link/nic6911w)
+
 ## Disclaimer
 Do this at your own risk ! You are interfacing with hardware that you can potentially damage if you do not connect things as required !
 Using the hardware and code presented here is done at you own risk. The hardware and software has been tested on the devices listed above without issues.
