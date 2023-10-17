@@ -1,0 +1,68 @@
+elements:
+  - entity: sensor.nibe_162269_43091
+    style:
+      left: 36%
+      top: 60%
+    type: state-icon
+  - entity: sensor.nibe_162269_44908
+    style:
+      left: 77%
+      top: 36%
+    type: state-icon
+  - entity: sensor.nibe_162269_44055
+    style:
+      left: 64%
+      top: 13%
+    type: state-label
+  - entity: sensor.nibe_162269_44058
+    style:
+      left: 64%
+      top: 23%
+    type: state-label
+  - entity: sensor.nibe_162269_44058
+    style:
+      left: 69%
+      top: 66%
+    type: state-label
+  - entity: sensor.nibe_162269_44055
+    style:
+      left: 69%
+      top: 81%
+    type: state-label
+  - entity: sensor.nibe_162269_41167
+    style:
+      left: 15%
+      top: 57%
+    type: state-label
+  - entity: sensor.nibe_162269_44363
+    style:
+      left: 15%
+      top: 80%
+    type: state-label
+  - entity: sensor.nibe_162269_40071
+    style:
+      left: 87%
+      top: 57%
+    type: state-label
+  - entity: sensor.nibe_162269_44059
+    style:
+      left: 47%
+      top: 57%
+    type: state-label
+  - entity: sensor.easyweatherv1_6_4_indoor_temperature
+    style:
+      left: 19%
+      top: 39%
+    type: state-label
+  - entity: sensor.nibe_162269_40004
+    style:
+      left: 8%
+      top: 20%
+    type: state-label
+  - entity: sensor.nibe_162269_40071
+    style:
+      left: 57%
+      top: 43%
+    type: state-label
+image: https://husdata.se/img/BV_3_HA.png
+type: picture-elements
