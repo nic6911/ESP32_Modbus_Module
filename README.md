@@ -4,6 +4,7 @@ ESP32 modbus module intended for use with Home Assistant to support various modb
 - Wavin AHC9000 floor heating
 - Wavin Sentio floor heating
 - EM340 electricity meter w. modbus
+- NIBE F1255 heatpump (https://github.com/elupus/esphome-nibe)
 
 There are a couple of additional code examples that has been tested and verified by users om the example code folder.
 

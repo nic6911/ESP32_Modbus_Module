@@ -1,0 +1,112 @@
+esphome:
+  name: heatpump
+  friendly_name: heatpump
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  baud_rate: 0
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  power_save_mode: none
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Heatpump Fallback Hotspot"
+    password: "fallback"
+
+captive_portal:
+
+external_components:
+  - source: 
+      type: git
+      url: https://github.com/elupus/esphome-nibe.git
+    components: [ nibegw ]
+
+uart:
+  rx_pin: 20
+  tx_pin: 21
+  baud_rate: 9600
+  id: uart_modbus
+  
+nibegw:
+  dir_pin:
+    number: 10
+    inverted: false
+
+  # If you have a named uart instance, you can specify this here.
+  uart_id: uart_modbus
+
+  udp:
+    # The target address(s) to send data to. May also be multicast addresses.
+    # This is the IP of Home Assistant.
+    target:
+      - ip: 192.168.1.78
+        port: 9999
+
+    # List of source address to accept read/write from, may be empty for no filter, but
+    # this is not recommended. This is the IP of Home Assistant.
+    source:
+      - 192.168.1.78
+
+    # Optional port this device will listen to to receive read requests. Defaults to 9999
+    read_port: 9999
+
+    # Optional port this device will listen to to receive write request. Defaults to 10000
+    write_port: 10000
+  
+  acknowledge:
+    - MODBUS40
+
+    # Enable a dummy RMU40 accessory to receive updates
+    # to certain registers faster. This should not be
+    # enabled if you have an actual RMU40.
+    - RMU40_S4
+
+  # Constant replies to certain requests can be made
+  constants:
+    - address: MODBUS40
+      token: ACCESSORY
+      data: [
+            0x0A, # MODBUS version low
+            0x00, # MODBUS version high
+            0x02, # MODBUS address?
+      ]
+
+    # Accessory version response
+    - address: RMU40_S4
+      token: ACCESSORY
+      data: [
+            0xEE, # RMU ?
+            0x03, # RMU version low
+            0x01, # RMU version high
+      ]
+
+    # Unknown response that nibepi uses
+    - address: RMU40_S4
+      token: RMU_DATA
+      command: RMU_WRITE
+      data: [
+            0x63,
+            0x00,
+      ]
+
+    # Constant fixed temperature to avoid pump going into alarm.
+    - address: RMU40_S4
+      token: RMU_WRITE
+      data: [
+            0x06, # Temperature
+            0x14, # degrees low
+            0x00, # degrees high
+      ]
