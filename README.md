@@ -10,7 +10,8 @@ There are a couple of additional code examples that has been tested and verified
 
 The module is not limited to those applications, but since I haven't tried other applications I give no promises !
 
-You can buy the module here: https://ustepper.com/shop/home/18-esphome-modbus-module.html
+You can buy the module here: 
+https://www.ustepper.com/shop/#!/products/esphome-modbus-module
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://bmc.link/nic6911w)
 
