@@ -397,13 +397,6 @@ sensor:
     filters:
       - multiply: 0.001
 
-  - id: phasesequence
-    platform: modbus_controller
-    name: "${dev} phase sequence"
-    address: 0x0032
-    register_type: read
-    value_type: S_WORD
-
   - id: Hz
     platform: modbus_controller
     name: "${dev} Hz"
