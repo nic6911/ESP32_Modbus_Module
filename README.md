@@ -1,4 +1,4 @@
-# ESP32_Modus_Module
+# ESP32_Modbus_Module
 ESP32 modbus module intended for use with Home Assistant to support various modbus enabled devices. Currently I have used and tested:
 - Nilan Ventilation with CTS602/602Light and CTS400 w. modbus
 - Wavin AHC9000 floor heating
