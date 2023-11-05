@@ -41,11 +41,6 @@ substitutions:
   channel_15: <Unused>
   channel_16: <Unused>
   
-  # TEMP STEP + CLIMATE MIN/MAX LIMIT TEMP SETPOINT
-  temp_step:   '0.5'
-  climate_min_temp: '12'  
-  climate_max_temp: '30'
-  
   # PIN DEFINITIONS (Should in most cases not be changed) 
   rx_pin: '20'
   tx_pin: '21'
