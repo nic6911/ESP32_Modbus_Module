@@ -444,6 +444,7 @@ text_sensor:
         case 32: type_str = "VP 18 Version 1"; break;
         case 33: type_str = "Combi 300"; break;
         case 34: type_str = "Compact med 4-vejsventil uden køl"; break;
+        case 35: type_str = "Combi 302 Polar"; break;
         default: type_str = "Unknown"; break;
       }
       return type_str;
@@ -728,4 +729,4 @@ button:
     name: Reset alarm
     id: nilan_reset_alarm_button
     output: nilan_reset_alarm
-    duration: 5s    
+    duration: 10s    
