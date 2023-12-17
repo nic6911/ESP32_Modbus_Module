@@ -1,0 +1,100 @@
+type: vertical-stack
+cards:
+  - elements:
+      - entity: sensor.inlet_temperature
+        style:
+          color: white
+          font-size: 150%
+          left: 71.5%
+          top: 65.2%
+        type: state-label
+      - entity: sensor.outdoor_temperature
+        style:
+          color: white
+          font-size: 150%
+          left: 30.5%
+          top: 9.0%
+        type: state-label
+      - entity: sensor.outlet_temperature
+        style:
+          color: white
+          font-size: 150%
+          left: 71.5%
+          top: 9.0%
+        type: state-label
+      - entity: sensor.exhaust_temperature
+        style:
+          color: white
+          font-size: 150%
+          left: 30.5%
+          top: 65.2%
+        type: state-label
+      - entity: sensor.post_heat_temperature
+        style:
+          color: white
+          font-size: 150%
+          left: 71.5%
+          top: 80%
+        type: state-label
+      - entity: sensor.humidity
+        style:
+          color: white
+          font-size: 150%
+          left: 51.0%
+          top: 79%
+        type: state-label
+      - entity: sensor.air_filter_alarm_status
+        style:
+          color: white
+          font-size: 120%
+          left: 49.0%
+          top: 55.2%
+        type: state-label
+      - entity: sensor.heat_exchange_efficiency
+        style:
+          color: white
+          font-size: 120%
+          left: 50.0%
+          top: 25.0%
+        type: state-label
+      - entity: sensor.exhaust_fan_speed
+        style:
+          color: white
+          font-size: 120%
+          left: 27.0%
+          top: 41.0%
+        type: state-label
+      - entity: sensor.inlet_fan_speed
+        style:
+          color: white
+          font-size: 120%
+          left: 74.0%
+          top: 41.0%
+        type: state-label
+    image: /local/community/ventilation.png
+    type: picture-elements
+  - entity: climate.nilan
+    name: Nilan Ventilation
+    sensors:
+      - entity: sensor.humidity
+        name: Luftfugtighed
+    step_size: '1'
+    type: custom:simple-thermostat
+    layout:
+      mode:
+        headings: false
+  - type: entities
+    entities:
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Information
+        entities:
+          - entity: binary_sensor.summer_mode
+          - entity: sensor.actual_fan_step
+          - entity: sensor.after_heating_off_on
+          - entity: sensor.status_after_heating_element
+          - entity: sensor.bypass_damper_status_1_open
+          - entity: sensor.days_to_next_filter_change
+            name: Dage til filterskift
+          - entity: sensor.active_alarms

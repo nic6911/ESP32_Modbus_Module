@@ -1,0 +1,5 @@
+{% set outdoor = states('sensor.outdoor_temperature') | float %}
+          {% set inlet = states('sensor.inlet_temperature') | float %}
+          {% set exhaust = states('sensor.exhaust_temperature') | float %}
+
+          {{ ((inlet - outdoor) / (exhaust - outdoor) * 100) | round(1, default=0) }}
