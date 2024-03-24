@@ -1,78 +1,79 @@
 type: vertical-stack
 cards:
-  - entity: climate.nilan
+  - entity: climate.nilan_nilan
     name: Nilan Ventilation
     sensors:
-      - entity: sensor.humidity
+      - entity: sensor.nilan_humidity
         name: Luftfugtighed
     step_size: '1'
     type: custom:simple-thermostat
-  - elements:
-      - entity: sensor.outdoor_temperature
+  - type: picture-elements
+    image: /local/ventilation_light.png
+    dark_mode_image: /local/ventilation.png
+    elements:
+      - entity: sensor.nilan_outdoor_temperature
         style:
-          color: white
+          color: var(--primary-text-color)
           font-size: 150%
           left: 30.5%
           top: 9.0%
         type: state-label
-      - entity: sensor.outlet_temperature
+      - entity: sensor.nilan_outlet_temperature
         style:
-          color: white
+          color: var(--primary-text-color)
           font-size: 150%
           left: 71.5%
           top: 9.0%
         type: state-label
-      - entity: sensor.exhaust_temperature
+      - entity: sensor.nilan_exhaust_temperature
         style:
-          color: white
+          color: var(--primary-text-color)
           font-size: 150%
           left: 30.5%
           top: 65.2%
         type: state-label
-      - entity: sensor.inlet_after_heater_temperature
+      - entity: sensor.nilan_inlet_after_heater_temperature
         style:
-          color: white
+          color: var(--primary-text-color)
           font-size: 150%
           left: 71.5%
           top: 65.2%
         type: state-label
-      - entity: sensor.humidity
+      - entity: sensor.nilan_humidity
         style:
-          color: white
+          color: var(--primary-text-color)
           font-size: 150%
           left: 51.0%
           top: 79%
         type: state-label
-      - entity: sensor.air_filter_alarm_status
+      - entity: sensor.nilan_air_filter_alarm_status
         style:
-          color: white
+          color: var(--primary-text-color)
           font-size: 120%
           left: 49.0%
           top: 55.2%
         type: state-label
-      - entity: sensor.heat_exchange_efficiency
+      - entity: sensor.nilan_heat_exchange_efficiency
         style:
-          color: white
+          color: var(--primary-text-color)
           font-size: 120%
           left: 50.0%
           top: 25.0%
         type: state-label
-      - entity: sensor.exhaust_fan_speed
+      - entity: sensor.nilan_exhaust_fan_speed
         style:
-          color: white
+          color: var(--primary-text-color)
           font-size: 120%
           left: 30.0%
           top: 72.0%
         type: state-label
-      - entity: sensor.inlet_fan_speed
+      - entity: sensor.nilan_inlet_fan_speed
         style:
-          color: white
+          color: var(--primary-text-color)
           font-size: 120%
           left: 71.0%
           top: 72.0%
         type: state-label
-    image: /local/ventilation.png
-    type: picture-elements
   - type: entities
     entities:
       - type: custom:fold-entity-row
@@ -80,20 +81,20 @@ cards:
           type: section
           label: Information
         entities:
-          - entity: sensor.software_version
+          - entity: sensor.nilan_software_version
             state_color: true
-          - entity: sensor.actual_user_function
+          - entity: sensor.nilan_actual_user_function
             state_color: true
             name: Brugervalg aktiv
-          - entity: sensor.aggregate_type
-          - entity: sensor.operation_mode
-          - entity: sensor.air_filter_alarm_status
+          - entity: sensor.nilan_aggregate_type
+          - entity: sensor.nilan_operation_mode
+          - entity: sensor.nilan_air_filter_alarm_status
             state_color: true
-          - entity: sensor.days_since_last_filter_change_alarm
+          - entity: sensor.nilan_days_since_last_filter_change_alarm
             name: Dagen siden filterskift
-          - entity: sensor.days_to_next_filter_change_alarm
+          - entity: sensor.nilan_days_to_next_filter_change_alarm
             name: Dage til filterskift
-          - entity: button.reset_alarm
+          - entity: button.nilan_reset_alarm
   - type: entities
     entities:
       - type: custom:fold-entity-row
@@ -101,24 +102,24 @@ cards:
           type: section
           label: Brugervalg 1
         entities:
-          - select.set_user_function
-          - number.user_time_set_minutes
-          - entity: number.user_ventilation_speed_set
+          - select.nilan_set_user_function
+          - number.nilan_user_time_set_minutes
+          - entity: number.nilan_user_ventilation_speed_set
             name: Blæser indstilling Brugervalg 1
-          - entity: number.user_temperature_set
+          - entity: number.nilan_user_temperature_set
             name: Temperatur Brugervalg 1
-          - entity: switch.brugervalg_1
+          - entity: switch.nilan_brugervalg_1
             name: Aktiver Brugervalg 1
       - type: custom:fold-entity-row
         head:
           type: section
           label: Brugervalg 2
         entities:
-          - select.set_user_function_2
-          - number.user_time_set_2_minutes
-          - entity: number.user_ventilation_speed_set_2
+          - select.nilan_set_user_function_2
+          - number.nilan_user_time_set_2_minutes
+          - entity: number.nilan_user_ventilation_speed_set_2
             name: Blæser indstilling Brugervalg 2
-          - entity: number.user_temperature_set_2
+          - entity: number.nilan_user_temperature_set_2
             name: Temperatur Brugervalg 2
-          - entity: switch.brugervalg_2
+          - entity: switch.nilan_brugervalg_2
             name: Aktiver Brugervalg 2
