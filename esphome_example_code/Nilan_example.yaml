@@ -9,11 +9,12 @@ esp32:
 # Enable logging
 logger:
   baud_rate: 0
-
+  
 # Enable Home Assistant API
 api:
 
 ota:
+  platform: esphome
 
 wifi:
   ssid: !secret wifi_ssid
@@ -123,6 +124,7 @@ sensor:
     accuracy_decimals: 1
     device_class: temperature
     register_type: read
+    value_type: S_WORD
     address: 203
     filters:
       - multiply: 0.01
@@ -133,7 +135,9 @@ sensor:
     id: nilan_outlet_temp_t4
     unit_of_measurement: °C
     accuracy_decimals: 1
+    device_class: temperature
     register_type: read
+    value_type: S_WORD
     address: 204
     filters:
       - multiply: 0.01
@@ -146,6 +150,7 @@ sensor:
     accuracy_decimals: 1
     device_class: temperature
     register_type: read
+    value_type: S_WORD
     address: 207
     filters:
       - multiply: 0.01
@@ -297,16 +302,24 @@ sensor:
     register_type: read
     address: 1104    
 
-  - platform: modbus_controller
-    modbus_controller_id: nilan_modbus_controller
+  - platform: template
     name: "Heat exchange efficiency"
     id: nilan_heat_exchange_efficiency
     unit_of_measurement: '%'
     accuracy_decimals: 1
-    register_type: read
-    address: 1204
-    filters:
-      - multiply: 0.01
+    lambda: !lambda |-
+      return (id(nilan_inlet_temp_t7).state-id(nilan_outdoor_temp_t8).state)/(id(nilan_exhaust_temp_t3).state-id(nilan_outdoor_temp_t8).state)*100.0;
+
+  # - platform: modbus_controller
+  #   modbus_controller_id: nilan_modbus_controller
+  #   name: "Heat exchange efficiency"
+  #   id: nilan_heat_exchange_efficiency
+  #   unit_of_measurement: '%'
+  #   accuracy_decimals: 1
+  #   register_type: read
+  #   address: 1204
+  #   filters:
+  #     - multiply: 0.01
       
 ###########################
 #### HOLDING REGISTERS ####
@@ -445,7 +458,6 @@ text_sensor:
         case 32: type_str = "VP 18 Version 1"; break;
         case 33: type_str = "Combi 300"; break;
         case 34: type_str = "Compact med 4-vejsventil uden køl"; break;
-        case 35: type_str = "Combi 302 Polar"; break;
         default: type_str = "Unknown"; break;
       }
       return type_str;
@@ -730,4 +742,4 @@ button:
     name: Reset alarm
     id: nilan_reset_alarm_button
     output: nilan_reset_alarm
-    duration: 10s    
+    duration: 5s    
