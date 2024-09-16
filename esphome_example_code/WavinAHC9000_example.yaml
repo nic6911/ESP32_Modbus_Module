@@ -75,6 +75,7 @@ logger:
 api:
   
 ota:
+  platform: esphome
   
 wifi:
   ssid: ${ssid_set}
