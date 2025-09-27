@@ -1,0 +1,99 @@
+########################################################################################
+#                                                                                      #
+#      WAVIN AHC-9000 FLOOR HEATING CONTROLLER SOFTWARE FOR HOME ASSISTANT             #
+#                                                                                      #   
+#        Code developed by : Heine Koldbro Madsen and Samuel Sieb 2021                 #
+#                                                                                      #
+#           https://github.com/heinekmadsen/esphome_wavinahc9000v3/tree/main           #    
+#                                                                                      #
+# Hardware by : Mogens Groth Nicolaisen https://github.com/nic6911/Wavin-AHC-9000-mqtt #
+#                                                                                      #
+########################################################################################
+ 
+esphome:
+  name: wavin
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+external_components:
+  - source: github://heinekmadsen/esphome_wavinahc9000v3
+    components: [wavin_ahc9000]
+    refresh: 0s
+
+logger:
+  baud_rate: 0
+
+uart:
+  id: uart_wavin
+  tx_pin: GPIO21
+  rx_pin: GPIO20
+  baud_rate: 38400
+  stop_bits: 1
+  parity: NONE
+
+wavin_ahc9000:
+  id: wavin
+  uart_id: uart_wavin
+  # Regular polling interval; optionally lower temporarily for quicker discovery
+  update_interval: 5s
+  # Optional: speed up initial discovery (uncomment briefly)
+  # poll_channels_per_cycle: 8
+  # update_interval: 2s
+  allow_mode_writes: false
+  # Optional per-channel friendly names used in generated YAML suggestions and chunk sensors
+  # Provide any subset (1..16). Missing entries fallback to "Zone N".
+  flow_control_pin: GPIO10
+  # Friendly names kept so future generated snippets (if re-enabled) stay consistent
+  channel_01_friendly_name: "Bedroom"
+  channel_02_friendly_name: "Living Room"
+  channel_03_friendly_name: "Kitchen"
+
+# Onboarding helper package (manual enable/disable)
+# Uncomment the yaml_generator include while you want the YAML suggestion sensors & services.
+# Comment it again later to keep the runtime entity list small.
+packages:
+  # yaml_generator: !include packages/yaml_generator.yaml
+  # wavin_debug: !include packages/wavin_debug_services.yaml
+
+climate:
+  # Group climates (auto-generated names may differ; you can rename here)
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Living Room & Kitchen"  # from channels 2 & 3
+    members: [2,3]
+  # Single channel climates (channel 1)
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Bedroom"
+    channel: 1
+  # (Channels 2 & 3 single climates were commented out in suggestion because they are grouped)
+
+sensor:
+  # Battery & temperature sensors (optional; include only what you need)
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Bedroom Battery"
+    channel: 1
+    type: battery
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Bedroom Temperature"
+    channel: 1
+    type: temperature
+  # Add more sensors per channel/group as required
+
+api:
+
+wifi:
+  ssid: "<your-ssid>"
+  password: "<your-password>"
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Wavin Fallback Hotspot"
+    password: ""
+
+ota:
+  platform: esphome
