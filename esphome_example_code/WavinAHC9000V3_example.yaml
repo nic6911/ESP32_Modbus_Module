@@ -16,7 +16,7 @@ esphome:
 esp32:
   board: esp32-c3-devkitm-1
   framework:
-    type: arduino
+    type: esp-idf
 
 external_components:
   - source: github://heinekmadsen/esphome_wavinahc9000v3
@@ -37,26 +37,12 @@ uart:
 wavin_ahc9000:
   id: wavin
   uart_id: uart_wavin
-  # Regular polling interval; optionally lower temporarily for quicker discovery
   update_interval: 5s
-  # Optional: speed up initial discovery (uncomment briefly)
-  # poll_channels_per_cycle: 8
-  # update_interval: 2s
   allow_mode_writes: false
-  # Optional per-channel friendly names used in generated YAML suggestions and chunk sensors
-  # Provide any subset (1..16). Missing entries fallback to "Zone N".
   flow_control_pin: GPIO10
-  # Friendly names kept so future generated snippets (if re-enabled) stay consistent
   channel_01_friendly_name: "Bedroom"
   channel_02_friendly_name: "Living Room"
   channel_03_friendly_name: "Kitchen"
-
-# Onboarding helper package (manual enable/disable)
-# Uncomment the yaml_generator include while you want the YAML suggestion sensors & services.
-# Comment it again later to keep the runtime entity list small.
-packages:
-  # yaml_generator: !include packages/yaml_generator.yaml
-  # wavin_debug: !include packages/wavin_debug_services.yaml
 
 climate:
   # Group climates (auto-generated names may differ; you can rename here)
