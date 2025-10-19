@@ -33,13 +33,17 @@ uart:
   baud_rate: 38400
   stop_bits: 1
   parity: NONE
+  rx_buffer_size: 1024
 
 wavin_ahc9000:
   id: wavin
   uart_id: uart_wavin
-  update_interval: 5s
+  update_interval: 15s
   allow_mode_writes: false
+  poll_channels_per_cycle: 1
   flow_control_pin: GPIO10
+
+
   channel_01_friendly_name: "Bedroom"
   channel_02_friendly_name: "Living Room"
   channel_03_friendly_name: "Kitchen"
