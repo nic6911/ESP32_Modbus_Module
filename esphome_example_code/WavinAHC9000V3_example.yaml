@@ -41,7 +41,7 @@ wavin_ahc9000:
   update_interval: 15s
   allow_mode_writes: false
   poll_channels_per_cycle: 1
-  flow_control_pin: GPIO10
+  tx_enable_pin: GPIO10
 
 
   channel_01_friendly_name: "Bedroom"
