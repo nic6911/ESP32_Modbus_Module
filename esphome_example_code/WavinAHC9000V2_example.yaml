@@ -160,7 +160,7 @@ modbus_controller:
  
 packages:
   remote_package:
-    url: https://github.com/nic6911/esphome_components
+    url: https://github.com/heinekmadsen/esphome_components
     ref: more_channels
     files: 
       - components/wavinahc9000v2/configs/basic.yaml # REQUIRED FOR WAVIN AHC 9000
