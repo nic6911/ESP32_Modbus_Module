@@ -96,7 +96,7 @@ uart:
   stop_bits: 1
   
 external_components:
-  - source: github://heinekmadsen/esphome_components
+  - source: github://nic6911/esphome_components
     refresh: 0s
 
 # Temporary fix for modbus component error in ESPHome 2021.10.0
