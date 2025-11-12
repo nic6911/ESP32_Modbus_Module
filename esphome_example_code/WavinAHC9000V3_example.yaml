@@ -12,6 +12,7 @@
  
 esphome:
   name: wavin
+  friendly_name: Wavin
 
 esp32:
   board: esp32-c3-devkitm-1
@@ -19,7 +20,7 @@ esp32:
     type: esp-idf
 
 external_components:
-  - source: github://heinekmadsen/esphome_wavinahc9000v3@restart
+  - source: github://nic6911/esphome_wavinahc9000v3@simplifications
     components: [wavin_ahc9000]
     refresh: 0s
 
@@ -33,53 +34,43 @@ uart:
   baud_rate: 38400
   stop_bits: 1
   parity: NONE
-  rx_buffer_size: 1024
 
 wavin_ahc9000:
   id: wavin
   uart_id: uart_wavin
-  update_interval: 15s
+  update_interval: 10s
   allow_mode_writes: false
   poll_channels_per_cycle: 1
   tx_enable_pin: GPIO10
 
-
-  channel_01_friendly_name: "Bedroom"
-  channel_02_friendly_name: "Living Room"
-  channel_03_friendly_name: "Kitchen"
+  channel_01_friendly_name: "Soveværelse"
 
 climate:
-  # Group climates (auto-generated names may differ; you can rename here)
   - platform: wavin_ahc9000
     wavin_ahc9000_id: wavin
-    name: "Living Room & Kitchen"  # from channels 2 & 3
-    members: [2,3]
-  # Single channel climates (channel 1)
-  - platform: wavin_ahc9000
-    wavin_ahc9000_id: wavin
-    name: "Bedroom"
+    name: "Soveværelse"
     channel: 1
-  # (Channels 2 & 3 single climates were commented out in suggestion because they are grouped)
 
 sensor:
-  # Battery & temperature sensors (optional; include only what you need)
+   # Ch.1 Soveværelse
   - platform: wavin_ahc9000
     wavin_ahc9000_id: wavin
-    name: "Bedroom Battery"
+    name: "Soveværelse Batteri"
     channel: 1
     type: battery
   - platform: wavin_ahc9000
     wavin_ahc9000_id: wavin
-    name: "Bedroom Temperature"
+    name: "Soveværelse Temperatur"
     channel: 1
     type: temperature
-  # Add more sensors per channel/group as required
+
+
 
 api:
 
 wifi:
-  ssid: "<your-ssid>"
-  password: "<your-password>"
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Wavin Fallback Hotspot"
@@ -87,3 +78,4 @@ wifi:
 
 ota:
   platform: esphome
+
