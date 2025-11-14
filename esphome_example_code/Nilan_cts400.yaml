@@ -47,7 +47,7 @@ modbus_controller:
   update_interval: 10s
  
 external_components:
-  - source: github://Jopand/esphome_components@develop
+  - source: github://Jopand/esphome_components
     refresh: 0s
     
 nilan:
