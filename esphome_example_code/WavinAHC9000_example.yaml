@@ -21,31 +21,26 @@ substitutions:
   log_level: WARN
  
   # UPDATE TIME (GATEWAY)
-  update_interval: 60s
+  update_interval: 5s
   
   # CHANNEL ID´S
-  channel_1:  <Unused1>
-  channel_2:  <Unused2>
-  channel_3:  <Unused3>
-  channel_4:  <Unused4>
-  channel_5:  <Unused5>
-  channel_6:  <Unused6>
-  channel_7:  <Unused7>
-  channel_8:  <Unused8>
-  channel_9:  Gang
-  channel_10: Luca
-  channel_11: Aya
-  channel_12: Loui
-  channel_13: Badeværelse
-  channel_14: <Unused14>
-  channel_15: <Unused15>
-  channel_16: <Unused16>
-  
-  # TEMP STEP + CLIMATE MIN/MAX LIMIT TEMP SETPOINT
-  temp_step:   '0.5'
-  climate_min_temp: '12'  
-  climate_max_temp: '40'
-  
+  channel_1:  Kontor
+  # channel_2:  <Unused2>
+  channel_3:  Køkken
+  # channel_4:  <Unused4>
+  # channel_5:  <Unused5>
+  # channel_6:  <Unused6>
+  # channel_7:  <Unused7>
+  # channel_8:  <Unused8>
+  # channel_9:  Gang
+  # channel_10: Luca
+  # channel_11: Aya
+  # channel_12: Loui
+  # channel_13: Badeværelse
+  # channel_14: <Unused14>
+  # channel_15: <Unused15>
+  # channel_16: <Unused16>
+
   # PIN DEFINITIONS (Should in most cases not be changed) 
   tx_enable_pin: '10'
   rx_pin: '20'
@@ -65,7 +60,7 @@ esphome:
 esp32:
   board: esp32-c3-devkitm-1
   framework:
-    type: arduino
+    type: esp-idf
 
 # Enable logging
 logger:
@@ -94,19 +89,10 @@ uart:
   baud_rate: 38400
   id: uart_modbus
   stop_bits: 1
-  
+
 external_components:
   - source: github://nic6911/esphome_components
     refresh: 0s
-
-# Temporary fix for modbus component error in ESPHome 2021.10.0
-# https://github.com/esphome/issues/issues/2630
-# Might not be nessesary in future builds, but for now it is
-  - source:
-      type: git
-      url: https://github.com/martgras/esphome
-      ref: modbus-fix
-    components: [ modbus ]
   
 modbus:
   uart_id: uart_modbus
@@ -119,27 +105,6 @@ climate:
   - platform: wavinAhc9000
     channel: 1
     name: ${friendly_name} Climate ${channel_1}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_1}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_1}
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 2
-    name: ${friendly_name} Climate ${channel_2}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_2}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_2}
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
   - platform: wavinAhc9000
     channel: 3
     name: ${friendly_name} Climate ${channel_3}
@@ -147,165 +112,4 @@ climate:
       name: ${friendly_name} Battery ${channel_3}
     current_temp:
       name: ${friendly_name} Temp ${channel_3}
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 4
-    name: ${friendly_name} Climate ${channel_4}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_4}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_4}
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 5
-    name: ${friendly_name} Climate ${channel_5}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_5}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_5}
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 6
-    name: ${friendly_name} Climate ${channel_6}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_6}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_6}
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 7
-    name: ${friendly_name} Climate ${channel_7}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_7}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_7}
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 8
-    name: ${friendly_name} Climate ${channel_8}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_8}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_8}
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 9
-    name: ${friendly_name} Climate ${channel_9}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_9}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_9}
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 10
-    name: ${friendly_name} Climate ${channel_10}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_10}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_10}
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 11
-    name: ${friendly_name} Climate ${channel_11}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_11}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_11}       
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 12
-    name: ${friendly_name} Climate ${channel_12}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_12}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_12}       
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 13
-    name: ${friendly_name} Climate ${channel_13}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_13}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_13}       
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 14
-    name: ${friendly_name} Climate ${channel_14}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_14}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_14}       
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 15
-    name: ${friendly_name} Climate ${channel_15}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_15}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_15}       
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-  - platform: wavinAhc9000
-    channel: 16
-    name: ${friendly_name} Climate ${channel_16}
-    battery_level:
-      name: ${friendly_name} Battery ${channel_16}
-    current_temp:
-      name: ${friendly_name} Temp ${channel_16}       
-    visual:
-      temperature_step: ${temp_step} °C
-      min_temperature: ${climate_min_temp} °C
-      max_temperature: ${climate_max_temp} °C
-      
-     
+
