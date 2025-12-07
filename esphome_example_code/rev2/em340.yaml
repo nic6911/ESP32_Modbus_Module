@@ -1,0 +1,436 @@
+# Based on this work: https://github.com/martgras/esphome/wiki/Carlo-Gavazzi-EM340
+esphome:
+  name: em340
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+substitutions:
+  updates: 60s
+  dev: em340meter
+
+# Enable logging
+logger:
+  baud_rate: 0
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "EM340 Fallback Hotspot"
+    password: "12345678"
+
+captive_portal:
+
+uart:
+  id: modbus_serial
+  rx_pin: 20
+  tx_pin: 21
+  baud_rate: 9600
+  stop_bits: 1
+
+modbus:
+  uart_id: modbus_serial
+  id: em340_modbus
+  flow_control_pin: 3  
+
+modbus_controller:
+  modbus_id: em340_modbus
+  command_throttle: 500ms
+  id: em340
+  update_interval: ${updates}
+  address: 0x0001
+  
+sensor:
+  - id: VolL1N
+    platform: modbus_controller
+    name: "${dev} Voltage L1-N"
+    address: 0x0000
+    register_count: 2
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: voltage
+    filters:
+      - multiply: 0.1
+
+  - id: VolL2N
+    platform: modbus_controller 
+    name: "${dev} Voltage L2-N"
+    address: 0x0002
+    register_count: 2
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: voltage
+    filters:
+      - multiply: 0.1
+
+  - id: VolL3N
+    platform: modbus_controller
+    name: "${dev} Voltage L3-N"
+    address: 0x0004
+    register_count: 2
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: voltage
+    filters:
+      - multiply: 0.1
+
+  - id: VolL1L2
+    platform: modbus_controller  
+    name: "${dev} Voltage L1-L2"
+    address: 0x0006
+    register_count: 2
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: voltage
+    filters:
+      - multiply: 0.1
+  
+  - id: VolL2L3
+    platform: modbus_controller
+    name: "${dev} Voltage L2-L3"
+    address: 0x0008
+    register_count: 2
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: voltage
+    filters:
+      - multiply: 0.1
+
+  - id: VolL3L1
+    platform: modbus_controller  
+    name: "${dev} Voltage L3-L1"
+    address: 0x000A
+    register_count: 2
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: voltage
+    filters:
+      - multiply: 0.1
+  
+  - id: AmpL1
+    platform: modbus_controller  
+    name: "${dev} Ampere L1"
+    address: 0x000C
+    register_count: 2
+    unit_of_measurement: "A"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: current
+    filters:
+      - multiply: 0.001
+
+  - id: AmpL2
+    platform: modbus_controller  
+    name: "${dev} Ampere L2"
+    address: 0x000E
+    register_count: 2
+    unit_of_measurement: "A"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: current
+    filters:
+      - multiply: 0.001
+  
+  - id: AmpL3
+    platform: modbus_controller  
+    name: "${dev} Ampere L3"
+    address: 0x0010
+    register_count: 2
+    unit_of_measurement: "A"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: current
+    filters:
+      - multiply: 0.001
+
+  - id: kWL1
+    platform: modbus_controller
+    name: "${dev} kW L1"
+    address: 0x0012
+    register_count: 2
+    unit_of_measurement: "W"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: power
+    filters:
+      - multiply: 0.1
+
+  - id: kWL2
+    platform: modbus_controller
+    name: "${dev} kW L2"
+    address: 0x0014
+    register_count: 2
+    unit_of_measurement: "W"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: power
+    filters:
+      - multiply: 0.1
+
+  - id: kWL3
+    platform: modbus_controller
+    name: "${dev} kW L3"
+    address: 0x0016
+    register_count: 2
+    unit_of_measurement: "W"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: power
+    filters:
+      - multiply: 0.1
+
+  - id: kVAL1
+    platform: modbus_controller
+    name: "${dev} kVA L1"
+    address: 0x0018
+    register_count: 2
+    unit_of_measurement: "VA"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: apparent_power
+    filters:
+      - multiply: 0.1
+
+  - id: kVAL2
+    platform: modbus_controller
+    name: "${dev} kVA L2"
+    address: 0x001A
+    register_count: 2
+    unit_of_measurement: "VA"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: apparent_power 
+    filters:
+      - multiply: 0.1
+
+  - id: kVAL3
+    platform: modbus_controller
+    name: "${dev} kVA L3"
+    address: 0x001C
+    register_count: 2
+    unit_of_measurement: "VA"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: apparent_power
+    filters:
+      - multiply: 0.1
+
+  - id: kvarL1
+    platform: modbus_controller
+    name: "${dev} kvar L1"
+    address: 0x001E
+    register_count: 2
+    unit_of_measurement: "var"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: reactive_power
+    filters:
+      - multiply: 0.1
+
+  - id: kvarL2
+    platform: modbus_controller
+    name: "${dev} kvar L2"
+    address: 0x0020
+    register_count: 2
+    unit_of_measurement: "var"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: reactive_power
+    filters:
+      - multiply: 0.1
+
+  - id: kvarL3
+    platform: modbus_controller
+    name: "${dev} kvar L3"
+    address: 0x0022
+    register_count: 2
+    unit_of_measurement: "var"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: reactive_power
+    filters:
+      - multiply: 0.1
+
+  - id: VsysLN
+    platform: modbus_controller
+    name: "${dev} sys L-N"
+    address: 0x0024
+    register_count: 2
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: voltage
+    filters:
+      - multiply: 0.1
+
+  - id: VsysLL
+    platform: modbus_controller
+    name: "${dev} sys L-L"
+    address: 0x0026
+    register_count: 2
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: voltage
+    filters:
+      - multiply: 0.1
+
+  - id: kWsys
+    platform: modbus_controller
+    name: "${dev} sys kW"
+    address: 0x0028
+    register_count: 2
+    unit_of_measurement: "W"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: power
+    filters:
+      - multiply: 0.1
+
+  - id: kVAsys
+    platform: modbus_controller
+    name: "${dev} sys kVA"
+    address: 0x002A
+    register_count: 2
+    unit_of_measurement: "VA"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: apparent_power
+    filters:
+      - multiply: 0.1
+
+  - id: VARsys
+    platform: modbus_controller
+    name: "${dev} sys kvar"
+    address: 0x002C
+    register_count: 2
+    unit_of_measurement: "var"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 1
+    device_class: reactive_power
+    filters:
+      - multiply: 0.1
+
+  - id: PFL1
+    platform: modbus_controller
+    name: "${dev} PF L1"
+    address: 0x002E
+    register_count: 1
+    unit_of_measurement: "%"
+    register_type: read
+    value_type: S_WORD
+    accuracy_decimals: 1
+    device_class: power_factor
+    filters:
+      - multiply: 0.001
+
+  - id: PFL2
+    platform: modbus_controller
+    name: "${dev} PF L2"
+    address: 0x002F
+    unit_of_measurement: "%"
+    register_type: read
+    value_type: S_WORD
+    accuracy_decimals: 1
+    device_class: power_factor
+    filters:
+      - multiply: 0.001
+
+  - id: PFL3
+    platform: modbus_controller
+    name: "${dev} PF L3"
+    address: 0x0030
+    unit_of_measurement: "%"
+    register_type: read
+    value_type: S_WORD
+    accuracy_decimals: 1
+    device_class: power_factor
+    filters:
+      - multiply: 0.001
+
+  - id: PFsys
+    platform: modbus_controller
+    name: "${dev} PF sys"
+    address: 0x0031
+    unit_of_measurement: "%"
+    register_type: read
+    value_type: S_WORD
+    accuracy_decimals: 1
+    device_class: power_factor
+    filters:
+      - multiply: 0.001
+
+  - id: Hz
+    platform: modbus_controller
+    name: "${dev} Hz"
+    address: 0x0033
+    unit_of_measurement: "Hz"
+    register_type: read
+    value_type: S_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+
+  - id: kWhintotal
+    platform: modbus_controller
+    name: "${dev} kWh in total"
+    address: 0x0034
+    unit_of_measurement: "kWh"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 3
+    device_class: energy
+    state_class: total_increasing
+    filters:
+      - multiply: 0.1
+
+  - id: kWhouttotal
+    platform: modbus_controller
+    name: "${dev} kWh out total"
+    address: 0x004E
+    unit_of_measurement: "kWh"
+    register_type: read
+    value_type: S_DWORD_R
+    accuracy_decimals: 3
+    device_class: energy
+    state_class: total_increasing
+    filters:
+      - multiply: 0.1

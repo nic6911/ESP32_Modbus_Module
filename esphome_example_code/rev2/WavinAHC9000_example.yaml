@@ -1,0 +1,115 @@
+########################################################################################
+#                                                                                      #
+#      WAVIN AHC-9000 FLOOR HEATING CONTROLLER SOFTWARE FOR HOME ASSISTANT             #
+#                                                                                      #   
+#        Code developed by : Heine Koldbro Madsen and Samuel Sieb 2021                 #
+#                                                                                      #
+# https://github.com/heinekmadsen/esphome_components/tree/main/components/wavinAhc9000 #    
+#                                                                                      #
+# Hardware by : Mogens Groth Nicolaisen https://github.com/nic6911/Wavin-AHC-9000-mqtt #
+#                                                                                      #
+########################################################################################
+
+
+########################################################################################
+#                      CONFIGURATION PART OF YOUR CHOICE :)                            #
+########################################################################################
+
+substitutions:
+  device_name: 'wavin'
+  friendly_name: 'Wavin'
+  log_level: WARN
+ 
+  # UPDATE TIME (GATEWAY)
+  update_interval: 5s
+  
+  # CHANNEL ID´S
+  channel_1:  Kontor
+  # channel_2:  <Unused2>
+  channel_3:  Køkken
+  # channel_4:  <Unused4>
+  # channel_5:  <Unused5>
+  # channel_6:  <Unused6>
+  # channel_7:  <Unused7>
+  # channel_8:  <Unused8>
+  # channel_9:  Gang
+  # channel_10: Luca
+  # channel_11: Aya
+  # channel_12: Loui
+  # channel_13: Badeværelse
+  # channel_14: <Unused14>
+  # channel_15: <Unused15>
+  # channel_16: <Unused16>
+
+  # PIN DEFINITIONS (Should in most cases not be changed) 
+  tx_enable_pin: '3'
+  rx_pin: '20'
+  tx_pin: '21'
+
+  # WiFi settings
+  ssid_set: !secret wifi_ssid
+  password_set: !secret wifi_password
+  
+########################################################################################
+#                        CODE BELOW SHOULD NOT BE CHANGED                              #
+########################################################################################  
+
+esphome:
+  name: ${device_name}
+  
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+  baud_rate: 0
+    
+# Enable Home Assistant API
+api:
+  
+ota:
+  platform: esphome
+  
+wifi:
+  ssid: ${ssid_set}
+  password: ${password_set}
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Wavin Fallback Hotspot"
+    password: ""
+
+captive_portal:  
+
+uart:
+  rx_pin: ${rx_pin}
+  tx_pin: ${tx_pin}
+  baud_rate: 38400
+  id: uart_modbus
+  stop_bits: 1
+
+external_components:
+  - source: github://nic6911/esphome_components
+    refresh: 0s
+  
+modbus:
+  uart_id: uart_modbus
+ 
+wavinAhc9000:
+  update_interval: ${update_interval}
+  rw_pin: ${tx_enable_pin}
+  
+climate:
+  - platform: wavinAhc9000
+    channel: 1
+    name: ${friendly_name} Climate ${channel_1}
+  - platform: wavinAhc9000
+    channel: 3
+    name: ${friendly_name} Climate ${channel_3}
+    battery_level:
+      name: ${friendly_name} Battery ${channel_3}
+    current_temp:
+      name: ${friendly_name} Temp ${channel_3}
+

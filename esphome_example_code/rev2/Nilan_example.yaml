@@ -1,0 +1,823 @@
+esphome:
+  name: nilan
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+
+# Enable logging
+logger:
+  baud_rate: 0
+  
+# Enable Home Assistant API
+api:
+
+ota:
+  platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Nilan Fallback Hotspot"
+    password: ""
+
+captive_portal:
+  
+uart:
+  rx_pin: 20
+  tx_pin: 21
+  parity: EVEN
+  baud_rate: 19200
+  id: uart_modbus
+  stop_bits: 1
+  
+modbus:
+  id: modbus_id
+  flow_control_pin: 3
+  uart_id: uart_modbus
+  
+modbus_controller:
+  id: nilan_modbus_controller
+  address: 30
+  modbus_id: modbus_id
+  update_interval: 30s
+ 
+external_components:
+  - source: github://Jopand/esphome_components@main
+    refresh: 0s
+ 
+nilan:
+    
+select:
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Set user function"
+    id: nilan_set_user_function
+    address: 601
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "None" : 0
+      "Extend" : 1
+      "Inlet" : 2
+      "Exhaust" : 3
+      "External heater offset" : 4
+      "Ventilate" : 5
+      "Cooker Hood" : 6
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Set user function 2"
+    id: nilan_set_user_function2
+    address: 611
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "None" : 0
+      "Extend" : 1
+      "Inlet" : 2
+      "Exhaust" : 3
+      "External heater offset" : 4
+      "Ventilate" : 5
+      "Cooker Hood" : 6
+      
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Set operation mode"
+    id: nilan_set_operation_mode
+    address: 1002
+    force_new_range: true
+    use_write_multiple: true
+    value_type: U_WORD
+    optionsmap:
+      "Off" : 0
+      "Heat" : 1
+      "Cool" : 2
+      "Auto" : 3
+
+
+sensor:
+  # WiFi signal sensor to ensure base sensor component is compiled
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 60s
+
+#########################
+#### INPUT REGISTERS ####
+#########################
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Bus version"
+    id: nilan_bus_version
+    accuracy_decimals: 0
+    register_type: read
+    address: 0
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Exhaust temperature"
+    id: nilan_exhaust_temp_t3
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    register_type: read
+    value_type: S_WORD
+    address: 203
+    filters:
+      - multiply: 0.01
+      
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Outlet temperature"
+    id: nilan_outlet_temp_t4
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    register_type: read
+    value_type: S_WORD
+    address: 204
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Inlet (after heater) temperature"
+    id: nilan_inlet_temp_t7
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    register_type: read
+    value_type: S_WORD
+    address: 207
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Outdoor temperature"
+    id: nilan_outdoor_temp_t8
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    register_type: read
+    value_type: S_WORD
+    address: 208
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Humidity"
+    id: nilan_humidity
+    unit_of_measurement: '%'
+    accuracy_decimals: 1
+    device_class: humidity
+    register_type: read
+    address: 221
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Active alarms"
+    id: nilan_active_alarms
+    accuracy_decimals: 0
+    register_type: read
+    address: 400
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Alarm list 1 id"
+    id: nilan_alarm_list_1_id
+    accuracy_decimals: 0
+    register_type: read
+    address: 401
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Alarm list 1 date"
+    id: nilan_alarm_list_1_date
+    accuracy_decimals: 0
+    register_type: read
+    address: 402
+    
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Alarm list 1 time"
+    id: nilan_alarm_list_1_time
+    accuracy_decimals: 0
+    register_type: read
+    address: 403
+    
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Alarm list 2 id"
+    id: nilan_alarm_list_2_id
+    accuracy_decimals: 0
+    register_type: read
+    address: 404
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Alarm list 2 date"
+    id: nilan_alarm_list_2_date
+    accuracy_decimals: 0
+    register_type: read
+    address: 405
+    
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Alarm list 2 time"
+    id: nilan_alarm_list_2_time
+    accuracy_decimals: 0
+    register_type: read
+    address: 406
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Alarm list 3 id"
+    id: nilan_alarm_list_3_id
+    accuracy_decimals: 0
+    register_type: read
+    address: 407
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Alarm list 3 date"
+    id: nilan_alarm_list_3_date
+    accuracy_decimals: 0
+    register_type: read
+    address: 408
+    
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Alarm list 3 time"
+    id: nilan_alarm_list_3_time
+    accuracy_decimals: 0
+    register_type: read
+    address: 409
+    
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Actual fan step"
+    id: nilan_actual_fan_step
+    accuracy_decimals: 0
+    register_type: read
+    address: 1100    
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Actual inlet fan step"
+    id: nilan_actual_inlet_fan_step
+    accuracy_decimals: 0
+    register_type: read
+    address: 1101    
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Actual exhaust fan step"
+    id: nilan_actual_exhaust_fan_step
+    accuracy_decimals: 0
+    register_type: read
+    address: 1102            
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Days since last filter change alarm"
+    id: nilan_days_since_last_filter_alarm
+    unit_of_measurement: 'days'
+    accuracy_decimals: 0
+    register_type: read
+    address: 1103
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Days to next filter change alarm"
+    id: nilan_days_to_next_filter_alarm
+    unit_of_measurement: 'days'
+    accuracy_decimals: 0
+    register_type: read
+    address: 1104    
+
+  - platform: template
+    name: "Heat exchange efficiency"
+    id: nilan_heat_exchange_efficiency
+    unit_of_measurement: '%'
+    accuracy_decimals: 1
+    lambda: !lambda |-
+      return (id(nilan_inlet_temp_t7).state-id(nilan_outdoor_temp_t8).state)/(id(nilan_exhaust_temp_t3).state-id(nilan_outdoor_temp_t8).state)*100.0;
+
+  # - platform: modbus_controller
+  #   modbus_controller_id: nilan_modbus_controller
+  #   name: "Heat exchange efficiency"
+  #   id: nilan_heat_exchange_efficiency
+  #   unit_of_measurement: '%'
+  #   accuracy_decimals: 1
+  #   register_type: read
+  #   address: 1204
+  #   filters:
+  #     - multiply: 0.01
+      
+###########################
+#### HOLDING REGISTERS ####
+###########################
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Exhaust fan speed"
+    id: nilan_exhaust_fan_speed
+    unit_of_measurement: '%'
+    icon: "mdi:percent"
+    accuracy_decimals: 0
+    register_type: holding
+    address: 200
+    filters:
+      - multiply: 0.01
+    
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Inlet fan speed"
+    id: nilan_inlet_fan_speed
+    unit_of_measurement: '%'
+    icon: "mdi:percent"
+    accuracy_decimals: 0
+    register_type: holding
+    address: 201
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Cooling set temperature"
+    id: nilan_cooling_set_temp
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    register_type: holding
+    address: 1200
+    filters:
+      - multiply: 0.01
+
+binary_sensor:
+  # Status binary sensor to ensure base binary_sensor component is compiled  
+  - platform: status
+    name: "Nilan Status"
+
+#########################
+#### INPUT REGISTERS ####
+#########################
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "User function"
+    id: nilan_user_function
+    register_type: read
+    address: 100
+    bitmask: 1
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Air filter alarm"
+    id: nilan_filter_alarm
+    register_type: read
+    address: 101
+    bitmask: 1
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "User function 2"
+    id: nilan_user_function_2
+    register_type: read
+    address: 113
+    bitmask: 1
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Summer mode"
+    id: nilan_is_summer
+    register_type: read
+    address: 1200
+    bitmask: 1
+
+###########################
+#### HOLDING REGISTERS ####
+###########################
+
+
+text_sensor:
+  # WiFi info text sensor to ensure base text_sensor component is compiled
+  - platform: wifi_info
+    ip_address:
+      name: "IP Address"
+  
+  - platform: template
+    name: "Air filter alarm status"
+    lambda: |-
+      if (id(nilan_filter_alarm).state) {
+        return {"Skift filter"};
+      } else {
+        return {"Filter OK"};
+      }  
+      
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Aggregate type"
+    id: nilan_platform_id
+    register_type: holding
+    address: 1000
+    lambda: !lambda |-
+      uint16_t int_type = (data[item->offset] << 8) + data[item->offset+1];
+      ESP_LOGD("main","Parsed aggregate type int : %d", int_type);
+      std::string type_str;
+      switch (int_type) {
+        case 0: type_str = "None"; break;
+        case 1: type_str = "Test"; break;
+        case 2: type_str = "VPL 10 uden køl"; break;
+        case 3: type_str = "VPL 15 uden køl"; break;
+        case 4: type_str = "VPL 15 med køl"; break;
+        case 5: type_str = "VPL 25 med 3 hastigheder uden køl"; break;
+        case 6: type_str = "VPL 25 med 3 hastigheder med køl"; break;
+        case 7: type_str = "VPL 28 2 hastigheder uden køl"; break;
+        case 8: type_str = "VPL 28 med 2 hastigheder med køl"; break;
+        case 9: type_str = "VP 18 med kryds monteret oven på anlæg uden køl"; break;
+        case 10: type_str = "VP 18 med kryds monteret oven på anlæg med køl"; break;
+        case 11: type_str = "Vp 18 Compact og Compact p uden køl"; break;
+        case 12: type_str = "VP 18 Compact og Compact P med køl"; break;
+        case 13: type_str = "Comfort anlæg (Comfort 300 LR)"; break;
+        case 14: type_str = "CT 150 anlæg med 1-2-3 omskifter"; break;
+        case 15: type_str = "VLX som kører VAV"; break;
+        case 16: type_str = "VLX med 2 trin"; break;
+        case 17: type_str = "VLX med 3 trin"; break;
+        case 18: type_str = "VP 18 uden køl"; break;
+        case 19: type_str = "VP 18 med køl"; break;
+        case 20: type_str = "VP 18 med elkedel uden køl"; break;
+        case 21: type_str = "VP 18 med elkedel og køl"; break;
+        case 22: type_str = "VGU 250 brugsvands varmepumpe"; break;
+        case 23: type_str = "VGU 250 brugsvands varmepumpe med elkedel"; break;
+        case 24: type_str = "VPL 25 uden køl"; break;
+        case 25: type_str = "VPL 25 med køl"; break;
+        case 26: type_str = "VPM 120-560"; break;
+        case 27: type_str = "Comfort 1200 - 4000"; break;
+        case 28: type_str = "VP 20 Compact gorona"; break;
+        case 29: type_str = "VLX med CTS 602 print"; break;
+        case 30: type_str = "Compact P Nordic"; break;
+        case 31: type_str = "Comfort Nordic"; break;
+        case 32: type_str = "VP 18 Version 1"; break;
+        case 33: type_str = "Combi 300"; break;
+        case 34: type_str = "Compact med 4-vejsventil uden køl"; break;
+        default: type_str = "Unknown"; break;
+      }
+      return type_str;
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Software version"
+    id: nilan_version_info
+    register_type: read
+    register_count: 3
+    response_size: 6
+    address: 1
+    lambda: !lambda |-
+      float bus_version = nilan_bus_version->get_state();
+      std::string output;
+      
+      if (bus_version == 8) {
+        output = data[item->offset+1];
+        output += data[item->offset+0];
+        output += data[item->offset+3];
+        output += data[item->offset+2];
+        output += data[item->offset+5]; 
+        output += data[item->offset+4];
+      } else {  
+        output = data[item->offset+0];
+        output += data[item->offset+1];
+        output += '.';
+        output += data[item->offset+2];
+        output += data[item->offset+3];
+        output += '.';
+        output += data[item->offset+4];
+        output += data[item->offset+5];
+      }
+ 
+      ESP_LOGD("main","Parsed SW version: %s", output.c_str()); 
+      return output;
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Actual user function"
+    id: nilan_actual_user_function
+    register_type: holding
+    address: 600
+    lambda: !lambda |-
+      uint16_t int_user_function = (data[item->offset] << 8) + data[item->offset+1];
+      ESP_LOGD("main","Parsed user function int : %d", int_user_function);
+      std::string actual_user_function;
+      switch(int_user_function) {
+        case 0: { actual_user_function = "0 : None"; break; }
+        case 1: { actual_user_function = "1 : Extend"; break; }
+        case 2: { actual_user_function = "2 : Inlet"; break; }
+        case 3: { actual_user_function = "3 : Exhaust"; break; }
+        case 4: { actual_user_function = "4 : External heater offset"; break; }
+        case 5: { actual_user_function = "5 : Ventilate"; break; }
+        case 6: { actual_user_function = "6 : Cooker Hood"; break; }
+      }
+      return actual_user_function;
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Actual user function 2"
+    id: nilan_actual_user_function2
+    register_type: holding
+    address: 610
+    lambda: !lambda |-
+      uint16_t int_user_function2 = (data[item->offset] << 8) + data[item->offset+1];
+      ESP_LOGD("main","Parsed user function 2 int : %d", int_user_function2);
+      std::string actual_user_function2;
+      switch(int_user_function2) {
+        case 0: { actual_user_function2 = "0 : None"; break; }
+        case 1: { actual_user_function2 = "1 : Extend"; break; }
+        case 2: { actual_user_function2 = "2 : Inlet"; break; }
+        case 3: { actual_user_function2 = "3 : Exhaust"; break; }
+        case 4: { actual_user_function2 = "4 : External heater offset"; break; }
+        case 5: { actual_user_function2 = "5 : Ventilate"; break; }
+        case 6: { actual_user_function2 = "6 : Cooker Hood"; break; }
+      }
+      return actual_user_function2;
+      
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Operation mode"
+    id: nilan_operation_mode
+    register_type: read
+    address: 1001
+    lambda: !lambda |-
+      uint16_t int_mode = (data[item->offset] << 8) + data[item->offset+1];
+      ESP_LOGD("main","Parsed operation mode int : %d", int_mode);
+      std::string mode_str;
+      switch (int_mode) {
+        case 0: mode_str = "Off"; break;
+        case 1: mode_str = "Heat"; break;
+        case 2: mode_str = "Cool"; break;
+        case 3: mode_str = "Auto"; break;
+        case 4: mode_str = "Service"; break;
+        default: mode_str = "Unknown"; break;
+      }
+      return mode_str;
+      
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Control mode"
+    id: nilan_control_state
+    register_type: read
+    address: 1002
+    lambda: !lambda |-
+      uint16_t int_mode = (data[item->offset] << 8) + data[item->offset+1];
+      ESP_LOGD("main","Parsed operation mode int : %d", int_mode);
+      std::string mode_str;
+      switch (int_mode) {
+        case 0:  mode_str = "Off"; break;
+        case 1:  mode_str = "Shift"; break;
+        case 2:  mode_str = "Stop"; break;
+        case 3:  mode_str = "Start"; break;
+        case 4:  mode_str = "Standby"; break;
+        case 5:  mode_str = "Ventilation stop"; break;
+        case 6:  mode_str = "Ventilation"; break;
+        case 7:  mode_str = "Heating"; break;
+        case 8:  mode_str = "Cooling"; break;
+        case 9:  mode_str = "Hot water"; break;
+        case 10: mode_str = "Legionella"; break;
+        case 11: mode_str = "Cooling + hot water"; break;
+        case 12: mode_str = "Central heating"; break;
+        case 13: mode_str = "Defrost"; break;
+        default: mode_str = "Unknown"; break;
+      }
+      return mode_str;
+
+number:
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "User time set (minutes)"
+    id: nilan_user_time_set
+    value_type: U_WORD
+    min_value: 1.0
+    max_value: 480.0
+    lambda: !lambda |-
+      uint16_t hours = x/100; // 100 is 1 hour
+      uint16_t minutes = ((uint16_t)x) % 100;
+      return (hours*60) + minutes;
+    write_lambda: !lambda |-
+      uint16_t intVal = x;
+      uint16_t firstDigit = (intVal / 60); // 1 hour is written as '100' and not '60'
+      uint16_t lastDigits = (intVal % 60); // 1:30 hours is written as '130' and not '90'
+      uint16_t result = (firstDigit*100) + lastDigits;
+      payload = modbus_controller::float_to_payload(result, modbus_controller::SensorValueType::U_WORD);
+      return x;
+    step: 1.0
+    address: 602
+    force_new_range: true
+    use_write_multiple: true 
+    
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "User ventilation speed set"
+    id: nilan_user_ventilation_speed_set
+    min_value: 0.0
+    max_value: 4.0
+    step: 1.0
+    address: 603
+    force_new_range: true
+    use_write_multiple: true 
+  
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "User temperature set"
+    id: nilan_user_temperature_set
+    min_value: 15.0
+    max_value: 30.0
+    step: 1.0
+    address: 604
+    force_new_range: true
+    use_write_multiple: true 
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "User time set 2 (minutes)"
+    id: nilan_user_time_set2
+    value_type: U_WORD
+    min_value: 1.0
+    max_value: 480.0
+    lambda: !lambda |-
+      uint16_t hours = x/100; // 100 is 1 hour
+      uint16_t minutes = ((uint16_t)x) % 100;
+      return (hours*60) + minutes;
+    write_lambda: !lambda |-
+      uint16_t intVal = x;
+      uint16_t firstDigit = (intVal / 60); // 1 hour is written as '100' and not '60'
+      uint16_t lastDigits = (intVal % 60); // 1:30 hours is written as '130' and not '90'
+      uint16_t result = (firstDigit*100) + lastDigits;
+      payload = modbus_controller::float_to_payload(result, modbus_controller::SensorValueType::U_WORD);
+      return x;
+    step: 1.0
+    address: 612
+    force_new_range: true
+    use_write_multiple: true 
+    
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "User ventilation speed set 2"
+    id: nilan_user_ventilation_speed_set2
+    min_value: 0.0
+    max_value: 4.0
+    step: 1.0
+    address: 613
+    force_new_range: true
+    use_write_multiple: true 
+  
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "User temperature set 2"
+    id: nilan_user_temperature_set2
+    min_value: 15.0
+    max_value: 30.0
+    step: 1.0
+    address: 614
+    force_new_range: true
+    use_write_multiple: true 
+    
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Ventilation speed set"
+    id: nilan_ventilation_speed_set
+    min_value: 0
+    max_value: 4
+    step: 1.0
+    address: 1003
+    force_new_range: true
+    use_write_multiple: true  
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Temperature set"
+    id: nilan_target_temperature_set
+    min_value: 12
+    max_value: 30
+    step: 1.0
+    address: 1004
+    force_new_range: true
+    use_write_multiple: true
+    multiply: 100
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Winter temp threshold"
+    id: nilan_winter_temp_threshold
+    min_value: -20
+    max_value: 10
+    step: 1.0
+    address: 4002
+    force_new_range: true
+    use_write_multiple: true
+    #multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Min Summer Set"
+    id: nilan_target_min_summer_set
+    min_value: 5
+    max_value: 14
+    step: 1.0
+    address: 4007
+    force_new_range: true
+    use_write_multiple: true
+    multiply: 100    
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Max Summer Set"
+    id: nilan_target_max_summer_set
+    min_value: 5
+    max_value: 25
+    step: 1.0
+    address: 4008
+    force_new_range: true
+    use_write_multiple: true
+    multiply: 100    
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Min Winter Set"
+    id: nilan_target_min_winter_set
+    min_value: 5
+    max_value: 16
+    step: 1.0
+    address: 4009
+    force_new_range: true
+    use_write_multiple: true
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Max Winter Set"
+    id: nilan_target_max_winter_set
+    min_value: 5
+    max_value: 35
+    step: 1.0
+    address: 4010
+    force_new_range: true
+    use_write_multiple: true
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Room lower limit"
+    id: nilan_room_low_limit
+    min_value: 0
+    max_value: 20
+    step: 1.0
+    address: 4012
+    force_new_range: true
+    use_write_multiple: true
+    multiply: 100  
+
+switch:
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "On/Off state"
+    id: nilan_on_off_state
+    register_type: holding
+    bitmask: 1
+    force_new_range: true
+    use_write_multiple: true
+    address: 1001
+    
+climate:
+  - platform: nilan
+    name: Nilan
+    current_temp_sensor_id: nilan_inlet_temp_t7
+    target_temp_sensor_id: nilan_target_temperature_set
+    fan_speed_sensor_id: nilan_ventilation_speed_set
+    mode_select_id: nilan_set_operation_mode
+
+output:
+  - platform: modbus_controller
+    id: nilan_reset_alarm
+    address: 400
+    use_write_multiple: true
+    value_type: U_WORD
+    write_lambda: return 255;
+    
+button:
+  # Restart button to ensure base button component is compiled
+  - platform: restart
+    name: "Nilan Restart"
+
+  - platform: output
+    name: Reset alarm
+    id: nilan_reset_alarm_button
+    output: nilan_reset_alarm
+    duration: 5s    
