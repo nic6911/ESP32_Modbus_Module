@@ -103,6 +103,10 @@ select:
 
 
 sensor:
+  # WiFi signal sensor to ensure base sensor component is compiled
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 60s
 
 #########################
 #### INPUT REGISTERS ####
@@ -361,6 +365,10 @@ sensor:
       - multiply: 0.01
 
 binary_sensor:
+  # Status binary sensor to ensure base binary_sensor component is compiled  
+  - platform: status
+    name: "Nilan Status"
+
 #########################
 #### INPUT REGISTERS ####
 #########################
@@ -402,6 +410,10 @@ binary_sensor:
 
 
 text_sensor:
+  # WiFi info text sensor to ensure base text_sensor component is compiled
+  - platform: wifi_info
+    ip_address:
+      name: "IP Address"
   
   - platform: template
     name: "Air filter alarm status"
@@ -700,6 +712,78 @@ number:
     use_write_multiple: true
     multiply: 100
 
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Winter temp threshold"
+    id: nilan_winter_temp_threshold
+    min_value: -20
+    max_value: 10
+    step: 1.0
+    address: 4002
+    force_new_range: true
+    use_write_multiple: true
+    #multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Min Summer Set"
+    id: nilan_target_min_summer_set
+    min_value: 5
+    max_value: 14
+    step: 1.0
+    address: 4007
+    force_new_range: true
+    use_write_multiple: true
+    multiply: 100    
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Max Summer Set"
+    id: nilan_target_max_summer_set
+    min_value: 5
+    max_value: 25
+    step: 1.0
+    address: 4008
+    force_new_range: true
+    use_write_multiple: true
+    multiply: 100    
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Min Winter Set"
+    id: nilan_target_min_winter_set
+    min_value: 5
+    max_value: 16
+    step: 1.0
+    address: 4009
+    force_new_range: true
+    use_write_multiple: true
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Max Winter Set"
+    id: nilan_target_max_winter_set
+    min_value: 5
+    max_value: 35
+    step: 1.0
+    address: 4010
+    force_new_range: true
+    use_write_multiple: true
+    multiply: 100  
+
+  - platform: modbus_controller
+    modbus_controller_id: nilan_modbus_controller
+    name: "Room lower limit"
+    id: nilan_room_low_limit
+    min_value: 0
+    max_value: 20
+    step: 1.0
+    address: 4012
+    force_new_range: true
+    use_write_multiple: true
+    multiply: 100  
+
 switch:
   - platform: modbus_controller
     modbus_controller_id: nilan_modbus_controller
@@ -738,6 +822,10 @@ output:
     write_lambda: return 255;
     
 button:
+  # Restart button to ensure base button component is compiled
+  - platform: restart
+    name: "Nilan Restart"
+
   - platform: output
     name: Reset alarm
     id: nilan_reset_alarm_button

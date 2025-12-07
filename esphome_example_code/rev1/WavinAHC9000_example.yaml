@@ -42,7 +42,7 @@ substitutions:
   # channel_16: <Unused16>
 
   # PIN DEFINITIONS (Should in most cases not be changed) 
-  tx_enable_pin: '3'
+  tx_enable_pin: '10'
   rx_pin: '20'
   tx_pin: '21'
 
@@ -112,3 +112,4 @@ climate:
       name: ${friendly_name} Battery ${channel_3}
     current_temp:
       name: ${friendly_name} Temp ${channel_3}
+
