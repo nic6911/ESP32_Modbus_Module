@@ -47,7 +47,7 @@ If you have a rev1 - it'll look like this:
 
 ![Case](/case/case_rev1.png)
 
-And the right code (GPIO10 flow-control pin) is here: [rev2](esphome_example_code/rev1)
+And the right code (GPIO10 flow-control pin) is here: [rev1](esphome_example_code/rev1)
 
 ## Connecting the Module
 
