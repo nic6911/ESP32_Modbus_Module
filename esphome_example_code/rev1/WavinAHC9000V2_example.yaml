@@ -150,7 +150,7 @@ uart:
 modbus:
     - id: ${device}_modbus
       uart_id: uart_${device}
-      flow_control_pin: 10
+      flow_control_pin: 3
  
 modbus_controller:
   id: ${device}_modbus_controller

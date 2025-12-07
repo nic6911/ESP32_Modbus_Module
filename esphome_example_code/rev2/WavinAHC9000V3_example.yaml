@@ -1,0 +1,81 @@
+########################################################################################
+#                                                                                      #
+#      WAVIN AHC-9000 FLOOR HEATING CONTROLLER SOFTWARE FOR HOME ASSISTANT             #
+#                                                                                      #   
+#        Code developed by : Heine Koldbro Madsen and Samuel Sieb 2021                 #
+#                                                                                      #
+#           https://github.com/heinekmadsen/esphome_wavinahc9000v3/tree/main           #    
+#                                                                                      #
+# Hardware by : Mogens Groth Nicolaisen https://github.com/nic6911/Wavin-AHC-9000-mqtt #
+#                                                                                      #
+########################################################################################
+ 
+esphome:
+  name: wavin
+  friendly_name: Wavin
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+
+external_components:
+  - source: github://nic6911/esphome_wavinahc9000v3@simplifications
+    components: [wavin_ahc9000]
+    refresh: 0s
+
+logger:
+  baud_rate: 0
+
+uart:
+  id: uart_wavin
+  tx_pin: GPIO21
+  rx_pin: GPIO20
+  baud_rate: 38400
+  stop_bits: 1
+  parity: NONE
+
+wavin_ahc9000:
+  id: wavin
+  uart_id: uart_wavin
+  update_interval: 10s
+  allow_mode_writes: false
+  poll_channels_per_cycle: 1
+  tx_enable_pin: GPIO3
+
+  channel_01_friendly_name: "Soveværelse"
+
+climate:
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Soveværelse"
+    channel: 1
+
+sensor:
+   # Ch.1 Soveværelse
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Soveværelse Batteri"
+    channel: 1
+    type: battery
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Soveværelse Temperatur"
+    channel: 1
+    type: temperature
+
+
+
+api:
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Wavin Fallback Hotspot"
+    password: ""
+
+ota:
+  platform: esphome
+

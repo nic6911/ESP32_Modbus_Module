@@ -47,7 +47,7 @@ substitutions:
   climate_max_temp: '40'
   
   # PIN DEFINITIONS (Should in most cases not be changed) 
-  tx_enable_pin: '10'
+  tx_enable_pin: '3'
   rx_pin: '20'
   tx_pin: '21'
 

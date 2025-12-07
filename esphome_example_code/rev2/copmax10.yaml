@@ -1,0 +1,155 @@
+# info on modbus found here: https://www.stokerpro.dk/viewtopic.php?f=107&t=26511&sid=77d316bacdd6f90063c444b2087fac57&start=50&fbclid=IwAR1LOpApTDWi9cttNNj6xrKJyZQCh7DmPZV8laLpBq_TM1kG5Dvml_JuoIE
+########################################################################################
+#                      CONFIGURATION PART                                              #
+########################################################################################
+
+substitutions:
+  device_name: 'copmax10'
+  friendly_name: 'Copmax'
+  log_level: DEBUG
+ 
+  # UPDATE TIME (GATEWAY)
+  update_interval: 30s
+  
+  # PIN DEFINITIONS (Should in most cases not be changed) 
+  rx_pin: '20'
+  tx_pin: '21'
+
+  # WiFi settings
+  ssid_set: !secret wifi_ssid
+  password_set: !secret wifi_password
+  
+########################################################################################
+#                        CODE BELOW SHOULD NOT BE CHANGED                              #
+########################################################################################  
+
+esphome:
+  name: ${device_name}
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  baud_rate: 0
+    
+# Enable Home Assistant API
+api:
+  
+ota:
+
+wifi:
+  ssid: ${ssid_set}
+  password: ${password_set}
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Copmax Fallback Hotspot"
+
+captive_portal:  
+    
+uart:
+  rx_pin: ${rx_pin}
+  tx_pin: ${tx_pin}
+  baud_rate: 9600
+  id: uart_modbus
+  parity: NONE
+  stop_bits: 1
+  
+modbus:
+  id: modbus_id
+  uart_id: uart_modbus
+  flow_control_pin: 3
+  
+modbus_controller:
+  id: copmax_modbus_controller
+  address: 1
+  modbus_id: modbus_id
+  update_interval: ${update_interval}
+  
+
+sensor:
+
+#########################
+#### INPUT REGISTERS ####
+#########################
+
+  - platform: modbus_controller
+    modbus_controller_id: copmax_modbus_controller
+    name: "Return Temperature"
+    id: rt
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    value_type: S_WORD
+    register_type: read
+    address: 0
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: copmax_modbus_controller
+    name: "Supply Temperature"
+    id: st
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    value_type: S_WORD
+    register_type: read
+    address: 1
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: copmax_modbus_controller
+    name: "Outside Temperature"
+    id: ot
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    value_type: S_WORD
+    register_type: read
+    address: 2
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: copmax_modbus_controller
+    name: "Water Temperature"
+    id: ht
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    value_type: S_WORD
+    register_type: read
+    address: 3
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: copmax_modbus_controller
+    name: "Condenser Temperature"
+    id: ct
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    value_type: S_WORD
+    register_type: read
+    address: 4
+    filters:
+      - multiply: 0.01
+
+  - platform: modbus_controller
+    modbus_controller_id: copmax_modbus_controller
+    name: "Evaporator Temperature"
+    id: et
+    unit_of_measurement: °C
+    accuracy_decimals: 1
+    device_class: temperature
+    value_type: S_WORD
+    register_type: read
+    address: 5
+    filters:
+      - multiply: 0.01      

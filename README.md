@@ -30,6 +30,19 @@ The module is flexible and can be adapted for other Modbus applications, althoug
 
 ---
 
+## December 2025 - Hardware update !
+Please be advised that the hardware have been updated with the major changes that the 2 x optocoupler outputs have been removed (legacy functionality), the 2 x pin rows are gone and the flow-control pin has been rewired to GPIO3. Nothing that impacts or degrades performance !
+
+For the adapted code (adjusted flow-control pin) look here: [rev2](ESP32_Modbus_Module/esphome_example_code/rev2)
+
+If you have a rev2 - it'll look like this:
+
+![Case](/case/case_rev2.png)
+
+![Topview](/electronics/top_rev2.png)
+
+![Schematic](/electronics/schematicsC3_Rev2.png)
+
 ## Connecting the Module
 
 ### Compatibility Notes
