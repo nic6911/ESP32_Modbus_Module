@@ -112,4 +112,3 @@ climate:
       name: ${friendly_name} Battery ${channel_3}
     current_temp:
       name: ${friendly_name} Temp ${channel_3}
-
