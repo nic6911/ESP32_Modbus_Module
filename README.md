@@ -43,6 +43,12 @@ If you have a rev2 - it'll look like this:
 
 ![Schematic](/electronics/schematicsC3_Rev2.png)
 
+If you have a rev1 - it'll look like this:
+
+![Case](/case/case_rev1.png)
+
+And the right code (GPIO10 flow-control pin) is here: [rev2](esphome_example_code/rev1)
+
 ## Connecting the Module
 
 ### Compatibility Notes
