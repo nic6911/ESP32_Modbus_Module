@@ -25,7 +25,7 @@ external_components:
     refresh: 0s
 
 logger:
-  baud_rate: 0
+  baud_rate: 0  # Disable UART logging
 
 uart:
   id: uart_wavin
@@ -38,21 +38,34 @@ uart:
 wavin_ahc9000:
   id: wavin
   uart_id: uart_wavin
+  flow_control_pin: GPIO3
   update_interval: 10s
   allow_mode_writes: false
   poll_channels_per_cycle: 1
-  tx_enable_pin: GPIO3
 
   channel_01_friendly_name: "Soveværelse"
+  #channel_02_friendly_name: "Kontor"
+  channel_03_friendly_name: "Stue 1"
+  #channel_04_friendly_name: "Stue 2"
 
 climate:
   - platform: wavin_ahc9000
     wavin_ahc9000_id: wavin
     name: "Soveværelse"
     channel: 1
+  # - platform: wavin_ahc9000
+  #   wavin_ahc9000_id: wavin
+  #   name: "Kontor"
+  #   channel: 2
+  #   use_floor_temperature: true
+  #   strict_mode_writes: true
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Stue"
+    members: [3, 4]
 
 sensor:
-   # Ch.1 Soveværelse
+  # Ch.1 Soveværelse
   - platform: wavin_ahc9000
     wavin_ahc9000_id: wavin
     name: "Soveværelse Batteri"
@@ -63,7 +76,60 @@ sensor:
     name: "Soveværelse Temperatur"
     channel: 1
     type: temperature
+  # # Ch.2 Kontor
+  # - platform: wavin_ahc9000
+  #   wavin_ahc9000_id: wavin
+  #   name: "Kontor Batteri"
+  #   channel: 2
+  #   type: battery
+  # - platform: wavin_ahc9000
+  #   wavin_ahc9000_id: wavin
+  #   name: "Kontor Temperatur"
+  #   channel: 2
+  #   type: temperature
+  # - platform: wavin_ahc9000
+  #   wavin_ahc9000_id: wavin
+  #   name: "Kontor Komfort Setpunkt"
+  #   channel: 2
+  #   type: comfort_setpoint
+  # - platform: wavin_ahc9000
+  #   wavin_ahc9000_id: wavin
+  #   name: "Kontor Gulvtemperatur"
+  #   channel: 2
+  #   type: floor_temperature
+  # - platform: wavin_ahc9000
+  #   wavin_ahc9000_id: wavin
+  #   name: "Kontor Gulv Minimum"
+  #   channel: 2
+  #   type: floor_min_temperature
+  # - platform: wavin_ahc9000
+  #   wavin_ahc9000_id: wavin
+  #   name: "Kontor Gulv Maksimum"
+  #   channel: 2
+  #   type: floor_max_temperature
+  # Ch.3/4 Stue zone
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Stue Temperatur"
+    channel: 3
+    type: temperature
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Stue Batteri"
+    channel: 3
+    type: battery
 
+switch:
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Soveværelse Børnelås"
+    channel: 1
+    type: child_lock
+  - platform: wavin_ahc9000
+    wavin_ahc9000_id: wavin
+    name: "Stue Børnelås"
+    channel: 3
+    type: child_lock
 
 
 api:
@@ -78,4 +144,3 @@ wifi:
 
 ota:
   platform: esphome
-
