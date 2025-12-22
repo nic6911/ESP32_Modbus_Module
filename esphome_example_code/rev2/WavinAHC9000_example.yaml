@@ -91,7 +91,7 @@ uart:
   stop_bits: 1
 
 external_components:
-  - source: github://nic6911/esphome_components
+  - source: github://heinekmadsen/esphome_components
     refresh: 0s
   
 modbus:

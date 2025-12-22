@@ -102,7 +102,7 @@ modbus_controller:
 # Uncomment the active channels on your Wavin Sentio
 packages:
   remote_package:
-    url: https://github.com/nic6911/esphome_components
+    url: https://github.com/heinekmadsen/esphome_components
     ref: main
     files: 
       - components/sentio/configs/basic.yaml # REQUIRED FOR WAVIN SENTIO
