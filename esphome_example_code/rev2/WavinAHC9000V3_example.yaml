@@ -40,7 +40,7 @@ wavinahc9000v3:
   uart_id: uart_wavin
   flow_control_pin: GPIO3
   update_interval: 10s
-  allow_mode_writes: false
+  allow_mode_writes: true
   poll_channels_per_cycle: 1
 
   channel_01_friendly_name: "Soveværelse"
