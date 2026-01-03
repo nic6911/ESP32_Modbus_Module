@@ -90,7 +90,7 @@ To connect the module, use an **RJ45B** cable. Cut the cable to expose colored w
 ### Installation & Setup
 
 - **Home Assistant & ESPHome**: The module integrates seamlessly with these platforms.
-- [Video Guide: USB + WiFi Upload for AHC9000]([https://youtu.be/Q5KRcv-uObo](https://youtu.be/jKOnhiWMCx8))
+- [Video Guide: USB + WiFi Upload for AHC9000](https://youtu.be/jKOnhiWMCx8)
 
 ### Example Code
 
