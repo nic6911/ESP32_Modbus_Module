@@ -67,14 +67,18 @@ To connect the module, use an **RJ45B** cable. Cut the cable to expose colored w
 
 ![Connections](/electronics/connection.png)
 
+
 #### A wiring example on a Nilan Comfort 300 CTS602 light is shown here:
 ![Connections](/electronics/CTS602_light.png)
+
 
 #### A wiring example on a Nilan CTS400 is shown here:
 ![Connections](/electronics/CTS400_connections.png)
 
+
 #### A wiring example on a EM340 modbus power meter is shown here:
 ![Connections](/electronics/EM340_connection.png)
+
 
 #### A Nibe Heat Pump modbus interface is shown here:
 ![Connections](/electronics/nibe_modbus_connection.png)
@@ -86,8 +90,7 @@ To connect the module, use an **RJ45B** cable. Cut the cable to expose colored w
 ### Installation & Setup
 
 - **Home Assistant & ESPHome**: The module integrates seamlessly with these platforms.
-- [Video Guide: USB Upload for AHC9000](https://youtu.be/Q5KRcv-uObo)
-- [Video Guide: Wireless Setup for Wavin Sentio](https://youtu.be/s8QjRjI9TLo)
+- [Video Guide: USB + WiFi Upload for AHC9000]([https://youtu.be/Q5KRcv-uObo](https://youtu.be/jKOnhiWMCx8))
 
 ### Example Code
 
