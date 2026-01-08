@@ -68,7 +68,7 @@ To connect the module, use an **RJ45B** cable. Cut the cable to expose colored w
 ![Connections](/electronics/connection.png)
 
 
-#### A wiring example on a Nilan Comfort 300 CTS602 light is shown here:
+#### A wiring example on a Nilan CTS602 or CTS602 light is shown here:
 ![Connections](/electronics/CTS602_light.png)
 
 
