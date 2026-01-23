@@ -92,7 +92,7 @@ substitutions:
   channel_16: "0x0F"
 
    # UPDATE TIME (GATEWAY)
-  update_interval: 60s
+  update_interval: 10s
  
   # PIN DEFINITIONS (Should in most cases not be changed) 
   rx_pin: '20'
