@@ -141,6 +141,8 @@ wifi:
   ap:
     ssid: "Wavin Fallback Hotspot"
     password: ""
+ 
+captive_portal:  
 
 ota:
   platform: esphome
