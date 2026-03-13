@@ -20,7 +20,7 @@ esp32:
     type: esp-idf
 
 external_components:
-  - source: github://nic6911/esphome_components@feature/timingfixes
+  - source: github://heinekmadsen/esphome_components@main
     components: [wavinahc9000v3]
     refresh: 0s
 
