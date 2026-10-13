@@ -1,15 +1,21 @@
 ########################################################################################
 #                                                                                      #
 #      WAVIN AHC-9000 FLOOR HEATING CONTROLLER SOFTWARE FOR HOME ASSISTANT             #
-#                                                                                      #   
+#                                                                                      #
 #        Code developed by : Heine Koldbro Madsen and Samuel Sieb 2021                 #
 #                                                                                      #
-#           https://github.com/heinekmadsen/esphome_wavinahc9000v3/tree/main           #    
+#           https://github.com/heinekmadsen/esphome_components                         #
 #                                                                                      #
 # Hardware by : Mogens Groth Nicolaisen https://github.com/nic6911/Wavin-AHC-9000-mqtt #
 #                                                                                      #
+#  Pins below are for the rev2 ESP32 Modbus Module. Leave them alone.                  #
+#                                                                                      #
+#  Want a room to follow your own temperature sensor instead of the Wavin wall         #
+#  thermostat? Add one "sensor:" line to that climate - see "Stue" further down,       #
+#  and components/wavinahc9000v3/ROOM_SENSORS.md                                       #
+#                                                                                      #
 ########################################################################################
- 
+
 esphome:
   name: wavin
   friendly_name: Wavin
@@ -49,20 +55,27 @@ wavinahc9000v3:
   #channel_04_friendly_name: "Stue 2"
 
 climate:
+  # A normal room: the Wavin wall thermostat measures it, as always.
   - platform: wavinahc9000v3
     wavinahc9000v3_id: wavin
     name: "Soveværelse"
     channel: 1
+
   # - platform: wavinahc9000v3
   #   wavinahc9000v3_id: wavin
   #   name: "Kontor"
   #   channel: 2
   #   use_floor_temperature: true
   #   strict_mode_writes: true
+
+  # A room on two outputs. Uncomment "sensor:" and put in your own temperature
+  # entity, and the room follows that instead of the wall thermostat. Nothing
+  # to set up in Home Assistant - no automation, no helper.
   - platform: wavinahc9000v3
     wavinahc9000v3_id: wavin
     name: "Stue"
     members: [3, 4]
+    #sensor: sensor.stue_temperatur
 
 sensor:
   # Ch.1 Soveværelse
@@ -131,6 +144,12 @@ switch:
     channel: 3
     type: child_lock
 
+button:
+  # Press this once after the first install. It prints ready-made YAML for
+  # every channel it found into the ESPHome log.
+  - platform: wavinahc9000v3
+    wavinahc9000v3_id: wavin
+    name: "Dump Wavin YAML"
 
 api:
 
@@ -141,9 +160,8 @@ wifi:
   ap:
     ssid: "Wavin Fallback Hotspot"
     password: ""
- 
-captive_portal:  
+
+captive_portal:
 
 ota:
-  platform: esphome
-
+  - platform: esphome
