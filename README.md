@@ -49,6 +49,31 @@ If you have a rev1 - it'll look like this:
 
 And the right code (GPIO10 flow-control pin) is here: [rev1](esphome_example_code/rev1)
 
+## Wavin AHC9000 automatic zones
+
+For the Wavin AHC9000, use the ready-made automatic-zone configuration for the
+Rev2 module:
+
+**[ahc9000_v4_auto.yaml](esphome_example_code/rev2/ahc9000_v4_auto.yaml)**
+
+This YAML sets up the `wavinahc9000v4` ESPHome component, automatic zone
+discovery, and the services required by the companion Home Assistant
+integration. It is already configured for the Rev2 flow-control pin (`GPIO3`).
+
+1. Wire the AHC9000 to the module as described in
+   [Connecting the Module](#connecting-the-module).
+2. Flash `ahc9000_v4_auto.yaml` with ESPHome.
+3. Install the
+   **[Wavin AHC9000 Zones integration](https://github.com/nic6911/ha-Wavin-AHC9000-Zones)**.
+   Home Assistant normally discovers the module automatically, so no IP address
+   is required.
+
+Component documentation and all YAML options:
+**[Wavin AHC9000 V4 setup](https://github.com/nic6911/esphome_components/blob/main/components/wavinahc9000v4/README.md)**
+
+For Rev1, use the same component setup but change `flow_control_pin` to
+`GPIO10`.
+
 ## Connecting the Module
 
 ### Compatibility Notes
