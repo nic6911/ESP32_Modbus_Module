@@ -69,7 +69,7 @@ integration. It is already configured for the Rev2 flow-control pin (`GPIO3`).
    is required.
 
 Component documentation and all YAML options:
-**[Wavin AHC9000 V4 setup](https://github.com/nic6911/esphome_components/blob/main/components/wavinahc9000v4/README.md)**
+**[Wavin AHC9000 V4 setup](https://github.com/heinekmadsen/esphome_components/blob/main/components/wavinahc9000v4/README.md)**
 
 For Rev1, use the same component setup but change `flow_control_pin` to
 `GPIO10`.
