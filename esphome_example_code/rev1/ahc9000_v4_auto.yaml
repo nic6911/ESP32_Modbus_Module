@@ -1,0 +1,89 @@
+esphome:
+  name: wavin-ahc9000
+  friendly_name: Wavin AHC9000
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/heinekmadsen/esphome_components
+      ref: "1.0.2-stable"
+      path: components
+    components: [wavinahc9000v4]
+    refresh: 0s
+
+logger:
+  baud_rate: 0
+
+uart:
+  id: uart_wavin
+  tx_pin: GPIO21
+  rx_pin: GPIO20
+  baud_rate: 38400
+  stop_bits: 1
+  parity: NONE
+
+wavinahc9000v4:
+  id: wavin
+  uart_id: uart_wavin
+  flow_control_pin: GPIO10
+  update_interval: 5s
+  auto_zones: true
+  auto_zone_scan_interval: 30s
+  poll_channels_per_cycle: 2
+  allow_mode_writes: true
+
+text_sensor:
+  - platform: wavinahc9000v4
+    wavinahc9000v4_id: wavin
+    name: "Wavin Zone Topology"
+    type: topology
+
+api:
+  services:
+    - service: wavin_zone_set_target
+      variables:
+        zone: int
+        temperature: float
+      then:
+        - lambda: 'id(wavin).zone_set_target(zone, temperature);'
+
+    - service: wavin_zone_set_mode
+      variables:
+        zone: int
+        turn_off: bool
+      then:
+        - lambda: 'id(wavin).zone_set_hvac_mode(zone, turn_off);'
+
+    - service: wavin_zone_set_child_lock
+      variables:
+        zone: int
+        enabled: bool
+      then:
+        - lambda: 'id(wavin).zone_set_child_lock(zone, enabled);'
+
+    - service: wavin_zone_set_sync
+      variables:
+        enabled: bool
+      then:
+        - lambda: 'id(wavin).zone_set_sync(enabled);'
+
+    - service: wavin_zone_discover
+      then:
+        - lambda: 'id(wavin).publish_topology();'
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "Wavin Fallback Hotspot"
+    password: ""
+
+captive_portal:
+
+ota:
+  - platform: esphome
