@@ -89,6 +89,30 @@ after flashing.
 Component documentation and YAML options:
 **[Wavin Sentio V2 setup](https://github.com/heinekmadsen/esphome_components/blob/main/components/sentiov2/README.md)**
 
+## Nilan ventilation automatic detection
+
+For Nilan CTS602, CTS602 Light and CTS400 ventilation units, use the
+automatic detection and commissioning configuration:
+
+- **Rev1 (direction pin GPIO10):** [nilan_ventilation_auto.yaml](esphome_example_code/rev1/nilan_ventilation_auto.yaml)
+- **Rev2 (direction pin GPIO3):** [nilan_ventilation_auto.yaml](esphome_example_code/rev2/nilan_ventilation_auto.yaml)
+
+The firmware detects the controller, model and capabilities, prunes registers the
+unit does not support and publishes topology/values/status for the companion
+Home Assistant integration. The Nilan bus runs at `19200` baud, 8 data bits, even
+parity, 1 stop bit and Modbus address `30`.
+
+Install the
+**[Nilan Ventilation integration](https://github.com/nic6911/ha-nilan-ventilation)**
+after flashing. Home Assistant normally discovers the module automatically, so
+no IP address is required.
+
+Component documentation and YAML options (currently on the testing branch):
+**[auto_nilan setup](https://github.com/nic6911/esphome_components/blob/feature/nilan_auto_discovery/components/auto_nilan/README.md)**
+
+The older manual examples (`nilan602.yaml`, `Nilan_cts400.yaml`,
+`Nilan_example.yaml`) remain for legacy setups.
+
 ## Connecting the Module
 
 ### Compatibility Notes

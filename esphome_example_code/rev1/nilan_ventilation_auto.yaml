@@ -1,0 +1,99 @@
+# Nilan ventilation - automatic detection and commissioning
+# ESP32 Modbus Module Rev1 (RS-485 direction pin GPIO10)
+#
+# Flashes the auto_nilan firmware and publishes topology/values/status for the
+# Nilan Ventilation Home Assistant integration.
+# Firmware docs: https://github.com/nic6911/esphome_components/blob/feature/nilan_auto_discovery/components/auto_nilan/README.md
+# Integration:  https://github.com/nic6911/ha-nilan-ventilation
+
+esphome:
+  name: nilan-ventilation
+  friendly_name: Nilan Ventilation
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+logger:
+  baud_rate: 0
+  level: INFO
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/nic6911/esphome_components
+      ref: feature/nilan_auto_discovery
+      path: components
+    components: [auto_nilan]
+    refresh: 0s
+
+uart:
+  id: modbus_uart
+  tx_pin: GPIO21
+  rx_pin: GPIO20
+  baud_rate: 19200
+  stop_bits: 1
+  parity: EVEN
+  flow_control_pin: GPIO10
+
+auto_nilan:
+  id: nilan
+  uart_id: modbus_uart
+  address: 30
+  update_interval: 10s
+
+text_sensor:
+  - platform: auto_nilan
+    auto_nilan_id: nilan
+    type: topology
+    name: "Nilan Topology"
+  - platform: auto_nilan
+    auto_nilan_id: nilan
+    type: values
+    name: "Nilan Values"
+  - platform: auto_nilan
+    auto_nilan_id: nilan
+    type: status
+    name: "Nilan Status"
+
+button:
+  - platform: auto_nilan
+    auto_nilan_id: nilan
+    action: commission
+    name: "Nilan Commission"
+  - platform: auto_nilan
+    auto_nilan_id: nilan
+    action: reset_alarm
+    name: "Nilan Reset Alarm"
+
+api:
+  services:
+    - service: nilan_commission
+      then:
+        - lambda: 'id(nilan).commission();'
+    - service: nilan_write_point
+      variables:
+        key: string
+        value: float
+      then:
+        - lambda: |-
+            std::string err;
+            if (!id(nilan).write_point(key, value, &err))
+              ESP_LOGW("nilan", "write_point failed: %s", err.c_str());
+    - service: nilan_reset_alarm
+      then:
+        - lambda: 'id(nilan).reset_alarm();'
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "Nilan Fallback Hotspot"
+
+captive_portal:
+
+ota:
+  - platform: esphome
+
+safe_mode:
