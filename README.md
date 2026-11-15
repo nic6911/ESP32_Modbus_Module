@@ -64,7 +64,7 @@ integration. It is already configured for the Rev2 flow-control pin (`GPIO3`).
    [Connecting the Module](#connecting-the-module).
 2. Flash `ahc9000_v4_auto.yaml` with ESPHome.
 3. Install the
-   **[Wavin AHC9000 Zones integration](https://github.com/nic6911/ha-Wavin-AHC9000-Zones)**.
+   **[Wavin Floor Heating integration](https://github.com/nic6911/ha-wavin-floor-heating)**.
    Home Assistant normally discovers the module automatically, so no IP address
    is required.
 
@@ -73,6 +73,21 @@ Component documentation and all YAML options:
 
 For Rev1, use the same component setup but change `flow_control_pin` to
 `GPIO10`.
+
+## Wavin Sentio automatic rooms
+
+For the Wavin Sentio, use the automatic room-discovery configuration:
+
+- **Rev2:** [WavinSentioV2_example.yaml](esphome_example_code/rev2/WavinSentioV2_example.yaml)
+- **Rev1:** [WavinSentioV2_example.yaml](esphome_example_code/rev1/WavinSentioV2_example.yaml)
+
+It uses the `sentiov2` component and publishes a topology text sensor for the
+same Home Assistant integration. Install the
+**[Wavin Floor Heating integration](https://github.com/nic6911/ha-wavin-floor-heating)**
+after flashing.
+
+Component documentation and YAML options:
+**[Wavin Sentio V2 setup](https://github.com/heinekmadsen/esphome_components/blob/main/components/sentiov2/README.md)**
 
 ## Connecting the Module
 

@@ -1,0 +1,99 @@
+########################################################################################
+#                                                                                      #
+#      WAVIN SENTIO FLOOR HEATING CONTROLLER SOFTWARE FOR HOME ASSISTANT               #
+#                                                                                      #
+#  Automatic room discovery using the sentiov2 component.                              #
+#  Home Assistant integration: https://github.com/nic6911/ha-wavin-floor-heating       #
+#                                                                                      #
+#  Hardware: ESP32 Modbus Module Rev1                                                  #
+#                                                                                      #
+########################################################################################
+
+esphome:
+  name: wavin-sentio
+  friendly_name: Wavin Sentio
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+external_components:
+  - source: github://heinekmadsen/esphome_components@1.0.3-stable
+    components: [sentiov2]
+    refresh: 0s
+
+logger:
+  baud_rate: 0
+
+uart:
+  id: uart_sentio
+  tx_pin: GPIO21
+  rx_pin: GPIO20
+  baud_rate: 19200
+  stop_bits: 1
+  parity: NONE
+
+sentiov2:
+  id: sentio
+  uart_id: uart_sentio
+  flow_control_pin: GPIO10
+  address: 1
+  update_interval: 10s
+
+text_sensor:
+  - platform: sentiov2
+    sentiov2_id: sentio
+    name: "Wavin Sentio Topology"
+    type: topology
+
+api:
+  services:
+    - service: sentio_zone_set_target
+      variables:
+        zone: int
+        temperature: float
+      then:
+        - lambda: 'id(sentio).zone_set_target(zone, temperature);'
+
+    - service: sentio_zone_set_mode
+      variables:
+        zone: int
+        turn_off: bool
+      then:
+        - lambda: 'id(sentio).zone_set_hvac_mode(zone, turn_off);'
+
+    - service: sentio_zone_set_child_lock
+      variables:
+        zone: int
+        enabled: bool
+      then:
+        - lambda: 'id(sentio).zone_set_child_lock(zone, enabled);'
+
+    - service: sentio_zone_set_vacation
+      variables:
+        enabled: bool
+      then:
+        - lambda: 'id(sentio).zone_set_vacation(enabled);'
+
+    - service: sentio_zone_set_sync
+      variables:
+        enabled: bool
+      then:
+        - lambda: 'id(sentio).zone_set_sync(enabled);'
+
+    - service: sentio_zone_discover
+      then:
+        - lambda: 'id(sentio).publish_topology();'
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "Wavin Fallback Hotspot"
+    password: ""
+
+captive_portal:
+
+ota:
+  - platform: esphome
