@@ -11,7 +11,7 @@ external_components:
   - source:
       type: git
       url: https://github.com/heinekmadsen/esphome_components
-      ref: "1.0.2-stable"
+      ref: "1.0.4-stable"
       path: components
     components: [wavinahc9000v4]
     refresh: 0s
@@ -71,6 +71,27 @@ api:
         enabled: bool
       then:
         - lambda: 'id(wavin).zone_set_sync(enabled);'
+
+    - service: wavin_zone_set_floor_min
+      variables:
+        zone: int
+        temperature: float
+      then:
+        - lambda: 'id(wavin).zone_set_floor_min(zone, temperature);'
+
+    - service: wavin_zone_set_floor_max
+      variables:
+        zone: int
+        temperature: float
+      then:
+        - lambda: 'id(wavin).zone_set_floor_max(zone, temperature);'
+
+    - service: wavin_zone_set_floor_enabled
+      variables:
+        zone: int
+        enabled: bool
+      then:
+        - lambda: 'id(wavin).zone_set_floor_enabled(zone, enabled);'
 
     - service: wavin_zone_discover
       then:
