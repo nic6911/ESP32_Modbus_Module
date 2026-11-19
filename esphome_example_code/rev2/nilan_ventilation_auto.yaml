@@ -22,8 +22,7 @@ logger:
 external_components:
   - source:
       type: git
-      url: https://github.com/nic6911/esphome_components
-      ref: feature/nilan_auto_discovery
+      url: https://github.com/heinekmadsen/esphome_components
       path: components
     components: [auto_nilan]
     refresh: 0s
