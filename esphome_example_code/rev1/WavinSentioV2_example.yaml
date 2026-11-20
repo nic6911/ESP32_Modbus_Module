@@ -19,9 +19,8 @@ esp32:
     type: arduino
 
 external_components:
-  - source: github://heinekmadsen/esphome_components@1.0.3-stable
+  - source: github://heinekmadsen/esphome_components
     components: [sentiov2]
-    refresh: 0s
 
 logger:
   baud_rate: 0

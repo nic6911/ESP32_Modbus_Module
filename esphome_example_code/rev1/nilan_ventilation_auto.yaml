@@ -3,7 +3,7 @@
 #
 # Flashes the auto_nilan firmware and publishes topology/values/status for the
 # Nilan Ventilation Home Assistant integration.
-# Firmware docs: https://github.com/nic6911/esphome_components/blob/feature/nilan_auto_discovery/components/auto_nilan/README.md
+# Firmware docs: https://github.com/nic6911/esphome_components/blob/main/components/auto_nilan/README.md
 # Integration:  https://github.com/nic6911/ha-nilan-ventilation
 
 esphome:
