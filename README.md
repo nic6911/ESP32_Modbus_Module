@@ -30,24 +30,20 @@ The module is flexible and can be adapted for other Modbus applications, althoug
 
 ---
 
-## December 2025 - Hardware update !
-Please be advised that the hardware have been updated with the major changes that the 2 x optocoupler outputs have been removed (legacy functionality), the 2 x pin rows are gone and the flow-control pin has been rewired to GPIO3. Nothing that impacts or degrades performance !
+## Rev2 hardware
 
-For the adapted code (adjusted flow-control pin) look here: [rev2](esphome_example_code/rev2)
+The 2 x optocoupler outputs have been removed (legacy functionality), the 2 x pin
+rows are gone, and the flow-control pin is GPIO3.
 
-If you have a rev2 - it'll look like this:
+The Rev2 code is here: [rev2](esphome_example_code/rev2)
+
+Using the older Rev1 board? The Rev1 example code (flow-control pin `GPIO10`) is still available in [esphome_example_code/rev1](esphome_example_code/rev1).
 
 ![Case](/case/case_rev2.png)
 
 ![Topview](/electronics/top_rev2.png)
 
 ![Schematic](/electronics/schematicsC3_Rev2.png)
-
-If you have a rev1 - it'll look like this:
-
-![Case](/case/case_rev1.png)
-
-And the right code (GPIO10 flow-control pin) is here: [rev1](esphome_example_code/rev1)
 
 ## Wavin AHC9000 automatic zones
 
@@ -71,15 +67,11 @@ integration. It is already configured for the Rev2 flow-control pin (`GPIO3`).
 Component documentation and all YAML options:
 **[Wavin AHC9000 V4 setup](https://github.com/heinekmadsen/esphome_components/blob/main/components/wavinahc9000v4/README.md)**
 
-For Rev1, use the same component setup but change `flow_control_pin` to
-`GPIO10`.
-
 ## Wavin Sentio automatic rooms
 
 For the Wavin Sentio, use the automatic room-discovery configuration:
 
-- **Rev2:** [WavinSentioV2_example.yaml](esphome_example_code/rev2/WavinSentioV2_example.yaml)
-- **Rev1:** [WavinSentioV2_example.yaml](esphome_example_code/rev1/WavinSentioV2_example.yaml)
+Configuration: **[WavinSentioV2_example.yaml](esphome_example_code/rev2/WavinSentioV2_example.yaml)**
 
 It uses the `sentiov2` component and publishes a topology text sensor for the
 same Home Assistant integration. Install the
@@ -98,8 +90,7 @@ automatic detection and commissioning configuration.
 the exact cable and pinout for the Rev2 module, see the dedicated
 **[Nilan connection guide](docs/nilan-connection-guide.md)**.
 
-- **Rev1 (direction pin GPIO10):** [nilan_ventilation_auto.yaml](esphome_example_code/rev1/nilan_ventilation_auto.yaml)
-- **Rev2 (direction pin GPIO3):** [nilan_ventilation_auto.yaml](esphome_example_code/rev2/nilan_ventilation_auto.yaml)
+Configuration: **[nilan_ventilation_auto.yaml](esphome_example_code/rev2/nilan_ventilation_auto.yaml)**
 
 The firmware detects the controller, model and capabilities, prunes registers the
 unit does not support and publishes topology/values/status for the companion
@@ -119,13 +110,7 @@ The older manual examples (`nilan602.yaml`, `Nilan_cts400.yaml`,
 
 ## Connecting the Module
 
-### Compatibility Notes
-
-- **Wavin AHC9000/Sentio**: the module's RJ45 socket is wired for these devices. Use a straight patch cable.
-- **Nilan CTS400 / CTS602 / CTS602 Light**: the module's RJ45 socket is **not** wired like the Nilan RJ45 port. A straight patch cable will **not** work. See the **[Nilan connection guide](docs/nilan-connection-guide.md)** for the exact cut-and-wire recipe for your connector.
-- Other devices use the module's A/B/GND connections as shown in their own wiring examples.
-
-### Wiring Information
+### General connector layout
 
 The module's RJ45 socket uses the Wavin pinout:
 
@@ -141,13 +126,37 @@ Power the module with **USB-C**, or with **5–24 V DC** on pins 7/8. Do not use
 
 ![Connections](/electronics/connection.png)
 
-> **Nilan:** do not connect a straight cable between a Nilan RJ45 port and the module. Follow the **[Nilan connection guide](docs/nilan-connection-guide.md)**.
+### Compatibility notes
 
-#### A wiring example on an EM340 modbus power meter is shown here:
+| Device | Connection |
+|---|---|
+| Wavin AHC9000 / Sentio | Straight RJ45 patch cable. The Wavin display must be disconnected because it is also a Modbus master. |
+| Nilan CTS400 / CTS602 / CTS602 Light | The module's RJ45 is **not** the Nilan pinout. Use the **[Nilan connection guide](docs/nilan-connection-guide.md)**. |
+| EM340 | Connect A/B/GND as shown below. |
+| Nibe F1255 | Connect A/B/GND as shown below. |
+
+### Wavin AHC9000 / Sentio
+
+Use a **straight RJ45 patch cable** between the Wavin Modbus port and the module.
+
+> **Only one Modbus master is allowed on the bus.** Disconnect the Wavin display/controller before connecting the module, because the display also acts as a Modbus master. The module must be the only master.
+
+For the ready-made configurations, see [Wavin AHC9000 automatic zones](#wavin-ahc9000-automatic-zones) and [Wavin Sentio automatic rooms](#wavin-sentio-automatic-rooms).
+
+### Nilan
+
+The module's RJ45 socket is **not** wired like a Nilan RJ45 port. A straight patch cable will **not** work. Use the dedicated **[Nilan connection guide](docs/nilan-connection-guide.md)** for the exact cable and pinout for CTS400, CTS602 and CTS602 Light.
+
+### EM340
+
+A wiring example on an EM340 Modbus power meter:
+
 ![Connections](/electronics/EM340_connection.png)
 
+### Nibe F1255
 
-#### A Nibe Heat Pump modbus interface is shown here:
+A Nibe heat pump Modbus interface:
+
 ![Connections](/electronics/nibe_modbus_connection.png)
 
 ---

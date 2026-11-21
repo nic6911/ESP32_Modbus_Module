@@ -47,8 +47,6 @@ The Rev2 module has:
 - one **RJ45** socket (Modbus + power input)
 - one **USB-C** socket (power and flashing)
 
-The older Rev1 board had a 2×4 pin header. **This guide does not use that header**, and it does not apply to Rev1.
-
 ### Tools
 
 - Side cutters and wire strippers
