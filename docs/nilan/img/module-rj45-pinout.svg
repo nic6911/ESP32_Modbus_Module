@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 780" font-family="Arial, Helvetica, sans-serif">
+  <rect width="1100" height="780" fill="#ffffff"/>
+  <text x="40" y="52" font-size="32" font-weight="bold" fill="#1a1a1a">ESP32 Modbus module — RJ45 pinout (Rev2)</text>
+  <text x="40" y="86" font-size="19" fill="#b00020" font-weight="bold">This is a Wavin pinout. It is not a Nilan pinout and not a normal Ethernet pinout.</text>
+
+  <rect x="70" y="130" width="170" height="510" rx="12" fill="#eef3f7" stroke="#7a8a99" stroke-width="2"/>
+  <text x="155" y="158" text-anchor="middle" font-size="16" fill="#52616b">RJ45 socket</text>
+
+  <!-- pin 1 -->
+  <text x="50" y="213" font-size="20" font-weight="bold" fill="#1a1a1a">1</text>
+  <rect x="92" y="190" width="126" height="34" rx="4" fill="#f5c46b" stroke="#b98a2e"/>
+  <rect x="92" y="190" width="126" height="8" rx="4" fill="#ffffff" opacity="0.8"/>
+  <text x="238" y="214" font-size="21" font-weight="bold" fill="#1a1a1a">GND</text>
+  <text x="420" y="214" font-size="18" fill="#52616b">orange/white · GND</text>
+
+  <!-- pin 2 -->
+  <text x="50" y="271" font-size="20" font-weight="bold" fill="#1a1a1a">2</text>
+  <rect x="92" y="248" width="126" height="34" rx="4" fill="#f5a623" stroke="#b97a10"/>
+  <text x="238" y="272" font-size="21" font-weight="bold" fill="#1a1a1a">GND</text>
+  <text x="420" y="272" font-size="18" fill="#52616b">orange · GND</text>
+
+  <!-- pin 3 -->
+  <text x="50" y="329" font-size="20" font-weight="bold" fill="#1a1a1a">3</text>
+  <rect x="92" y="306" width="126" height="34" rx="4" fill="#a5d6a7" stroke="#4b8b4f"/>
+  <rect x="92" y="306" width="126" height="8" rx="4" fill="#ffffff" opacity="0.8"/>
+  <text x="238" y="330" font-size="21" font-weight="bold" fill="#1a1a1a">B (Modbus−)</text>
+  <text x="420" y="330" font-size="18" fill="#52616b">green/white · Data−</text>
+
+  <!-- pin 4 -->
+  <text x="50" y="387" font-size="20" font-weight="bold" fill="#1a1a1a">4</text>
+  <rect x="92" y="364" width="126" height="34" rx="4" fill="#90caf9" stroke="#4a7fa5"/>
+  <rect x="92" y="364" width="126" height="8" rx="4" fill="#ffffff" opacity="0.8"/>
+  <text x="238" y="388" font-size="21" font-weight="bold" fill="#8a8a8a">not used</text>
+  <text x="420" y="388" font-size="18" fill="#8a8a8a">blue · unused</text>
+
+  <!-- pin 5 -->
+  <text x="50" y="445" font-size="20" font-weight="bold" fill="#1a1a1a">5</text>
+  <rect x="92" y="422" width="126" height="34" rx="4" fill="#2196f3" stroke="#1565a8"/>
+  <text x="238" y="446" font-size="21" font-weight="bold" fill="#8a8a8a">not used</text>
+  <text x="420" y="446" font-size="18" fill="#8a8a8a">blue/white · unused</text>
+
+  <!-- pin 6 -->
+  <text x="50" y="503" font-size="20" font-weight="bold" fill="#1a1a1a">6</text>
+  <rect x="92" y="480" width="126" height="34" rx="4" fill="#4caf50" stroke="#2e7d32"/>
+  <text x="238" y="504" font-size="21" font-weight="bold" fill="#1a1a1a">A (Modbus+)</text>
+  <text x="420" y="504" font-size="18" fill="#52616b">green · Data+</text>
+
+  <!-- pin 7 -->
+  <text x="50" y="561" font-size="20" font-weight="bold" fill="#1a1a1a">7</text>
+  <rect x="92" y="538" width="126" height="34" rx="4" fill="#bcaaa4" stroke="#7d5f56"/>
+  <rect x="92" y="538" width="126" height="8" rx="4" fill="#ffffff" opacity="0.8"/>
+  <text x="238" y="562" font-size="21" font-weight="bold" fill="#1a1a1a">+12 V input</text>
+  <text x="420" y="562" font-size="18" fill="#52616b">brown/white · 5–24 V</text>
+
+  <!-- pin 8 -->
+  <text x="50" y="619" font-size="20" font-weight="bold" fill="#1a1a1a">8</text>
+  <rect x="92" y="596" width="126" height="34" rx="4" fill="#795548" stroke="#4e342e"/>
+  <text x="238" y="620" font-size="21" font-weight="bold" fill="#1a1a1a">+12 V input</text>
+  <text x="420" y="620" font-size="18" fill="#52616b">brown · 5–24 V</text>
+
+  <rect x="620" y="130" width="430" height="250" rx="12" fill="#fff4f4" stroke="#d32f2f" stroke-width="2"/>
+  <text x="646" y="168" font-size="21" font-weight="bold" fill="#b00020">Do not use a straight cable</text>
+  <text x="646" y="202" font-size="17" fill="#5c1b1b">A straight RJ45 cable connects Nilan</text>
+  <text x="646" y="228" font-size="17" fill="#5c1b1b">A/B on pins 4 and 5. The module expects</text>
+  <text x="646" y="254" font-size="17" fill="#5c1b1b">A/B on pins 6 and 3.</text>
+  <text x="646" y="292" font-size="17" fill="#5c1b1b">Result: no communication.</text>
+  <text x="646" y="330" font-size="17" font-weight="bold" fill="#b00020">Use the crossover cable in this guide.</text>
+
+  <rect x="620" y="404" width="430" height="236" rx="12" fill="#f2f7fb" stroke="#0085CA" stroke-width="2"/>
+  <text x="646" y="442" font-size="21" font-weight="bold" fill="#005b8f">Remember</text>
+  <text x="646" y="478" font-size="17" fill="#20313b">• Pins 1 and 2 are the same GND.</text>
+  <text x="646" y="508" font-size="17" fill="#20313b">• Pins 7 and 8 are the same +12 V input.</text>
+  <text x="646" y="538" font-size="17" fill="#20313b">• One wire on each is enough; two is better.</text>
+  <text x="646" y="568" font-size="17" fill="#20313b">• Pins 4 and 5 are not Modbus.</text>
+  <text x="646" y="598" font-size="17" fill="#20313b">• The module has an onboard 120 Ω resistor.</text>
+
+  <text x="40" y="700" font-size="16" fill="#52616b">Wire colours shown are for a T568B cable. For a T568A cable, see the colour table in the guide.</text>
+  <text x="40" y="728" font-size="16" fill="#52616b">Module Rev2 has one RJ45 socket and one USB-C socket. There is no pin header.</text>
+  <text x="40" y="756" font-size="16" fill="#52616b">ESP32 Modbus Module · Nilan connection guide</text>
+</svg>

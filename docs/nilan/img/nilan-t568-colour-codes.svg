@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 780" font-family="Arial, Helvetica, sans-serif">
+  <rect width="1100" height="780" fill="#ffffff"/>
+  <text x="40" y="52" font-size="32" font-weight="bold" fill="#1a1a1a">T568A and T568B wire colours</text>
+  <text x="40" y="84" font-size="19" fill="#52616b">The module uses RJ45 pin numbers, not colours. Identify your cable before you cut it.</text>
+
+  <!-- T568A -->
+  <rect x="50" y="120" width="480" height="560" rx="12" fill="#f4f8f4" stroke="#7a9a7a" stroke-width="2"/>
+  <text x="290" y="156" text-anchor="middle" font-size="23" font-weight="bold" fill="#2e5d2e">T568A</text>
+  <text x="290" y="184" text-anchor="middle" font-size="16" fill="#52616b">Pin 1 is on the left, clip away from you.</text>
+
+  <text x="80" y="226" font-size="16" font-weight="bold" fill="#1a1a1a">Pin</text>
+  <text x="130" y="226" font-size="16" font-weight="bold" fill="#1a1a1a">Wire</text>
+  <text x="300" y="226" font-size="16" font-weight="bold" fill="#1a1a1a">Module function</text>
+
+  <text x="80" y="266" font-size="17" font-weight="bold" fill="#1a1a1a">1</text>
+  <rect x="120" y="246" width="120" height="24" rx="4" fill="#a5d6a7" stroke="#4b8b4f"/>
+  <text x="260" y="264" font-size="16" fill="#1a1a1a">green/white</text>
+  <text x="400" y="264" font-size="16" font-weight="bold" fill="#1a1a1a">GND</text>
+
+  <text x="80" y="306" font-size="17" font-weight="bold" fill="#1a1a1a">2</text>
+  <rect x="120" y="286" width="120" height="24" rx="4" fill="#4caf50" stroke="#2e7d32"/>
+  <text x="260" y="304" font-size="16" fill="#1a1a1a">green</text>
+  <text x="400" y="304" font-size="16" font-weight="bold" fill="#1a1a1a">GND</text>
+
+  <text x="80" y="346" font-size="17" font-weight="bold" fill="#1a1a1a">3</text>
+  <rect x="120" y="326" width="120" height="24" rx="4" fill="#f5c46b" stroke="#b98a2e"/>
+  <text x="260" y="344" font-size="16" fill="#1a1a1a">orange/white</text>
+  <text x="400" y="344" font-size="16" font-weight="bold" fill="#1a1a1a">B (Modbus−)</text>
+
+  <text x="80" y="386" font-size="17" fill="#9e9e9e">4</text>
+  <rect x="120" y="366" width="120" height="24" rx="4" fill="#90caf9" stroke="#4a7fa5"/>
+  <text x="260" y="384" font-size="16" fill="#9e9e9e">blue</text>
+  <text x="400" y="384" font-size="16" fill="#9e9e9e">not used</text>
+
+  <text x="80" y="426" font-size="17" fill="#9e9e9e">5</text>
+  <rect x="120" y="406" width="120" height="24" rx="4" fill="#2196f3" stroke="#1565a8"/>
+  <text x="260" y="424" font-size="16" fill="#9e9e9e">blue/white</text>
+  <text x="400" y="424" font-size="16" fill="#9e9e9e">not used</text>
+
+  <text x="80" y="466" font-size="17" font-weight="bold" fill="#1a1a1a">6</text>
+  <rect x="120" y="446" width="120" height="24" rx="4" fill="#f5a623" stroke="#b97a10"/>
+  <text x="260" y="464" font-size="16" fill="#1a1a1a">orange</text>
+  <text x="400" y="464" font-size="16" font-weight="bold" fill="#1a1a1a">A (Modbus+)</text>
+
+  <text x="80" y="506" font-size="17" font-weight="bold" fill="#1a1a1a">7</text>
+  <rect x="120" y="486" width="120" height="24" rx="4" fill="#bcaaa4" stroke="#7d5f56"/>
+  <text x="260" y="504" font-size="16" fill="#1a1a1a">brown/white</text>
+  <text x="400" y="504" font-size="16" font-weight="bold" fill="#1a1a1a">+12 V</text>
+
+  <text x="80" y="546" font-size="17" font-weight="bold" fill="#1a1a1a">8</text>
+  <rect x="120" y="526" width="120" height="24" rx="4" fill="#795548" stroke="#4e342e"/>
+  <text x="260" y="544" font-size="16" fill="#1a1a1a">brown</text>
+  <text x="400" y="544" font-size="16" font-weight="bold" fill="#1a1a1a">+12 V</text>
+
+  <text x="80" y="610" font-size="15" fill="#52616b">A T568A cable starts with green/white on pin 1.</text>
+  <text x="80" y="636" font-size="15" fill="#52616b">Nilan's gateway manual uses T568A colours.</text>
+
+  <!-- T568B -->
+  <rect x="570" y="120" width="480" height="560" rx="12" fill="#f4f6fb" stroke="#7a86a0" stroke-width="2"/>
+  <text x="810" y="156" text-anchor="middle" font-size="23" font-weight="bold" fill="#244a7a">T568B</text>
+  <text x="810" y="184" text-anchor="middle" font-size="16" fill="#52616b">Pin 1 is on the left, clip away from you.</text>
+
+  <text x="600" y="226" font-size="16" font-weight="bold" fill="#1a1a1a">Pin</text>
+  <text x="650" y="226" font-size="16" font-weight="bold" fill="#1a1a1a">Wire</text>
+  <text x="820" y="226" font-size="16" font-weight="bold" fill="#1a1a1a">Module function</text>
+
+  <text x="600" y="266" font-size="17" font-weight="bold" fill="#1a1a1a">1</text>
+  <rect x="640" y="246" width="120" height="24" rx="4" fill="#f5c46b" stroke="#b98a2e"/>
+  <text x="780" y="264" font-size="16" fill="#1a1a1a">orange/white</text>
+  <text x="920" y="264" font-size="16" font-weight="bold" fill="#1a1a1a">GND</text>
+
+  <text x="600" y="306" font-size="17" font-weight="bold" fill="#1a1a1a">2</text>
+  <rect x="640" y="286" width="120" height="24" rx="4" fill="#f5a623" stroke="#b97a10"/>
+  <text x="780" y="304" font-size="16" fill="#1a1a1a">orange</text>
+  <text x="920" y="304" font-size="16" font-weight="bold" fill="#1a1a1a">GND</text>
+
+  <text x="600" y="346" font-size="17" font-weight="bold" fill="#1a1a1a">3</text>
+  <rect x="640" y="326" width="120" height="24" rx="4" fill="#a5d6a7" stroke="#4b8b4f"/>
+  <text x="780" y="344" font-size="16" fill="#1a1a1a">green/white</text>
+  <text x="920" y="344" font-size="16" font-weight="bold" fill="#1a1a1a">B (Modbus−)</text>
+
+  <text x="600" y="386" font-size="17" fill="#9e9e9e">4</text>
+  <rect x="640" y="366" width="120" height="24" rx="4" fill="#90caf9" stroke="#4a7fa5"/>
+  <text x="780" y="384" font-size="16" fill="#9e9e9e">blue</text>
+  <text x="920" y="384" font-size="16" fill="#9e9e9e">not used</text>
+
+  <text x="600" y="426" font-size="17" fill="#9e9e9e">5</text>
+  <rect x="640" y="406" width="120" height="24" rx="4" fill="#2196f3" stroke="#1565a8"/>
+  <text x="780" y="424" font-size="16" fill="#9e9e9e">blue/white</text>
+  <text x="920" y="424" font-size="16" fill="#9e9e9e">not used</text>
+
+  <text x="600" y="466" font-size="17" font-weight="bold" fill="#1a1a1a">6</text>
+  <rect x="640" y="446" width="120" height="24" rx="4" fill="#4caf50" stroke="#2e7d32"/>
+  <text x="780" y="464" font-size="16" fill="#1a1a1a">green</text>
+  <text x="920" y="464" font-size="16" font-weight="bold" fill="#1a1a1a">A (Modbus+)</text>
+
+  <text x="600" y="506" font-size="17" font-weight="bold" fill="#1a1a1a">7</text>
+  <rect x="640" y="486" width="120" height="24" rx="4" fill="#bcaaa4" stroke="#7d5f56"/>
+  <text x="780" y="504" font-size="16" fill="#1a1a1a">brown/white</text>
+  <text x="920" y="504" font-size="16" font-weight="bold" fill="#1a1a1a">+12 V</text>
+
+  <text x="600" y="546" font-size="17" font-weight="bold" fill="#1a1a1a">8</text>
+  <rect x="640" y="526" width="120" height="24" rx="4" fill="#795548" stroke="#4e342e"/>
+  <text x="780" y="544" font-size="16" fill="#1a1a1a">brown</text>
+  <text x="920" y="544" font-size="16" font-weight="bold" fill="#1a1a1a">+12 V</text>
+
+  <text x="600" y="610" font-size="15" fill="#52616b">A T568B cable starts with orange/white on pin 1.</text>
+  <text x="600" y="636" font-size="15" fill="#52616b">This is the most common patch cable.</text>
+
+  <rect x="50" y="700" width="1000" height="56" rx="10" fill="#fff8e1" stroke="#e0a800" stroke-width="2"/>
+  <text x="74" y="735" font-size="17" font-weight="bold" fill="#7a5200">If you are unsure which standard your cable uses, stop and check with a multimeter or use a known T568B patch cable.</text>
+</svg>

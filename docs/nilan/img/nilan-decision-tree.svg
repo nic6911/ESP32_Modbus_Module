@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 900" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#52616b"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="900" fill="#ffffff"/>
+  <text x="40" y="52" font-size="32" font-weight="bold" fill="#1a1a1a">Which Nilan connection do you have?</text>
+  <text x="40" y="84" font-size="19" fill="#52616b">Find the physical Modbus connection on the unit, then follow the matching recipe.</text>
+
+  <rect x="330" y="110" width="440" height="70" rx="12" fill="#e8f3fb" stroke="#0085CA" stroke-width="2"/>
+  <text x="550" y="153" text-anchor="middle" font-size="21" font-weight="bold" fill="#005b8f">Look at the Modbus connection on the unit</text>
+
+  <!-- column 1: RJ45 -->
+  <path d="M 400 180 C 300 210, 160 220, 150 270" fill="none" stroke="#52616b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="20" y="280" width="240" height="60" rx="10" fill="#f4f6f8" stroke="#7a8a99" stroke-width="2"/>
+  <text x="140" y="316" text-anchor="middle" font-size="19" font-weight="bold" fill="#1a1a1a">RJ45 socket</text>
+
+  <!-- fork RJ45 into two choices -->
+  <path d="M 140 340 L 140 368" fill="none" stroke="#52616b" stroke-width="2"/>
+  <path d="M 70 368 L 210 368" fill="none" stroke="#52616b" stroke-width="2"/>
+  <path d="M 70 368 L 70 390" fill="none" stroke="#52616b" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 210 368 L 210 390" fill="none" stroke="#52616b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="15" y="395" width="110" height="80" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="70" y="423" text-anchor="middle" font-size="15" font-weight="bold" fill="#1b5e20">CTS400</text>
+  <text x="70" y="446" text-anchor="middle" font-size="13" fill="#2e5d2e">Recipe A</text>
+  <text x="70" y="465" text-anchor="middle" font-size="13" fill="#2e5d2e">USB-C</text>
+
+  <rect x="135" y="395" width="125" height="80" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="197" y="423" text-anchor="middle" font-size="14" font-weight="bold" fill="#1b5e20">CTS602 RJ45</text>
+  <text x="197" y="446" text-anchor="middle" font-size="13" fill="#2e5d2e">Recipe B</text>
+  <text x="197" y="465" text-anchor="middle" font-size="13" fill="#2e5d2e">USB-C</text>
+
+  <!-- column 2: 6-pin -->
+  <path d="M 470 180 C 420 220, 390 240, 400 280" fill="none" stroke="#52616b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="290" y="280" width="240" height="60" rx="10" fill="#f4f6f8" stroke="#7a8a99" stroke-width="2"/>
+  <text x="410" y="316" text-anchor="middle" font-size="19" font-weight="bold" fill="#1a1a1a">6-pin side plug</text>
+  <path d="M 410 340 L 410 390" fill="none" stroke="#52616b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="290" y="395" width="240" height="80" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="410" y="423" text-anchor="middle" font-size="18" font-weight="bold" fill="#1b5e20">CTS602 / 602 Light</text>
+  <text x="410" y="447" text-anchor="middle" font-size="16" fill="#2e5d2e">Recipe C</text>
+  <text x="410" y="467" text-anchor="middle" font-size="15" fill="#2e5d2e">Nilan 12 V or USB-C</text>
+
+  <!-- column 3: 8-pin -->
+  <path d="M 630 180 C 680 220, 650 240, 660 280" fill="none" stroke="#52616b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="560" y="280" width="240" height="60" rx="10" fill="#f4f6f8" stroke="#7a8a99" stroke-width="2"/>
+  <text x="680" y="316" text-anchor="middle" font-size="19" font-weight="bold" fill="#1a1a1a">8-pin side plug</text>
+  <path d="M 680 340 L 680 390" fill="none" stroke="#52616b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="560" y="395" width="240" height="80" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="680" y="423" text-anchor="middle" font-size="18" font-weight="bold" fill="#1b5e20">CTS602</text>
+  <text x="680" y="447" text-anchor="middle" font-size="16" fill="#2e5d2e">Recipe D</text>
+  <text x="680" y="467" text-anchor="middle" font-size="15" fill="#2e5d2e">Nilan 12 V or USB-C</text>
+
+  <!-- column 4: terminal -->
+  <path d="M 700 180 C 800 210, 960 220, 950 270" fill="none" stroke="#52616b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="820" y="280" width="240" height="60" rx="10" fill="#f4f6f8" stroke="#7a8a99" stroke-width="2"/>
+  <text x="940" y="316" text-anchor="middle" font-size="19" font-weight="bold" fill="#1a1a1a">Terminal block</text>
+  <path d="M 940 340 L 940 390" fill="none" stroke="#52616b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="820" y="395" width="240" height="80" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="940" y="423" text-anchor="middle" font-size="18" font-weight="bold" fill="#1b5e20">CTS602 commercial</text>
+  <text x="940" y="447" text-anchor="middle" font-size="16" fill="#2e5d2e">Recipe E</text>
+  <text x="940" y="467" text-anchor="middle" font-size="15" fill="#2e5d2e">Nilan 12 V or USB-C</text>
+
+  <!-- bottom notes -->
+  <rect x="20" y="620" width="1040" height="70" rx="10" fill="#f2f7fb" stroke="#0085CA" stroke-width="2"/>
+  <text x="44" y="650" font-size="17" font-weight="bold" fill="#005b8f">All recipes use the module's RJ45 socket. Rev2 has no pin header.</text>
+  <text x="44" y="676" font-size="16" fill="#20313b">The module's RJ45 is a Wavin pinout. A straight Nilan/Ethernet cable will not work.</text>
+
+  <rect x="20" y="720" width="1040" height="70" rx="10" fill="#fff4f4" stroke="#d32f2f" stroke-width="2"/>
+  <text x="44" y="748" font-size="18" font-weight="bold" fill="#b00020">Cannot identify the connector, or it is not one of the four types above?</text>
+  <text x="44" y="774" font-size="16" fill="#5c1b1b">Stop. Do not guess. Check the unit's own wiring diagram or contact a Nilan technician.</text>
+
+  <text x="40" y="850" font-size="16" fill="#52616b">Only CTS400, CTS602, CTS602i and CTS602 Light are covered by this guide.</text>
+</svg>

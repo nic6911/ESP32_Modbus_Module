@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="Arial, Helvetica, sans-serif">
+  <rect width="1100" height="720" fill="#ffffff"/>
+  <text x="40" y="52" font-size="32" font-weight="bold" fill="#1a1a1a">Powering the module</text>
+  <text x="40" y="84" font-size="19" fill="#52616b">Use one power source. Always connect GND between the Nilan unit and the module.</text>
+
+  <!-- USB-C -->
+  <rect x="50" y="120" width="470" height="300" rx="12" fill="#eef3f7" stroke="#7a8a99" stroke-width="2"/>
+  <text x="285" y="158" text-anchor="middle" font-size="23" font-weight="bold" fill="#005b8f">USB-C</text>
+  <text x="285" y="188" text-anchor="middle" font-size="17" fill="#52616b">Recommended for CTS400 and CTS602 RJ45</text>
+
+  <rect x="90" y="220" width="100" height="46" rx="10" fill="#cfd8dc" stroke="#607d8b" stroke-width="2"/>
+  <text x="140" y="250" text-anchor="middle" font-size="17" font-weight="bold" fill="#37474f">USB-C</text>
+  <text x="215" y="235" font-size="16" fill="#20313b">5 V phone charger works.</text>
+  <text x="215" y="262" font-size="16" fill="#20313b">No polarity to worry about.</text>
+  <text x="215" y="289" font-size="16" fill="#20313b">Still connect the GND wire.</text>
+
+  <text x="90" y="340" font-size="16" fill="#20313b">USB-C does not provide a common ground</text>
+  <text x="90" y="364" font-size="16" fill="#20313b">with the Nilan unit. The GND wire does.</text>
+  <text x="90" y="400" font-size="15" fill="#b00020">Use a good charger. A weak charger causes resets.</text>
+
+  <!-- Nilan 12V -->
+  <rect x="580" y="120" width="470" height="300" rx="12" fill="#fff8ef" stroke="#d7a86e" stroke-width="2"/>
+  <text x="815" y="158" text-anchor="middle" font-size="23" font-weight="bold" fill="#8a4b08">Nilan 12 V</text>
+  <text x="815" y="188" text-anchor="middle" font-size="17" fill="#52616b">Recommended for CTS602 6-pin and 8-pin</text>
+
+  <text x="620" y="235" font-size="17" font-weight="bold" fill="#1a1a1a">6-pin:</text>
+  <text x="730" y="235" font-size="17" fill="#20313b">pin 1 = +12 V</text>
+  <text x="620" y="268" font-size="17" font-weight="bold" fill="#1a1a1a">8-pin:</text>
+  <text x="730" y="268" font-size="17" fill="#20313b">pin 8 = +12 V</text>
+  <text x="620" y="301" font-size="17" font-weight="bold" fill="#1a1a1a">GND:</text>
+  <text x="730" y="301" font-size="17" fill="#20313b">6-pin pin 6 / 8-pin pin 1</text>
+
+  <text x="620" y="345" font-size="16" fill="#20313b">Nilan +12 V → module pins 7 and 8</text>
+  <text x="620" y="371" font-size="16" fill="#20313b">Nilan GND → module pins 1 and 2</text>
+  <text x="620" y="400" font-size="15" fill="#b00020">If the module resets or WiFi drops, use USB-C.</text>
+
+  <!-- wiring -->
+  <rect x="50" y="450" width="1000" height="90" rx="12" fill="#f4f6f8" stroke="#c9d1d9" stroke-width="2"/>
+  <text x="76" y="484" font-size="18" font-weight="bold" fill="#1a1a1a">Module RJ45 power pins</text>
+  <rect x="360" y="466" width="120" height="30" rx="5" fill="#f5c46b" stroke="#b98a2e"/>
+  <text x="420" y="487" text-anchor="middle" font-size="14" fill="#1a1a1a">1 GND</text>
+  <rect x="490" y="466" width="120" height="30" rx="5" fill="#f5a623" stroke="#b97a10"/>
+  <text x="550" y="487" text-anchor="middle" font-size="14" fill="#ffffff">2 GND</text>
+  <rect x="700" y="466" width="120" height="30" rx="5" fill="#bcaaa4" stroke="#7d5f56"/>
+  <text x="760" y="487" text-anchor="middle" font-size="14" fill="#1a1a1a">7 +12 V</text>
+  <rect x="830" y="466" width="120" height="30" rx="5" fill="#795548" stroke="#4e342e"/>
+  <text x="890" y="487" text-anchor="middle" font-size="14" fill="#ffffff">8 +12 V</text>
+  <text x="76" y="520" font-size="16" fill="#52616b">Pins 1/2 are the same GND. Pins 7/8 are the same 5–24 V input.</text>
+
+  <!-- rules -->
+  <rect x="50" y="570" width="1000" height="110" rx="12" fill="#fff4f4" stroke="#d32f2f" stroke-width="2"/>
+  <text x="76" y="604" font-size="19" font-weight="bold" fill="#b00020">Rules</text>
+  <text x="76" y="634" font-size="16" fill="#5c1b1b">• Use one power source at a time. Do not connect USB-C and 12 V together.</text>
+  <text x="76" y="660" font-size="16" fill="#5c1b1b">• Never connect 12 V to A or B. Never connect the Nilan 12 V to module pins 3 or 6.</text>
+</svg>

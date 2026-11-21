@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" font-family="Arial, Helvetica, sans-serif">
+  <rect width="1100" height="760" fill="#ffffff"/>
+  <text x="40" y="52" font-size="32" font-weight="bold" fill="#1a1a1a">CTS602 terminal block / CN7 → module RJ45</text>
+  <text x="40" y="84" font-size="19" fill="#52616b">Commercial units and direct-to-CN7 connections use the same pins as the 6-pin plug.</text>
+
+  <!-- module plug -->
+  <rect x="80" y="130" width="180" height="500" rx="12" fill="#eef3f7" stroke="#7a8a99" stroke-width="2"/>
+  <text x="170" y="162" text-anchor="middle" font-size="19" font-weight="bold" fill="#005b8f">Module RJ45 plug</text>
+
+  <text x="98" y="215" font-size="17" font-weight="bold" fill="#1a1a1a">1</text>
+  <rect x="122" y="194" width="112" height="28" rx="4" fill="#f5c46b" stroke="#b98a2e"/>
+  <text x="178" y="214" text-anchor="middle" font-size="13" fill="#1a1a1a">GND</text>
+
+  <text x="98" y="263" font-size="17" font-weight="bold" fill="#1a1a1a">2</text>
+  <rect x="122" y="242" width="112" height="28" rx="4" fill="#f5a623" stroke="#b97a10"/>
+  <text x="178" y="262" text-anchor="middle" font-size="13" fill="#ffffff">GND</text>
+
+  <text x="98" y="311" font-size="17" font-weight="bold" fill="#1a1a1a">3</text>
+  <rect x="122" y="290" width="112" height="28" rx="4" fill="#a5d6a7" stroke="#4b8b4f"/>
+  <text x="178" y="310" text-anchor="middle" font-size="13" fill="#1a1a1a">B</text>
+
+  <text x="98" y="359" font-size="17" fill="#9e9e9e">4</text>
+  <rect x="122" y="338" width="112" height="28" rx="4" fill="#e0e0e0" stroke="#bdbdbd"/>
+  <text x="178" y="358" text-anchor="middle" font-size="13" fill="#9e9e9e">not used</text>
+
+  <text x="98" y="407" font-size="17" fill="#9e9e9e">5</text>
+  <rect x="122" y="386" width="112" height="28" rx="4" fill="#e0e0e0" stroke="#bdbdbd"/>
+  <text x="178" y="406" text-anchor="middle" font-size="13" fill="#9e9e9e">not used</text>
+
+  <text x="98" y="455" font-size="17" font-weight="bold" fill="#1a1a1a">6</text>
+  <rect x="122" y="434" width="112" height="28" rx="4" fill="#4caf50" stroke="#2e7d32"/>
+  <text x="178" y="454" text-anchor="middle" font-size="13" fill="#ffffff">A</text>
+
+  <text x="98" y="503" font-size="17" font-weight="bold" fill="#1a1a1a">7</text>
+  <rect x="122" y="482" width="112" height="28" rx="4" fill="#bcaaa4" stroke="#7d5f56"/>
+  <text x="178" y="502" text-anchor="middle" font-size="13" fill="#1a1a1a">+12 V</text>
+
+  <text x="98" y="551" font-size="17" font-weight="bold" fill="#1a1a1a">8</text>
+  <rect x="122" y="530" width="112" height="28" rx="4" fill="#795548" stroke="#4e342e"/>
+  <text x="178" y="550" text-anchor="middle" font-size="13" fill="#ffffff">+12 V</text>
+
+  <!-- wires -->
+  <path d="M 234 208 C 450 208, 600 532, 790 532" fill="none" stroke="#f5c46b" stroke-width="7"/>
+  <path d="M 234 256 C 450 256, 600 532, 790 532" fill="none" stroke="#f5a623" stroke-width="7"/>
+  <path d="M 234 304 C 450 304, 600 352, 790 352" fill="none" stroke="#a5d6a7" stroke-width="7"/>
+  <path d="M 234 448 C 450 448, 600 292, 790 292" fill="none" stroke="#4caf50" stroke-width="7"/>
+  <path d="M 234 496 C 450 496, 600 232, 790 232" fill="none" stroke="#bcaaa4" stroke-width="7"/>
+  <path d="M 234 544 C 450 544, 600 232, 790 232" fill="none" stroke="#795548" stroke-width="7"/>
+
+  <!-- terminal block -->
+  <rect x="780" y="170" width="280" height="410" rx="12" fill="#f4f7f9" stroke="#7a8a99" stroke-width="2"/>
+  <text x="920" y="200" text-anchor="middle" font-size="19" font-weight="bold" fill="#005b8f">Nilan terminal block</text>
+
+  <circle cx="808" cy="232" r="10" fill="#b0bec5" stroke="#607d8b"/>
+  <text x="832" y="238" font-size="17" font-weight="bold" fill="#1a1a1a">1  +12 V</text>
+
+  <circle cx="808" cy="292" r="10" fill="#b0bec5" stroke="#607d8b"/>
+  <text x="832" y="298" font-size="17" font-weight="bold" fill="#1a1a1a">2  A (A1)</text>
+
+  <circle cx="808" cy="352" r="10" fill="#b0bec5" stroke="#607d8b"/>
+  <text x="832" y="358" font-size="17" font-weight="bold" fill="#1a1a1a">3  B (B1)</text>
+
+  <circle cx="808" cy="412" r="10" fill="#b0bec5" stroke="#607d8b"/>
+  <text x="832" y="418" font-size="15" fill="#8a8a8a">4  panel A2 — do not use</text>
+
+  <circle cx="808" cy="472" r="10" fill="#b0bec5" stroke="#607d8b"/>
+  <text x="832" y="478" font-size="15" fill="#8a8a8a">5  panel B2 — do not use</text>
+
+  <circle cx="808" cy="532" r="10" fill="#b0bec5" stroke="#607d8b"/>
+  <text x="832" y="538" font-size="17" font-weight="bold" fill="#1a1a1a">6  GND</text>
+
+  <text x="40" y="670" font-size="17" fill="#20313b">T568B wire colours: A = green, B = green/white, GND = orange/white + orange, +12 V = brown/white + brown.</text>
+  <text x="40" y="698" font-size="17" fill="#20313b">Power: Nilan pin 1 (+12 V) → module pins 7/8 is recommended. For USB-C, leave the brown pair disconnected but keep GND.</text>
+  <text x="40" y="726" font-size="15" fill="#b00020">Opening the unit exposes 230 VAC. Use a Nilan technician if you are not qualified.</text>
+</svg>

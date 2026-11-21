@@ -92,7 +92,11 @@ Component documentation and YAML options:
 ## Nilan ventilation automatic detection
 
 For Nilan CTS602, CTS602 Light and CTS400 ventilation units, use the
-automatic detection and commissioning configuration:
+automatic detection and commissioning configuration.
+
+**Wiring:** the module's RJ45 socket is **not** wired like a Nilan RJ45 port. For
+the exact cable and pinout for the Rev2 module, see the dedicated
+**[Nilan connection guide](docs/nilan-connection-guide.md)**.
 
 - **Rev1 (direction pin GPIO10):** [nilan_ventilation_auto.yaml](esphome_example_code/rev1/nilan_ventilation_auto.yaml)
 - **Rev2 (direction pin GPIO3):** [nilan_ventilation_auto.yaml](esphome_example_code/rev2/nilan_ventilation_auto.yaml)
@@ -117,30 +121,29 @@ The older manual examples (`nilan602.yaml`, `Nilan_cts400.yaml`,
 
 ### Compatibility Notes
 
-- **RJ45 Interface**: Works specifically with Wavin AHC9000/Sentio.
-- Use a **patch cable** to connect the module to the Modbus port for these devices.
+- **Wavin AHC9000/Sentio**: the module's RJ45 socket is wired for these devices. Use a straight patch cable.
+- **Nilan CTS400 / CTS602 / CTS602 Light**: the module's RJ45 socket is **not** wired like the Nilan RJ45 port. A straight patch cable will **not** work. See the **[Nilan connection guide](docs/nilan-connection-guide.md)** for the exact cut-and-wire recipe for your connector.
+- Other devices use the module's A/B/GND connections as shown in their own wiring examples.
 
 ### Wiring Information
 
-To connect the module, use an **RJ45B** cable. Cut the cable to expose colored wires, which serve the following functions:
+The module's RJ45 socket uses the Wavin pinout:
 
-- **A (Modbus+)**
-- **B (Modbus-)**
-- **GND**
-- **+12V (optional)** for power, or use a **USB-C** cable from a charger.
+| Pin | Function |
+|---|---|
+| 1, 2 | GND |
+| 3 | B (Modbus−) |
+| 4, 5 | not used |
+| 6 | A (Modbus+) |
+| 7, 8 | +12 V input (5–24 V DC) |
+
+Power the module with **USB-C**, or with **5–24 V DC** on pins 7/8. Do not use both at the same time.
 
 ![Connections](/electronics/connection.png)
 
+> **Nilan:** do not connect a straight cable between a Nilan RJ45 port and the module. Follow the **[Nilan connection guide](docs/nilan-connection-guide.md)**.
 
-#### A wiring example on a Nilan CTS602 or CTS602 light is shown here:
-![Connections](/electronics/CTS602_light.png)
-
-
-#### A wiring example on a Nilan CTS400 is shown here:
-![Connections](/electronics/CTS400_connections.png)
-
-
-#### A wiring example on a EM340 modbus power meter is shown here:
+#### A wiring example on an EM340 modbus power meter is shown here:
 ![Connections](/electronics/EM340_connection.png)
 
 
